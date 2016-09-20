@@ -1,0 +1,631 @@
+#N canvas 103 47 1102 683 10;
+#N canvas 272 309 524 411 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 625 113 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2821 -330 /~ 1024;
+#X obj -2998 -380 r Add_addsynon;
+#X obj -2821 -281 tabwrite~ Add-SyntheseSpektrum;
+#X obj -2820 -309 clip~ 0 1;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 9 0;
+#X connect 3 0 2 0;
+#X connect 5 0 11 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 12 0;
+#X connect 10 0 5 0;
+#X connect 12 0 11 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -2911 -532 r~ Add_out;
+#X obj -2910 -468 tabwrite~ Add-Summe;
+#N canvas 0 0 1280 718 draw 0;
+#X obj 15 -7985 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj 15 -7949 t b b;
+#X obj 15 -7919 until;
+#X msg 41 -7894 0;
+#X obj 15 -7872 f;
+#X obj 50 -7872 + 1;
+#X obj 15 -7840 t f f;
+#X obj 15 -7789 * 3.14159;
+#X msg 140 -7973 100000;
+#X obj 140 -7949 /;
+#X floatatom 155 -8043 5 0 0 0 - - -;
+#X floatatom 140 -7929 5 0 0 0 - - -;
+#X obj 115 -7876 int;
+#X obj 15 -7813 / 100;
+#X obj 201 -7988 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj 201 -7952 t b b;
+#X obj 201 -7922 until;
+#X msg 227 -7897 0;
+#X obj 201 -7875 f;
+#X obj 236 -7875 + 1;
+#X obj 201 -7844 t f f;
+#X obj 201 -7793 * 3.14159;
+#X obj 201 -7817 / 100;
+#X obj 115 -7898 f;
+#X obj 15 -7761 sin;
+#X obj 201 -7767 sin;
+#X obj 80 -7855 sel;
+#X obj 262 -7851 sel;
+#X obj 140 -8017 f;
+#X floatatom 331 -8043 5 0 0 0 - - -;
+#X obj 316 -8016 f;
+#X obj 140 -7995 t b f;
+#X obj 421 -8104 delay 1;
+#X msg 316 -7971 100000;
+#X obj 316 -7947 /;
+#X floatatom 316 -7927 5 0 0 0 - - -;
+#X obj 301 -7877 int;
+#X obj 301 -7899 f;
+#X obj 316 -7993 t b f;
+#X floatatom 117 -7698 5 0 0 0 - - -;
+#X obj 115 -7830 / 2;
+#X obj 301 -7834 / 2;
+#X obj 502 -8092 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj 394 -7978 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj 394 -7942 t b b;
+#X obj 394 -7912 until;
+#X msg 420 -7887 0;
+#X obj 394 -7865 f;
+#X obj 429 -7865 + 1;
+#X obj 394 -7834 t f f;
+#X obj 394 -7783 * 3.14159;
+#X obj 394 -7807 / 100;
+#X obj 394 -7757 sin;
+#X obj 462 -7849 sel;
+#X floatatom 524 -8033 5 0 0 0 - - -;
+#X obj 509 -8006 f;
+#X msg 509 -7961 100000;
+#X obj 509 -7937 /;
+#X floatatom 509 -7917 5 0 0 0 - - -;
+#X obj 494 -7867 int;
+#X obj 494 -7889 f;
+#X obj 509 -7983 t b f;
+#X obj 494 -7824 / 2;
+#X obj 155 -8067 r Add_basicfreq;
+#X msg 174 -7682 \; Add-SynSinus1 resize \$1;
+#X msg 179 -7649 \; Add-SynSinus2 resize \$1;
+#X obj 596 -7970 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj 596 -7934 t b b;
+#X obj 596 -7904 until;
+#X msg 622 -7879 0;
+#X obj 596 -7857 f;
+#X obj 631 -7857 + 1;
+#X obj 596 -7825 t f f;
+#X obj 596 -7774 * 3.14159;
+#X msg 721 -7958 100000;
+#X obj 721 -7934 /;
+#X floatatom 736 -8028 5 0 0 0 - - -;
+#X floatatom 721 -7914 5 0 0 0 - - -;
+#X obj 696 -7861 int;
+#X obj 596 -7798 / 100;
+#X obj 782 -7973 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj 782 -7937 t b b;
+#X obj 782 -7907 until;
+#X msg 808 -7882 0;
+#X obj 782 -7860 f;
+#X obj 817 -7860 + 1;
+#X obj 782 -7829 t f f;
+#X obj 782 -7778 * 3.14159;
+#X obj 782 -7802 / 100;
+#X obj 696 -7883 f;
+#X obj 596 -7746 sin;
+#X obj 782 -7752 sin;
+#X obj 652 -7838 sel;
+#X obj 846 -7885 sel;
+#X obj 721 -8002 f;
+#X floatatom 912 -8028 5 0 0 0 - - -;
+#X obj 897 -8001 f;
+#X obj 721 -7980 t b f;
+#X msg 897 -7956 100000;
+#X obj 897 -7932 /;
+#X floatatom 897 -7912 5 0 0 0 - - -;
+#X obj 882 -7862 int;
+#X obj 882 -7884 f;
+#X obj 897 -7978 t b f;
+#X obj 696 -7815 / 2;
+#X obj 882 -7819 / 2;
+#X obj 975 -7963 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj 975 -7927 t b b;
+#X obj 975 -7897 until;
+#X msg 1001 -7872 0;
+#X obj 975 -7850 f;
+#X obj 1010 -7850 + 1;
+#X obj 975 -7819 t f f;
+#X obj 975 -7768 * 3.14159;
+#X obj 975 -7792 / 100;
+#X obj 975 -7742 sin;
+#X obj 1038 -7834 sel;
+#X floatatom 1105 -8018 5 0 0 0 - - -;
+#X obj 1090 -7991 f;
+#X msg 1090 -7946 100000;
+#X obj 1090 -7922 /;
+#X floatatom 1090 -7902 5 0 0 0 - - -;
+#X obj 1075 -7852 int;
+#X obj 1075 -7874 f;
+#X obj 1090 -7968 t b f;
+#X obj 1075 -7809 / 2;
+#X obj 16 -7729 tabwrite Add-SynSinus1;
+#X obj 975 -7711 tabwrite Add-SynSinus6;
+#X obj 779 -7721 tabwrite Add-SynSinus5;
+#X obj 596 -7715 tabwrite Add-SynSinus4;
+#X obj 394 -7726 tabwrite Add-SynSinus3;
+#X obj 201 -7736 tabwrite Add-SynSinus2;
+#X msg 190 -7608 \; Add-SynSinus3 resize \$1;
+#X msg 190 -7577 \; Add-SynSinus4 resize \$1;
+#X msg 178 -7546 \; Add-SynSinus5 resize \$1;
+#X msg 157 -7506 \; Add-SynSinus6 resize \$1;
+#X obj 502 -8116 metro 2000;
+#X obj 502 -8140 r Add_addsynon;
+#X obj 332 -8066 r Add_freq1;
+#X obj 524 -8057 r Add_freq2;
+#X obj 736 -8052 r Add_freq3;
+#X obj 913 -8051 r Add_freq4;
+#X obj 1105 -8042 r Add_freq5;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 1 3 0;
+#X connect 2 0 4 0;
+#X connect 3 0 4 1;
+#X connect 4 0 5 0;
+#X connect 4 0 6 0;
+#X connect 4 0 26 0;
+#X connect 5 0 4 1;
+#X connect 6 0 13 0;
+#X connect 6 1 126 1;
+#X connect 7 0 24 0;
+#X connect 8 0 9 0;
+#X connect 9 0 11 0;
+#X connect 10 0 28 1;
+#X connect 11 0 23 0;
+#X connect 12 0 26 1;
+#X connect 12 0 27 1;
+#X connect 12 0 40 0;
+#X connect 12 0 53 1;
+#X connect 12 0 92 1;
+#X connect 12 0 93 1;
+#X connect 12 0 116 1;
+#X connect 12 0 39 0;
+#X connect 13 0 7 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 15 1 17 0;
+#X connect 16 0 18 0;
+#X connect 17 0 18 1;
+#X connect 18 0 19 0;
+#X connect 18 0 20 0;
+#X connect 18 0 27 0;
+#X connect 19 0 18 1;
+#X connect 20 0 22 0;
+#X connect 20 1 131 1;
+#X connect 21 0 25 0;
+#X connect 22 0 21 0;
+#X connect 23 0 12 0;
+#X connect 24 0 126 0;
+#X connect 25 0 131 0;
+#X connect 26 0 2 1;
+#X connect 27 0 16 1;
+#X connect 28 0 31 0;
+#X connect 29 0 30 1;
+#X connect 30 0 38 0;
+#X connect 31 0 8 0;
+#X connect 31 1 9 1;
+#X connect 32 0 0 0;
+#X connect 32 0 14 0;
+#X connect 32 0 43 0;
+#X connect 32 0 66 0;
+#X connect 32 0 80 0;
+#X connect 32 0 106 0;
+#X connect 33 0 34 0;
+#X connect 34 0 35 0;
+#X connect 35 0 37 0;
+#X connect 36 0 41 0;
+#X connect 37 0 36 0;
+#X connect 38 0 33 0;
+#X connect 38 1 34 1;
+#X connect 39 0 64 0;
+#X connect 39 0 65 0;
+#X connect 39 0 132 0;
+#X connect 39 0 133 0;
+#X connect 39 0 134 0;
+#X connect 39 0 135 0;
+#X connect 40 0 13 1;
+#X connect 41 0 22 1;
+#X connect 42 0 32 0;
+#X connect 42 0 28 0;
+#X connect 42 0 30 0;
+#X connect 42 0 55 0;
+#X connect 42 0 94 0;
+#X connect 42 0 96 0;
+#X connect 42 0 118 0;
+#X connect 43 0 44 0;
+#X connect 44 0 45 0;
+#X connect 44 1 46 0;
+#X connect 45 0 47 0;
+#X connect 46 0 47 1;
+#X connect 47 0 48 0;
+#X connect 47 0 49 0;
+#X connect 47 0 53 0;
+#X connect 48 0 47 1;
+#X connect 49 0 51 0;
+#X connect 49 1 130 1;
+#X connect 50 0 52 0;
+#X connect 51 0 50 0;
+#X connect 52 0 130 0;
+#X connect 53 0 45 1;
+#X connect 54 0 55 1;
+#X connect 55 0 61 0;
+#X connect 56 0 57 0;
+#X connect 57 0 58 0;
+#X connect 58 0 60 0;
+#X connect 59 0 62 0;
+#X connect 60 0 59 0;
+#X connect 61 0 56 0;
+#X connect 61 1 57 1;
+#X connect 62 0 51 1;
+#X connect 63 0 10 0;
+#X connect 66 0 67 0;
+#X connect 67 0 68 0;
+#X connect 67 1 69 0;
+#X connect 68 0 70 0;
+#X connect 69 0 70 1;
+#X connect 70 0 71 0;
+#X connect 70 0 72 0;
+#X connect 70 0 92 0;
+#X connect 71 0 70 1;
+#X connect 72 0 79 0;
+#X connect 72 1 129 1;
+#X connect 73 0 90 0;
+#X connect 74 0 75 0;
+#X connect 75 0 77 0;
+#X connect 76 0 94 1;
+#X connect 77 0 89 0;
+#X connect 78 0 104 0;
+#X connect 79 0 73 0;
+#X connect 80 0 81 0;
+#X connect 81 0 82 0;
+#X connect 81 1 83 0;
+#X connect 82 0 84 0;
+#X connect 83 0 84 1;
+#X connect 84 0 85 0;
+#X connect 84 0 86 0;
+#X connect 84 0 93 0;
+#X connect 85 0 84 1;
+#X connect 86 0 88 0;
+#X connect 86 1 128 1;
+#X connect 87 0 91 0;
+#X connect 88 0 87 0;
+#X connect 89 0 78 0;
+#X connect 90 0 129 0;
+#X connect 91 0 128 0;
+#X connect 92 0 68 1;
+#X connect 93 0 82 1;
+#X connect 94 0 97 0;
+#X connect 95 0 96 1;
+#X connect 96 0 103 0;
+#X connect 97 0 74 0;
+#X connect 97 1 75 1;
+#X connect 98 0 99 0;
+#X connect 99 0 100 0;
+#X connect 100 0 102 0;
+#X connect 101 0 105 0;
+#X connect 102 0 101 0;
+#X connect 103 0 98 0;
+#X connect 103 1 99 1;
+#X connect 104 0 79 1;
+#X connect 105 0 88 1;
+#X connect 106 0 107 0;
+#X connect 107 0 108 0;
+#X connect 107 1 109 0;
+#X connect 108 0 110 0;
+#X connect 109 0 110 1;
+#X connect 110 0 111 0;
+#X connect 110 0 112 0;
+#X connect 110 0 116 0;
+#X connect 111 0 110 1;
+#X connect 112 0 114 0;
+#X connect 112 1 127 1;
+#X connect 113 0 115 0;
+#X connect 114 0 113 0;
+#X connect 115 0 127 0;
+#X connect 116 0 108 1;
+#X connect 117 0 118 1;
+#X connect 118 0 124 0;
+#X connect 119 0 120 0;
+#X connect 120 0 121 0;
+#X connect 121 0 123 0;
+#X connect 122 0 125 0;
+#X connect 123 0 122 0;
+#X connect 124 0 119 0;
+#X connect 124 1 120 1;
+#X connect 125 0 114 1;
+#X connect 136 0 42 0;
+#X connect 137 0 136 0;
+#X connect 138 0 29 0;
+#X connect 139 0 54 0;
+#X connect 140 0 76 0;
+#X connect 141 0 95 0;
+#X connect 142 0 117 0;
+#X restore -2838 -434 pd draw;
+#X obj -2998 -554 r Add_addsynon;
+#X obj -3020 -494 sel 1;
+#X obj -3020 -442 s Add_reset;
+#X obj -2982 -420 delay 50;
+#X obj -2982 -375 s Add_mainfreqmidi;
+#X msg -2982 -398 93;
+#X obj -2999 -310 s Add_relvolon;
+#X obj -2999 -353 - 1;
+#X obj -2999 -334 abs;
+#X obj -2901 -252 s Add_notein1_dissctl;
+#X msg -2901 -272 0;
+#X obj -3050 -264 r Add_notein1_diss;
+#X obj -3050 -235 spigot;
+#X obj -3050 -209 s Add_notein1;
+#X obj -2738 -382 closebang;
+#X obj -2954 -231 sel 0;
+#X msg -2954 -200 0;
+#N canvas 89 0 824 209 presetscontrol 0;
+#X obj 99 55 r Add_tonepreset5_EP;
+#X obj 98 88 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 115 113 del 50;
+#X obj 100 162 s Add_tonepreset5;
+#X obj 240 83 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 257 108 del 50;
+#X obj 241 50 r Add_tonepreset4_EP;
+#X obj 242 157 s Add_tonepreset4;
+#X obj 399 104 del 50;
+#X obj 524 74 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 541 99 del 50;
+#X obj 383 46 r Add_tonepreset3_EP;
+#X obj 384 153 s Add_tonepreset3;
+#X obj 525 41 r Add_tonepreset2_EP;
+#X obj 526 148 s Add_tonepreset2;
+#X obj 661 80 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 678 105 del 50;
+#X obj 662 47 r Add_tonepreset1_EP;
+#X obj 663 154 s Add_tonepreset1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 4 0 5 0;
+#X connect 4 0 7 0;
+#X connect 5 0 7 0;
+#X connect 6 0 4 0;
+#X connect 8 0 12 0;
+#X connect 9 0 10 0;
+#X connect 9 0 14 0;
+#X connect 10 0 14 0;
+#X connect 11 0 8 0;
+#X connect 11 0 12 0;
+#X connect 13 0 9 0;
+#X connect 15 0 16 0;
+#X connect 15 0 18 0;
+#X connect 16 0 18 0;
+#X connect 17 0 15 0;
+#X restore -2678 -480 pd presetscontrol;
+#X obj -2756 -574 tgl 35 0 Add_addsynon Add_addsynon_ctl An/Aus -70
+20 0 17 -99865 -1 -1 1 1;
+#X obj -2640 -582 loadbang;
+#X msg -2640 -561 1;
+#X obj -2640 -539 s Add_addsynon_ctl;
+#X obj -2694 -589 bng 15 250 50 0 empty ADD_EPAddSyn_reset empty 17
+7 0 10 -262144 -1 -1;
+#X obj -2694 -563 del 15;
+#X obj -2738 -328 s Add_addsynon_ctl;
+#X msg -2738 -356 0;
+#X obj -2686 -359 s Add_reset;
+#X connect 0 0 3 0;
+#X connect 2 0 1 0;
+#X connect 2 0 3 0;
+#X connect 5 0 0 0;
+#X connect 5 0 6 0;
+#X connect 5 0 12 0;
+#X connect 5 0 17 1;
+#X connect 5 0 15 0;
+#X connect 5 0 20 0;
+#X connect 6 0 7 0;
+#X connect 6 0 8 0;
+#X connect 8 0 10 0;
+#X connect 10 0 9 0;
+#X connect 12 0 13 0;
+#X connect 13 0 11 0;
+#X connect 15 0 14 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 19 0 15 0;
+#X connect 19 0 18 0;
+#X connect 19 0 31 0;
+#X connect 20 0 21 0;
+#X connect 21 0 18 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 27 0 23 0;
+#X connect 27 0 28 0;
+#X connect 28 0 23 0;
+#X connect 30 0 29 0;
+#X restore 778 -1161 pd guts;
+#X obj -273 -1818 cnv 15 1100 680 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -20 -1750 knob 32 32 0 127 0 0 Add_OT2ctl Add_OT2ctl Oberton_2
+0 -8 0 10 -228856 -260097 -261682 0 1;
+#X obj -22 -1710 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq2 empty
+0 -8 0 10 -99865 -260097 -1 1320 256;
+#X obj -129 -1750 knob 32 32 0 127 0 0 Add_OT1ctl Add_OT1ctl Oberton_1
+0 -8 0 10 -228856 -260097 -261682 0 1;
+#X obj -130 -1710 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq1 empty
+0 -8 0 10 -99865 -260097 -1 880 256;
+#X obj 205 -1751 knob 32 32 0 127 0 0 Add_OT4ctl Add_OT4ctl Oberton_4
+0 -8 0 10 -228856 -260097 -261682 0 1;
+#X obj 203 -1711 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq4 empty
+0 -8 0 10 -99865 -260097 -1 2200 256;
+#X obj 91 -1750 knob 32 32 0 127 0 0 Add_OT3ctl Add_OT3ctl Oberton_3
+0 -8 0 10 -228856 -260097 -261682 0 1;
+#X obj 90 -1710 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq3 empty 0
+-8 0 10 -99865 -260097 -1 1760 256;
+#X obj 318 -1750 knob 32 32 0 127 0 0 Add_OT5ctl Add_OT5ctl Oberton_5
+0 -8 0 10 -228856 -260097 -261682 0 1;
+#X obj 316 -1710 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq5 empty
+0 -8 0 10 -99865 -260097 -1 2640 256;
+#X obj -240 -1758 knob 40 40 0 127 0 0 Add_mainfreqmidi Add_mainfreqmidi
+Grundfrequenz 0 -8 0 10 -228856 -260097 -261682 2856 1;
+#X obj -241 -1710 nbx 5 14 -1e+037 1e+037 0 0 empty Add_basicfreq empty
+0 -8 0 10 -99865 -260097 -1 440 256;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Add-Summe 300 float 2;
+#X coords 0 0.2 300 -0.2 265 200 1 0 0;
+#X restore -231 -1365 graph;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Add-SyntheseSpektrum 3000 float 2;
+#X coords 0 0.3 3000 0 500 100 1 0 0;
+#X restore -266 -1516 graph;
+#X text -250 -1274 0;
+#X text -251 -1415 1000 Hz;
+#X text -189 -1415 3000 Hz;
+#X text -127 -1415 5000 Hz;
+#X text -65 -1415 7000 Hz;
+#X text -4 -1415 9000 Hz;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Add-SynSinus1 227 float 2;
+#X coords 0 1 227 -1 100 70 1 0 0;
+#X restore -266 -1614 graph;
+#X text 59 -1415 11000 Hz;
+#X text 120 -1415 13000 Hz;
+#X obj -266 -1614 cnv 30 100 70 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -155 -1615 cnv 30 100 70 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Add-SynSinus2 227 float 2;
+#X coords 0 1 227 -1 100 70 1 0 0;
+#X restore -155 -1615 graph;
+#X obj 292 -1614 cnv 30 100 70 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj 179 -1614 cnv 30 100 70 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj 67 -1614 cnv 30 100 70 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -44 -1614 cnv 30 100 70 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Add-SynSinus3 227 float 2;
+#X coords 0 1 227 -1 100 70 1 0 0;
+#X restore -44 -1614 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Add-SynSinus4 227 float 2;
+#X coords 0 1 227 -1 100 70 1 0 0;
+#X restore 67 -1614 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Add-SynSinus5 227 float 2;
+#X coords 0 1 227 -1 100 70 1 0 0;
+#X restore 179 -1614 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Add-SynSinus6 227 float 2;
+#X coords 0 1 227 -1 100 70 1 0 0;
+#X restore 292 -1614 graph;
+#X obj 402 -1692 tgl 35 0 Add_notein1_diss Add_notein1_dissctl Ton
+7 -10 0 12 -99865 -260097 -260097 0 127;
+#X obj -266 -1516 cnv 30 500 100 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -231 -1365 cnv 30 265 200 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X text 51 -1359 PRESET 1 - Sinus: Der Sinuston ist eine reine Schwinung
+auf einer bestimmten Frequenz und somit der Grundbaustein eines jeden
+Klanges. Die Schwingung im Zeitbereich entspricht der Sinuskurve.;
+#X obj 472 -1394 bng 15 250 50 0 Add_tonepreset1_EP empty 1_Sinus 0
+-8 0 9 -99865 -260097 -261682;
+#X obj 523 -1394 bng 15 250 50 0 Add_tonepreset2_EP empty 2_Saw 0 -8
+0 9 -99865 -260097 -261682;
+#X obj 573 -1394 bng 15 250 50 0 Add_tonepreset3_EP empty 3_Square
+0 -8 0 9 -99865 -260097 -261682;
+#X obj 626 -1394 bng 15 250 50 0 Add_tonepreset4_EP empty 4_Tri 0 -8
+0 9 -99865 -260097 -261682;
+#X obj 677 -1394 bng 15 250 50 0 Add_tonepreset5_EP empty 5_Bell 0
+-8 0 9 -99865 -260097 -261682;
+#X text -255 -1366 0.2;
+#X text -262 -1182 -0.2;
+#X text 51 -1301 PRESET 2 - Sägezahn: Die Sägezahnschwingung enthält
+alle Harmonischen. Die Obertöne haben eine hohe Amplitude und sind
+damit relativ laut. Daraus resultiert ein scharfer \, voller Klangcharakter.
+;
+#X text 426 -1364 PRESET 4 - Dreieck: Die Dreiecksschwingung hat das
+gleiche Obertonspektrum wie die Rechteckschwingung \, allerdings sind
+die Obertöne deutlich leiser. Daraus resultiert ein warmer \, reiner
+Klang \, der einem Sinus ähnlich ist.;
+#X text 425 -1224 DIE BEZEICHNUNGEN DER SIGNALE beziehen sich auf den
+Idealfall \, in dem alle Obertöne (theoretisch unendlich viele) am
+Klang beteiligt sind. ADD allerdings arbeitet mit den ersten fünf
+Obertönen \, so dass die Form der Signale dem Ideal nur ähnelt. Sind
+aber alle Obertöne beteiligt \, so ist das Signal im Zeitbereich ein
+perfektes Dreieck/Rechteck/...;
+#X obj 402 -1517 cnv 15 380 100 empty empty ToDo 20 8 0 10 -260097
+-66577 0;
+#X text 51 -1242 PRESET 3 - Rechteck: Die Rechteckschwingung enthält
+alle ungeraden Harmonischen bei gleicher Lautstärke im Vergleich zur
+Sägezahnschwingung. Rechteckschwingungen habe also insgesamt weniger
+Obertöne und klingen daher klarer als Sägezahnschwingungen.;
+#X obj -273 -1811 cnv 15 1100 22 empty empty what?-Additive 20 11 0
+14 -260097 -33289 0;
+#X text 6 -1808 Obertöne und komplexe Töne;
+#X obj -135 -1811 cnv 15 100 22 empty empty Klangsynthese 0 11 0 14
+-260097 -33289 0;
+#X obj -232 -1677 vsl 30 40 0 127 0 0 Add_mainvolctl Add_mainvolctl
+Gesamtlautstärke -32 -9 0 10 -99865 -260097 -1 3900 1;
+#X obj -113 -1678 vsl 15 40 0 127 0 0 Add_OT1volctl Add_OT1volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj -4 -1678 vsl 15 40 0 127 0 0 Add_OT2volctl Add_OT2volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 108 -1678 vsl 15 40 0 127 0 0 Add_OT3volctl Add_OT3volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 220 -1678 vsl 15 40 0 127 0 0 Add_OT4volctl Add_OT4volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 332 -1678 vsl 15 40 0 127 0 0 Add_OT5volctl Add_OT5volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X text 407 -1622 Die Frequenzen der Obertöne eines Klanges sind Vielfache
+der Grundschwingung \, sie sind also immer höher als diese. Ist die
+Frequenz des jeweiligen Obertons ein ganzzahliges Vielfaches der Grundfrequenz
+\, so wird dieser Oberton auch 'Harmonische' genannt. 'Nicht-Harmonische'
+bezeichnet dementsprechend Obertöne \, deren Frequenz ein nicht-ganzzahliges
+Vielfaches der Grundfrequenz ist.;
+#X text 426 -1307 PRESET 5 - Glocken: Der unreine \, komplizierte Klangcharakter
+von Glocken wird dadurch bestimmt \, dass diese ein nicht-harmonisches
+Obertonspektrum \, also nicht-ganzzahlige Obertöne haben. Dieses Spektrum
+führt zu einem sehr komplexen Zeitsignal.;
+#X text 412 -1503 Probiere die unterschiedlichen Ton-Presets aus. Beachte
+die Schwingungs- und Lautstärkenverhältnisse der einzelnen am Gesamtton
+beteiligten Schwingungen und höre wie sich der Klang mit unterschiedlichen
+Obertonspektren ändert. Erzeuge außerdem eigene Klänge \, indem
+du das Obertonspektrum frei gestaltest.;
+#X obj 761 -1781 bng 25 250 50 0 ADD_EPAddSyn_reset ADD_EPAddSyn_reset_ctl
+zurücksetzen -28 34 0 11 -99865 -260097 -1;
+#X text 461 -1739 Jeder Klang kann verstanden werden als eine Summe
+von Sinustönen und kann daher in seinem Frequenzspektrum betrachtet
+werden. Die einzelnen Schwingungen bestimmen den Charakter des Klanges.
+Theoretisch und praktisch kann also jeder Klang aus einer Vielzahl
+an Sinustönen zusammengesetzt ('addiert') werden. Klänge aus nur
+einer einzelnen Schwingung werden als 'reine Töne' bezeichnet \, Klänge
+mit Obertönen dagegen als 'komplexe Töne'.;

@@ -1,0 +1,313 @@
+#N canvas 143 89 1006 585 10;
+#N canvas 589 456 450 300 guts 0;
+#N canvas 706 632 868 262 globalisierung_ADSR 0;
+#X obj 38 25 r knob_levenv_attack_global;
+#X obj 255 25 r knob_levenv_decay_global;
+#X obj 472 27 r knob_levenv_sustain_global;
+#X obj 689 28 r knob_levenv_release_global;
+#X obj 38 132 EP_ADSR_globalisierung 5;
+#X obj 38 162 EP_ADSR_globalisierung 1;
+#X obj 208 162 EP_ADSR_globalisierung 2;
+#X obj 378 162 EP_ADSR_globalisierung 3;
+#X obj 548 162 EP_ADSR_globalisierung 4;
+#X obj 208 132 EP_ADSR_globalisierung 6;
+#X obj 378 132 EP_ADSR_globalisierung 7;
+#X obj 548 132 EP_ADSR_globalisierung 8;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 0 0 6 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X connect 0 0 9 0;
+#X connect 0 0 10 0;
+#X connect 0 0 11 0;
+#X connect 1 0 4 1;
+#X connect 1 0 5 1;
+#X connect 1 0 6 1;
+#X connect 1 0 7 1;
+#X connect 1 0 8 1;
+#X connect 1 0 9 1;
+#X connect 1 0 10 1;
+#X connect 1 0 11 1;
+#X connect 2 0 4 2;
+#X connect 2 0 5 2;
+#X connect 2 0 6 2;
+#X connect 2 0 7 2;
+#X connect 2 0 8 2;
+#X connect 2 0 9 2;
+#X connect 2 0 10 2;
+#X connect 2 0 11 2;
+#X connect 3 0 4 3;
+#X connect 3 0 5 3;
+#X connect 3 0 6 3;
+#X connect 3 0 7 3;
+#X connect 3 0 8 3;
+#X connect 3 0 9 3;
+#X connect 3 0 10 3;
+#X connect 3 0 11 3;
+#X restore -76 18 pd globalisierung_ADSR;
+#N canvas 619 405 761 419 init 0;
+#X obj 44 -32 r~ huellkurve1;
+#X obj 45 -1 tabwrite~ Huellkurve;
+#X obj 15 -74 r EP-ADSR-BANG;
+#X obj 15 -46 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 178 -42 r knob_levenv_attack_global;
+#X obj 209 -18 r knob_levenv_decay_global;
+#X obj 268 6 r knob_levenv_release_global;
+#X obj 178 83 expr $f1 + $f2 + $f3;
+#X obj 268 48 t b f;
+#X obj 209 48 t b f;
+#X msg 163 250 \; Huellkurve resize \$1;
+#X obj 178 181 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X msg 444 147 \; Huellkurve xticks 0 441 10;
+#X msg 445 107 \; Huellkurve yticks 0 0.125 2;
+#X obj 427 80 loadbang;
+#X obj 95 146 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1 1
+;
+#X obj 64 112 r EP_ADSR_onoff;
+#X obj 163 219 f;
+#X obj 95 192 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 95 169 metro 750;
+#X obj 38 235 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 38 196 sel 1;
+#X obj 178 120 + 50;
+#X obj 178 149 * 100;
+#X obj 38 283 s bangtonal_tri;
+#X obj -16 304 s knob_pitenv_freq2_1_in;
+#X text 146 303 Setze Bang1 Ton auf 440 Hz.;
+#X msg -16 282 69;
+#X obj -11 243 del 2;
+#X connect 0 0 1 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 7 0;
+#X connect 5 0 9 0;
+#X connect 6 0 8 0;
+#X connect 7 0 22 0;
+#X connect 8 0 7 0;
+#X connect 8 1 7 2;
+#X connect 9 0 7 0;
+#X connect 9 1 7 1;
+#X connect 11 0 17 1;
+#X connect 14 0 13 0;
+#X connect 14 0 12 0;
+#X connect 15 0 19 0;
+#X connect 16 0 21 0;
+#X connect 16 0 15 0;
+#X connect 17 0 10 0;
+#X connect 18 0 17 0;
+#X connect 19 0 18 0;
+#X connect 20 0 24 0;
+#X connect 21 0 20 0;
+#X connect 21 0 28 0;
+#X connect 22 0 23 0;
+#X connect 23 0 11 0;
+#X connect 27 0 25 0;
+#X connect 28 0 27 0;
+#X restore 64 18 pd init;
+#N canvas 6 392 476 300 bangs 0;
+#X floatatom 31 16 0 0 0 0 - - -;
+#X obj 64 -28 0;
+#X obj 12 111 s EP-ADSR-BANG;
+#X floatatom 178 19 0 0 0 0 - - -;
+#X obj 211 -25 0;
+#X obj 159 114 s EP-ADSR-BANG;
+#X obj 211 -51 delay 100;
+#X floatatom 311 16 0 0 0 0 - - -;
+#X obj 354 -28 0;
+#X obj 302 111 s EP-ADSR-BANG;
+#X obj 31 -29 0.75;
+#X obj 178 -26 0.75;
+#X obj 321 -29 0.75;
+#X obj 173 -112 r bang75-100;
+#X obj 26 -115 r bang75-50;
+#X obj 354 -54 delay 400;
+#X obj 316 -115 r bang75-400;
+#X obj 27 84 s EP-ADSR_Inputbang-1;
+#X obj 174 87 s EP-ADSR_Inputbang-1;
+#X obj 317 84 s EP-ADSR_Inputbang-1;
+#X obj 64 -54 delay 50;
+#X connect 0 0 17 0;
+#X connect 1 0 0 0;
+#X connect 3 0 18 0;
+#X connect 4 0 3 0;
+#X connect 6 0 4 0;
+#X connect 7 0 19 0;
+#X connect 8 0 7 0;
+#X connect 10 0 0 0;
+#X connect 11 0 3 0;
+#X connect 12 0 7 0;
+#X connect 13 0 5 0;
+#X connect 13 0 6 0;
+#X connect 13 0 11 0;
+#X connect 14 0 2 0;
+#X connect 14 0 10 0;
+#X connect 14 0 20 0;
+#X connect 15 0 8 0;
+#X connect 16 0 9 0;
+#X connect 16 0 12 0;
+#X connect 16 0 15 0;
+#X connect 20 0 1 0;
+#X restore 115 18 pd bangs;
+#N canvas 665 609 798 339 preset 0;
+#X obj 48 235 s knob_levenv_attack_global;
+#X obj 225 235 s knob_levenv_decay_global;
+#X obj 402 235 s knob_levenv_sustain_global;
+#X obj 580 235 s knob_levenv_release_global;
+#X obj 48 138 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 48 163 1;
+#X obj 48 82 r ADSR-preset-01;
+#X obj 226 138 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 226 82 r ADSR-preset-02;
+#X obj 403 138 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 403 82 r ADSR-preset-03;
+#X msg 286 163 1;
+#X msg 463 163 0;
+#X msg 226 163 200;
+#X msg 256 163 100;
+#X msg 316 163 200;
+#X msg 403 163 25;
+#X msg 433 163 300;
+#X msg 493 164 100;
+#X connect 4 0 5 0;
+#X connect 5 0 0 0;
+#X connect 5 0 1 0;
+#X connect 5 0 2 0;
+#X connect 5 0 3 0;
+#X connect 6 0 4 0;
+#X connect 7 0 13 0;
+#X connect 7 0 14 0;
+#X connect 7 0 11 0;
+#X connect 7 0 15 0;
+#X connect 8 0 7 0;
+#X connect 9 0 16 0;
+#X connect 9 0 17 0;
+#X connect 9 0 12 0;
+#X connect 9 0 18 0;
+#X connect 10 0 9 0;
+#X connect 11 0 2 0;
+#X connect 12 0 2 0;
+#X connect 13 0 0 0;
+#X connect 14 0 1 0;
+#X connect 15 0 3 0;
+#X connect 16 0 0 0;
+#X connect 17 0 1 0;
+#X connect 18 0 3 0;
+#X restore 171 18 pd preset;
+#X obj 23 -54 closebang;
+#X msg 23 -31 0;
+#X obj 23 -6 s EP_ADSR_onoff;
+#X obj -77 -52 loadbang;
+#X obj -77 -6 s EP_ADSR_onoff;
+#X msg -77 -31 1;
+#X obj 144 -39 tgl 30 0 EP_ADSR_onoff EP_ADSR_onoff An/Aus 0 -6 0 10
+-24014 -1 -1 1 1;
+#X obj 53 -31 s bang808;
+#X connect 4 0 5 0;
+#X connect 4 0 11 0;
+#X connect 5 0 6 0;
+#X connect 7 0 9 0;
+#X connect 9 0 8 0;
+#X restore 864 343 pd guts;
+#X obj -90 -219 cnv 15 1000 580 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -90 -212 cnv 15 1000 22 empty empty what? 20 11 0 14 -260097
+-33289 0;
+#X obj -24 -212 cnv 15 50 22 empty empty ADSR-Hüllkurve 0 11 0 14
+-260097 -33289 0;
+#X obj -71 165 cnv 15 335 110 empty empty LevelEnvelope 10 12 0 13
+-99865 -260097 0;
+#X obj -36 206 knob 35 35 0 200 0 0 knob_levenv_attack_global knob_levenv_attack_global
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 33 206 knob 35 35 1 500 0 0 knob_levenv_decay_global knob_levenv_decay_global
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 103 206 knob 35 35 0 1 0 0 knob_levenv_sustain_global knob_levenv_sustain_global
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 173 206 knob 35 35 1 500 0 0 knob_levenv_release_global knob_levenv_release_global
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj -36 249 nbx 4 14 0 500 0 0 knob_levenv_attack_global knob_levenv_attack_global
+empty 0 -8 0 11 -66577 -260097 -260097 0 256;
+#X obj 33 249 nbx 4 14 -1e+037 1e+037 0 0 knob_levenv_decay_global
+knob_levenv_decay_global empty 0 -8 0 11 -66577 -260097 -260097 0 256
+;
+#X obj 103 249 nbx 4 14 -1e+037 1e+037 0 0 knob_levenv_sustain_global
+knob_levenv_sustain_global empty 0 -8 0 11 -66577 -260097 -260097 0
+256;
+#X obj 173 249 nbx 4 14 -1e+037 1e+037 0 0 knob_levenv_release_global
+knob_levenv_release_global empty 0 -8 0 11 -66577 -260097 -260097 0
+256;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Huellkurve 1 float 3;
+#A 0 0;
+#X coords 0 1 1 0 600 160 1 0 0;
+#X restore 300 189 graph;
+#X obj 300 189 cnv 15 600 160 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -71 279 cnv 15 335 70 empty empty empty 6 10 0 11 -99865 -260097
+0;
+#X obj -56 287 bng 15 250 50 0 bang75-50 empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X obj -56 307 bng 15 250 50 0 bang75-100 empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X obj -56 327 bng 15 250 50 0 bang75-400 empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X text -67 -53 Attack [ms];
+#X text -66 -13 Decay [ms];
+#X text -66 27 Sustain [0 - 1];
+#X text -66 65 Release [ms];
+#X text 3 286 75 % Anschlagstärke / 50 ms Tastendruck;
+#X text 3 306 75 % Anschlagstärke / 100 ms Tastendruck;
+#X text 3 326 75 % Anschlagstärke / 400 ms Tastendruck;
+#X text -61 -41 (dt. Anstieg);
+#X text -61 -1 (dt. Abfall);
+#X text -61 39 (dt. Halten);
+#X text -61 79 (dt. Freigabe);
+#X text 64 27 Relativer Lautstärkewert (in Relation zur Anschlagsstärke)
+auf den das Signal nach Attack- und Decay-Zeit abschwillt.;
+#X text 499 -116 Benutze für die Beispiele Drumpad 1 oder die drei
+Bangs.;
+#X obj 468 -89 cnv 15 430 220 empty empty ToDo 10 12 0 11 -260097 -1
+0;
+#X obj 850 -43 bng 15 250 50 0 ADSR-preset-01 empty empty 17 7 0 10
+-99865 -260097 -1;
+#X obj 850 14 bng 15 250 50 0 ADSR-preset-02 empty empty 17 7 0 10
+-99865 -260097 -1;
+#X obj 850 77 bng 15 250 50 0 ADSR-preset-03 empty empty 17 7 0 10
+-99865 -260097 -1;
+#X text 479 -3 Wenn der Sustain-Wert 1 beträgt \, entfällt die Decay-Phase.
+(Dies wird erst hörbar \, wenn die Taste länger als die Attack-Zeit
+gedrückt wird). Dieses Verhalten gleicht dem einer gestrichenen Geigensaite.
+;
+#X obj 818 -164 dspcon;
+#X text 64 -53 Zeit \, in der die Lautstärke von Null auf den Wert
+der Anschlagsstärke (0 - 1) linear anwächst.;
+#X text 64 -13 Zeit nach dem Anstieg \, in der die Lautstärke auf
+den Sustain-Wert linear abfällt.;
+#X text -63 -98 ADSR-Hüllkurven formen Lautstärkeverläufe von Signalen.
+Diese sind üblicherweise in drei Phasen aufgeteilt:;
+#X text 64 65 Zeit \, in der die Laustärke linear auf den Wert Null
+zurück geht \, wenn das Drumpad nicht mehr berührt wird oder der
+simulierte Tastendruck beendet ist.;
+#X text 479 -64 Ohne eine Hüllkurve der Tonlautstärken ist der Ton
+bei Tastendruck sofort bei seiner vollen Lautstärke und ist auch beim
+Loslassen der Taste sofort verklungen. Dieses Verhalten ist vergleichbar
+mit dem einer Orgel.;
+#X obj -35 191 cnv 10 10 10 empty empty Attack 0 7 0 11 -99865 -261682
+0;
+#X obj 32 191 cnv 10 10 10 empty empty Decay 0 7 0 11 -99865 -261682
+0;
+#X obj 102 191 cnv 10 10 10 empty empty Sustain 0 7 0 11 -99865 -261682
+0;
+#X obj 172 191 cnv 10 10 10 empty empty Release 0 7 0 11 -99865 -261682
+0;
+#X text 479 58 Wenn der Sustain-Wert 0 beträgt \, entfällt die Sustain-Phase.
+Das Abklingen des Tons setzt direkt nach dem Erreichen des Maximums
+ein (nach der Attackzeit). Dieses Verhalten ähnelt dem einer angeschlagenen
+Gitarrensaite.;

@@ -1,0 +1,267 @@
+#N canvas 82 24 1104 695 10;
+#N canvas 426 92 769 331 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 619 123 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2697 -388 loadbang;
+#X text -2631 -389 Beschriftung X-Achse Spektrum;
+#X text -2585 -458 Blockgröße;
+#X obj -2821 -495 inlet~;
+#X msg -2697 -366 \; Add-Reverb-Spektrum yticks -1 20 20;
+#X obj -2827 -230 tabwrite~ Add-Reverb-Spektrum;
+#X obj -2922 -369 r Add_reverbon;
+#X obj -2712 -458 block~ 8192 1 1;
+#X obj -2822 -442 rfft~;
+#X obj -2823 -357 biquad~ 0 0 0 0 1;
+#X obj -2822 -383 q8_sqrt~;
+#X obj -2824 -326 /~ 4096;
+#X obj -2825 -304 log~ 10;
+#X obj -2826 -281 *~ 20;
+#X obj -2922 -315 metro 20;
+#X obj -2826 -255 clip~ -270 0;
+#X connect 0 0 12 0;
+#X connect 1 0 12 0;
+#X connect 2 0 6 0;
+#X connect 5 0 10 0;
+#X connect 8 0 16 0;
+#X connect 10 0 0 0;
+#X connect 10 0 0 1;
+#X connect 10 1 1 0;
+#X connect 10 1 1 1;
+#X connect 11 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 17 0;
+#X connect 16 0 7 0;
+#X connect 17 0 7 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -2998 -554 r Add_reverbon;
+#X obj -2910 -468 tabwrite~ Add-Reverb-Zeitbereich;
+#X obj -2689 -483 s Add_verbdrywetctl;
+#X msg -2689 -512 127;
+#X obj -2689 -537 sel 1;
+#X obj -2553 -483 s Add_verbdrywetctl;
+#X obj -2553 -537 sel 0;
+#X msg -2553 -512 0;
+#X obj -2998 -436 s Add_relvolon;
+#X obj -2998 -479 - 1;
+#X obj -2998 -460 abs;
+#X obj -2900 -378 s Add_notein1_dissctl;
+#X msg -2900 -398 0;
+#X obj -2900 -421 sel 0;
+#N canvas 522 186 371 715 pulse 0;
+#X obj -310 -760 bng 15 250 50 0 empty empty empty 17 7 0 10 -66577
+-1 -1;
+#X obj -319 -192 s~ Add_pulse;
+#X obj -310 -812 r Add_pulsego;
+#X obj -304 -716 line~;
+#X obj -304 -693 *~;
+#X obj -304 -669 *~;
+#X obj -304 -645 *~;
+#X obj -303 -622 *~;
+#X obj -343 -596 *~ 5000;
+#X obj -344 -575 +~ 100;
+#X obj -344 -550 phasor~;
+#X obj -344 -458 +~;
+#X obj -293 -521 noise~;
+#X obj -292 -497 *~;
+#X obj -244 -513 *~ 0.133;
+#X obj -292 -475 lop~ 2000;
+#X obj -319 -407 cos~;
+#X obj -318 -378 *~;
+#X msg -304 -737 1 0 \, 0 50;
+#X obj -228 -752 s Add_finalvol;
+#X obj -310 -783 delay 200;
+#X msg -228 -778 0.02;
+#X msg -191 -779 1;
+#X obj -319 -320 *~;
+#X obj -255 -337 line;
+#X msg -255 -361 \$1 50;
+#X obj -255 -383 r Add_reverbon;
+#X obj -191 -803 delay 5000;
+#X obj -319 -293 *~ 0.1;
+#X obj -116 -303 r Add_reverbon;
+#X obj -116 -275 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj -212 -251 spigot~;
+#X connect 0 0 18 0;
+#X connect 2 0 20 0;
+#X connect 3 0 4 0;
+#X connect 3 0 4 1;
+#X connect 4 0 5 0;
+#X connect 4 0 5 1;
+#X connect 5 0 6 0;
+#X connect 5 0 6 1;
+#X connect 5 0 17 1;
+#X connect 6 0 7 0;
+#X connect 6 0 7 1;
+#X connect 6 0 14 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 16 0;
+#X connect 12 0 13 0;
+#X connect 13 0 15 0;
+#X connect 14 0 13 1;
+#X connect 15 0 11 1;
+#X connect 16 0 17 0;
+#X connect 17 0 23 0;
+#X connect 18 0 3 0;
+#X connect 20 0 0 0;
+#X connect 21 0 19 0;
+#X connect 22 0 19 0;
+#X connect 23 0 28 0;
+#X connect 24 0 23 1;
+#X connect 25 0 24 0;
+#X connect 26 0 25 0;
+#X connect 27 0 22 0;
+#X connect 28 0 31 0;
+#X connect 29 0 30 0;
+#X connect 30 0 31 1;
+#X connect 31 1 1 0;
+#X restore -2730 -418 pd pulse;
+#X obj -2589 -423 closebang;
+#X msg -2589 -400 0;
+#X obj -2589 -375 s Add_reverbon;
+#X obj -2489 -381 s Add_finalvol;
+#X msg -2489 -406 1;
+#X obj -2675 -393 s Add_reset;
+#X obj -2911 -532 r~ Add_reverbout;
+#X obj -2406 -607 tgl 35 0 Add_reverbon Add_reverbon_ctl An/Aus -70
+20 0 17 -99865 -1 -1 1 1;
+#X obj -2490 -570 loadbang;
+#X msg -2488 -546 1;
+#X obj -2486 -520 s Add_reverbon_ctl;
+#X obj -2623 -625 bng 15 250 50 0 empty ADD_EPReverb_reset empty 17
+7 0 10 -262144 -1 -1;
+#X msg -2624 -594 0;
+#X obj -2627 -568 s Add_verbfeedctl;
+#X msg -2411 -487 0;
+#X obj -2411 -463 s Add_trigseq;
+#X connect 0 0 3 0;
+#X connect 2 0 0 0;
+#X connect 2 0 6 0;
+#X connect 2 0 8 0;
+#X connect 2 0 11 0;
+#X connect 2 0 15 0;
+#X connect 5 0 4 0;
+#X connect 6 0 5 0;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 11 0 12 0;
+#X connect 12 0 10 0;
+#X connect 14 0 13 0;
+#X connect 15 0 14 0;
+#X connect 17 0 18 0;
+#X connect 17 0 21 0;
+#X connect 17 0 22 0;
+#X connect 18 0 19 0;
+#X connect 21 0 20 0;
+#X connect 23 0 1 0;
+#X connect 23 0 3 0;
+#X connect 25 0 26 0;
+#X connect 25 0 31 0;
+#X connect 26 0 27 0;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;
+#X connect 31 0 32 0;
+#X restore 786 -1134 pd guts;
+#X obj -248 -1808 cnv 15 1100 690 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -248 -1800 cnv 15 1100 22 empty empty What?-Reverb 20 11 0 14
+-260097 -66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Add-Reverb-Zeitbereich 2000 float 2;
+#X coords 0 1 2000 -1 200 120 1 0 0;
+#X restore -218 -1531 graph;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Add-Reverb-Spektrum 3000 float 2;
+#X coords 0 -30 3000 -270 800 180 1 0 0;
+#X restore -219 -1326 graph;
+#X text -234 -1480 0;
+#X obj 596 -1751 bng 35 250 50 0 Add_pulsego empty Impuls! -75 21 0
+17 -99865 -260097 -1;
+#X text -234 -1536 1;
+#X text -240 -1426 -1;
+#X text -102 -1797 künstlicher Raumklang;
+#X text -187 -1146 1000 Hz;
+#X text -85 -1146 3000 Hz;
+#X text 12 -1146 5000 Hz;
+#X text 113 -1147 7000 Hz;
+#X text 211 -1145 9000 Hz;
+#X text 307 -1145 11000 Hz;
+#X text 406 -1145 13000 Hz;
+#X text 505 -1145 15000 Hz;
+#X obj -218 -1531 cnv 30 200 120 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -219 -1326 cnv 30 800 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj 425 -1520 cnv 15 380 130 empty empty ToDo 20 8 0 10 -260097
+-66577 0;
+#X text 440 -1506 Erzeuge mit ADD Klänge oder einen Impuls mit dem
+obigen Button. Spiele dabei mit den Parametern des Reverbs und beobachte
+die Unterschiede im Verhalten des Nachhalls und die Veränderung der
+Klangfarbe. Ein Feedback von 100 führt übrigens zu einem endlos langen
+Nachhall. Dem würde in der Realität eine Raum entsprechen \, indem
+kleinerlei Absorption passiert und der Schall so für immer im Raum
+hin- und her geworfen wird.;
+#X text 423 -1632 REVERB wird im Audiotechnik eingesetzt \, um einem
+Signal einen räumlichen Klang zu geben. Dabei kann der Anspruch verfolgt
+werden \, die künstliche Nachbildung des Raumklanges möglichst echt
+wirken zu lassen oder der Reverb wird bewusst als Effekt genutzt \,
+um einen Nachhall zu erzeugen \, der in der Natur nicht vorkommt \,
+aber interessant klingt.;
+#X obj -227 -1762 cnv 15 200 200 empty empty empty 20 12 0 14 -99865
+-66577 0;
+#X obj -205 -1625 knob 32 32 0 127 0 0 Add_verbdampctl Add_verbdampctl
+Damping 0 -8 0 9 -228856 -260097 -261682 0 1;
+#X obj -186 -1738 vsl 15 54 0 127 0 0 Add_verbdrywetctl Add_verbdrywetctl
+Dry/Wet 0 -9 0 9 -66577 -260097 -261682 5300 1;
+#X obj -119 -1625 knob 32 32 0 127 0 0 Add_verblopctl Add_verblopctl
+Lowpass-Frequency 0 -8 0 9 -228856 -260097 -261682 0 1;
+#X obj -206 -1585 nbx 5 14 -1e+037 1e+037 0 0 empty Add_verbdamppc
+empty 0 -8 0 10 -66577 -260097 -1 0 256;
+#X obj -119 -1585 nbx 5 14 -1e+037 1e+037 0 0 empty Add_verblop empty
+0 -8 0 10 -66577 -260097 -1 0 256;
+#X text -214 -1697 dry;
+#X text -212 -1745 wet;
+#X obj -118 -1737 knob 32 32 0 127 0 0 Add_verbfeedctl Add_verbfeedctl
+Feedback 0 -8 0 9 -228856 -260097 -261682 0 1;
+#X obj -119 -1697 nbx 5 14 -1e+037 1e+037 0 0 empty Add_verbfeed empty
+0 -8 0 10 -66577 -260097 -1 0 256;
+#X text -183 -1657 Damping-Filter;
+#X obj 565 -1707 cnv 15 100 20 empty empty empty 20 12 0 14 -258113
+-66577 0;
+#X text 569 -1706 Vorsicht! LAUT!;
+#X obj 773 -1752 bng 25 250 50 0 ADD_EPReverb_reset ADD_EPReverb_reset_ctl
+zurücksetzen -28 34 0 11 -99865 -260097 -1;
+#X text 17 -1534 Es gibt verschiedene Varianten \, Nachhall künstlich
+nachzubilden. Hier wird ein recht simpler Algorithmus verwendet \,
+in dem 16 Delays (zu Delay siehe Jerry) zu einem komplexen Netzwerk
+verschaltet werden \, das das Reflektionsverhalten eines Raumes nachbilden
+soll. Der Parameter FEEDBACK steuert dabei die Länge des Nachhalls
+\, also die Fähigkeit eines Raumes zur Reflektion. Außerdem kann
+der Nachhall durch den Einsatz eines Filters in seinem Klang geformt
+werden. Die LOWPASS-Frequenz gibt an \, ab welcher Frequenz die Absorption
+von Schall einsetzt \, der Parameter 'DAMPING' (dt. Dämpfung) steuert
+die Stärke dieser Absorption. So können Räume simuliert werden \,
+die in hohen Frequenzen stärker absorbieren als in tiefen. Der Parameter
+DRY/WET entscheidet darüber \, wie viel Signal in den künstlichen
+Raum gegeben wird.;
+#X text 15 -1762 Breitet sich SCHALL IN EINEM RAUM aus \, kommt es
+zu Reflexion und Absorption. Die Schallwellen treffen auf Wände oder
+andere Objekte im Raum und werden zurückgeworfen oder werden von ihnen
+(teilweise) geschluckt \, je nachdem aus welchem Material die Wände
+und Objekte bestehen. Dabei werden selten alle Frequenzen in gleicher
+Weise beeinflusst. So gibt es beispielsweise Materialien \, die tiefe
+Frequenzen stark reflektieren und hohe Frequenzen fast vollständig
+absorbieren. Nahezu jeder Klang \, den wir im Alltag hören \, wird
+von diesen räumlichen Einflüssen geformt \, selbst unter offenem
+Himmel passieren Absorption und Reflexion an Gebäuden oder dem Boden.
+Klänge ohne jeglichen Raumklang klingen für das menschliche Ohr ungewöhnlich
+direkt \, nah und oft etwas leblos. Vor allem reflexionsarme Räume
+\, deren Wände Schall stark absorbieren \, klingen für das menschliche
+Gehör sehr unnatürlich.;

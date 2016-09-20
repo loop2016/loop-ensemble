@@ -1,0 +1,114 @@
+#N canvas 139 90 1002 503 10;
+#N canvas 329 0 450 300 guts 0;
+#X obj 140 126 loadbang;
+#X obj 206 188 s JERRY_delfeedback_ctl;
+#X obj 144 215 s JERRY_deltime_ctl;
+#X msg 142 179 350;
+#X msg 205 163 0.5;
+#X connect 0 0 3 0;
+#X connect 0 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X restore 928 -1218 pd guts;
+#X obj 0 -1680 cnv 15 1000 500 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#N canvas 342 10 426 179 Ausgabe 0;
+#X obj -197 -1598 inlet~;
+#X obj -201 -1503 dac~;
+#X obj -151 -1578 inlet;
+#X obj -198 -1561 *~;
+#X obj -99 -1606 r Jerry_EPDelaylineOFF;
+#X msg -99 -1578 0;
+#X obj -99 -1551 s Jerry_EPDelaylineOFFctl;
+#X obj -76 -1520 s JERRY_delfeedback_ctl;
+#X connect 0 0 3 0;
+#X connect 2 0 3 1;
+#X connect 3 0 1 0;
+#X connect 3 0 1 1;
+#X connect 4 0 5 0;
+#X connect 5 0 3 1;
+#X connect 5 0 6 0;
+#X connect 5 0 7 0;
+#X restore 49 -1279 pd Ausgabe;
+#X obj 102 -1393 delread~ Echo;
+#X obj 228 -1488 *~;
+#X obj 101 -1564 delwrite~ Echo 10000;
+#N canvas 516 333 307 136 Mikrofon 0;
+#X obj 22 -1578 adc~;
+#X obj 29 -1546 +~;
+#X obj 31 -1493 outlet~;
+#X obj 30 -1515 *~ 0.15;
+#X connect 0 0 1 0;
+#X connect 0 1 1 0;
+#X connect 1 0 3 0;
+#X connect 3 0 2 0;
+#X restore 48 -1602 pd Mikrofon;
+#N canvas 592 0 137 101 DELAYTIME 0;
+#X obj 20 49 outlet;
+#X obj 20 23 r JERRY_deltime;
+#X connect 1 0 0 0;
+#X restore 102 -1426 pd DELAYTIME;
+#N canvas 467 13 228 89 FEEDBACK 0;
+#X obj -1168 -1577 r JERRY_delfeedback;
+#X obj -1168 -1540 outlet;
+#X obj -1168 -1559 - 0.1;
+#X connect 0 0 2 0;
+#X connect 2 0 1 0;
+#X restore 243 -1517 pd FEEDBACK;
+#X text 231 -1564 Delayline wird geschrieben;
+#X text 256 -1487 Delayline wird zurückgekoppelt;
+#X text 318 -1517 Das Feedback regelt die Stärke der Rückkopplung
+;
+#X text 191 -1393 Delayline wird ausgelesen;
+#X obj 106 -1351 vsl 15 60 0 1 0 0 empty Jerry_EPDelaylineOFFctl empty
+0 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 0 -1673 cnv 15 1000 22 empty empty what?-Delayline 20 11 0 14
+-260097 -33289 0;
+#X text 144 -1348 Ausgabelautstärke;
+#X obj 582 -1468 cnv 15 390 280 empty empty ToDo 10 15 0 14 -260097
+-66577 0;
+#X obj 591 -1321 cnv 15 370 120 empty empty empty 20 12 0 14 -258113
+-66577 0;
+#X text 598 -1318 Wenn du die Ausgabelautstärke zu laut einstellst
+\, kann eine RÜCKKOPPLUNG enstehen.;
+#X obj 146 -1325 bng 30 250 50 0 Jerry_EPDelaylineOFF empty AUS! 35
+14 0 18 -258113 -1 -1;
+#X text 597 -1289 Dabei kommt das Signal aus den Lautsprechern und
+geht direkt zurück ins Mikrofon \, so dass eine Art ENDLOSSCHLEIFE
+entsteht. Resultat ist ein LAUTER PFEIFTON. Dieser klingt zwar unangenehm
+\, ist aber nicht weiter schlimm.;
+#X text 597 -1235 Klicke einfach auf den AUS-BUTTON und das Pfeifen
+verschwindet.;
+#X obj 691 -1620 cnv 20 150 120 empty empty empty 10 12 0 13 -33289
+-260097 0;
+#X obj 696 -1615 cnv 20 140 110 empty empty Delay 10 12 0 13 -66577
+-260097 0;
+#X obj 774 -1574 knob 42 42 0 1000 0 1 JERRY_deltime JERRY_deltime_ctl
+empty 0 -10 0 11 -262144 -260097 -260097 335 1;
+#X obj 711 -1574 knob 42 42 0 1 0 0 JERRY_delfeedback JERRY_delfeedback_ctl
+empty 0 -10 0 11 -262144 -260097 -260097 4000 1;
+#X obj 774 -1528 nbx 5 14 -1e+037 1e+037 0 0 empty JERRY_deltime empty
+0 -8 0 10 -54094 -260097 -260097 81.7073 256;
+#X obj 710 -1528 nbx 5 14 -1e+037 1e+037 0 0 empty JERRY_delfeedback
+empty 0 -8 0 10 -54094 -260097 -260097 0.97561 256;
+#X obj 709 -1592 cnv 15 15 15 empty empty Feedback 0 8 0 11 -66577
+-261682 0;
+#X obj 772 -1592 cnv 15 15 15 empty empty Time 0 8 0 11 -66577 -261682
+0;
+#X text 596 -1399 Erhöhe dafür VORSICHTIG die Ausgabelautstärke
+am Regler unten links im Bild und mache dabei Geräusche vor deinem
+Computer (z.B. Sprechen \, Klatschen). Du solltest dann ein die Klänge
+\, die das Mikrofon aufnimmt \, mit einem Delay versehen hören.;
+#X text 191 -1431 Die Delaytime regelt die Zeitverzögerung \, nach
+der die Delayline ausgelesen wird.;
+#X text 596 -1442 Hier kannst du mit Hilfe des Mikrofons deines Computers
+Sound aufnehmen und in eine Delayline schicken \, um ein Delay zu erzeugen.
+;
+#X connect 3 0 4 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 6 0 2 0;
+#X connect 6 0 5 0;
+#X connect 7 0 3 0;
+#X connect 8 0 4 1;
+#X connect 13 0 2 1;

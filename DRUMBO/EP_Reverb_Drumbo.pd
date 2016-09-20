@@ -1,0 +1,188 @@
+#N canvas 76 97 1054 585 10;
+#N canvas 500 299 626 471 guts 0;
+#X obj -2467 -675 closebang;
+#X msg -2467 -653 0;
+#X obj -2835 -660 clip~ -0.6 0.6;
+#X msg -2807 -463 stop;
+#X obj -2780 -431 metro 100;
+#X obj -2807 -513 sel 0;
+#X obj -2607 -472 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -2928 -442 spigot~;
+#N canvas 188 203 842 358 spektrum_Reverb 0;
+#X obj 11 32 rfft~;
+#X obj 11 59 *~;
+#X obj 38 59 *~;
+#X obj 11 123 biquad~ 0 0 0 0 1;
+#X obj 11 101 q8_sqrt~;
+#X obj 112 225 loadbang;
+#X text 173 239 Beschriftung X-Achse Spektrum;
+#X text 320 18 Blockgröße;
+#X obj 11 146 clip~ 0 256;
+#X obj -91 1 inlet~;
+#X obj 149 21 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 149 81 stop;
+#X obj 149 121 metro 100;
+#X obj 149 47 sel 0;
+#X text 381 215 Array graphs can be given "ticks" on both the x and
+y axis to help you visually measure your data. The tick messages require
+3 values: (the index or value of the FIRST large tick \, then the interval
+between ticks \, then finally the number of ticks overall per large
+tick).;
+#X text 380 301 Arrays can be given labels to describe the x and y
+axis. Give a y value and a bunch of x values or vice versa:;
+#X obj 239 18 block~ 4096;
+#X obj -92 192 tabwrite~ spektrum_Reverb;
+#X msg 174 264 \; spektrum_Reverb xticks 0 9.5 5;
+#X msg 175 302 \; spektrum_Reverb yticks -1 20 20;
+#X obj 149 -7 r EP_Reverb_Drumbo_onoff;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 1 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 18 0;
+#X connect 5 0 19 0;
+#X connect 8 0 17 0;
+#X connect 9 0 0 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 17 0;
+#X connect 13 0 11 0;
+#X connect 13 1 12 0;
+#X connect 20 0 10 0;
+#X restore -2890 -361 pd spektrum_Reverb;
+#X obj -2836 -391 tabwrite~ zeitsignal_Reverb;
+#X obj -2805 -575 tgl 30 0 empty empty Patch-An/Aus -17 -8 0 10 -3394
+-1 -1 1 1;
+#X obj -2527 -676 loadbang;
+#X msg -2527 -653 1;
+#X obj -2658 -329 s sustain_globe;
+#X msg -2658 -364 0;
+#X obj -2607 -356 s bang808;
+#X obj -2416 -625 s bang808;
+#X obj -2834 -703 r~ darstellung_EP;
+#X obj -2733 -542 s EP_Reverb_Drumbo_onoff;
+#X connect 0 0 1 0;
+#X connect 0 0 16 0;
+#X connect 1 0 10 0;
+#X connect 2 0 9 0;
+#X connect 3 0 4 0;
+#X connect 4 0 9 0;
+#X connect 5 0 3 0;
+#X connect 5 1 4 0;
+#X connect 5 1 6 0;
+#X connect 6 0 14 0;
+#X connect 6 0 15 0;
+#X connect 7 1 8 0;
+#X connect 10 0 5 0;
+#X connect 10 0 7 1;
+#X connect 10 0 18 0;
+#X connect 11 0 12 0;
+#X connect 12 0 10 0;
+#X connect 14 0 13 0;
+#X connect 17 0 2 0;
+#X connect 17 0 7 0;
+#X restore 756 -1247 pd guts;
+#X obj -248 -1808 cnv 15 1050 580 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -248 -1800 cnv 15 1050 22 empty empty What?-Reverb-Drumbo 20
+11 0 14 -260097 -1 0;
+#X obj 386 -1692 cnv 15 400 70 empty empty ToDo 10 12 0 10 -260097
+-66577 0;
+#X text -14 -1354 REVERB wird im Audiotechnik eingesetzt \, um einem
+Signal einen räumlichen Klang zu geben. Dabei kann der Anspruch verfolgt
+werden \, die künstliche Nachbildung des Raumklanges möglichst echt
+wirken zu lassen oder der Reverb wird bewusst als Effekt genutzt \,
+um einen Nachhall zu erzeugen \, der in der Natur nicht vorkommt \,
+aber interessant klingt.;
+#X obj -227 -1692 cnv 15 90 110 empty empty Reverb 10 12 0 13 -99865
+-260097 0;
+#X obj -203 -1654 knob 45 45 0 1 0 1 reverb_globe reverb_globe empty
+0 -10 0 11 -262144 -260097 -260097 0 1;
+#X obj -204 -1602 nbx 4 14 -1e+037 1e+037 0 0 empty reverb_globe empty
+0 -8 0 10 -66577 -260097 -260097 0 256;
+#X text 751 -1281 2 KHz;
+#X text 560 -1281 1 KHz;
+#X text 468 -1281 500 Hz;
+#X text 654 -1281 1.5 KHz;
+#X text 382 -1281 0 Hz;
+#X obj 388 -1435 cnv 15 400 150 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array spektrum_Reverb 200 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 256 200 0 400 150 1 0 0;
+#X restore 388 -1435 graph;
+#X text 374 -1537 0;
+#X text 368 -1474 -1;
+#X text 374 -1599 1;
+#X obj 387 -1599 cnv 15 400 140 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array zeitsignal_Reverb 200 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 0.6 199 -0.6 400 140 1 0 0;
+#X restore 387 -1599 graph;
+#X obj -12 -1721 bng 18 250 50 0 1-GUI-bang 1-GUI-bang_r Drumpad-1
+25 10 0 11 -99865 -260097 -1;
+#X text 404 -1672 Erzeuge mit DRUMBO Klänge. Spiele dabei mit den
+Parametern des Reverbs und beobachte die Unterschiede im Verhalten
+des Nachhalls und die Veränderung der Klangfarbe.;
+#X obj 91 -1720 bng 18 250 50 0 2-GUI-bang 2-GUI-bang_r Drumpad-2 25
+10 0 11 -99865 -260097 -1;
+#X obj 721 -1741 dspcon;
+#X text -14 -1683 Breitet sich Schall in einem Raum aus \, kommt es
+zu Reflektion und Absorption. Die Schallwellen treffen auf Wände oder
+andere Objekte im Raum und werden zurückgeworfen oder werden von ihnen
+(teilweise) geschluckt \, je nachdem aus welchem Material die Wände
+und Objekte bestehen. Dabei werden selten alle Frequenzen in gleicher
+Weise beeinflusst. So gibt es beispielsweise Materialien \, die tiefe
+Frequenzen stark reflektieren und hohe Frequenzen fast vollständig
+absorbieren (z.B. Teppichbelag). Nahezu jeder Klang \, den wir im Alltag
+hören \, wird von diesem räumlichen Einflüssen geformt. Selbst unter
+offenem Himmel passieren Absorption und Reflektion an Gebäuden oder
+dem Boden. Digital erzeugte Klänge ohne jeglichen Raumklang sind für
+das menschliche Ohr ungewöhnlich direkt \, nah und oft etwas leblos.
+Genauso klingen reflektionsarme Räume \, deren Wände Schall stark
+absorbieren \, für das menschliche Gehör sehr unnatürlich.;
+#X text -14 -1462 Der Parameter Raumgröße steuert die Länge des
+Nachhalls und simuliert so die Größe des Raumes. Der Parameter 'Absorption'
+(Dämpfung) steuert die Stärke der Absorption. Ein Wert nahe 0 lässt
+die Oberflächen kaum absorbieren. Werte zwischen 1 und 2 erhöhen
+den Absorptionsgrad besonders für hohe Frequenzen \, was einen kurzen
+Reverb zur Folge hat.;
+#X obj -227 -1576 cnv 15 180 110 empty empty Reverb-Einstellungen 10
+12 0 13 -99865 -260097 0;
+#X obj -206 -1531 knob 35 35 0 1 0 0 knob_roomsize knob_roomsize empty
+0 -10 0 11 -262144 -260097 -260097 0 1;
+#X obj -130 -1531 knob 35 35 0 2 0 0 knob_absorption knob_absorption
+empty 0 -10 0 11 -262144 -260097 -260097 0 1;
+#X obj -207 -1489 nbx 4 14 -1e+037 1e+037 0 0 empty knob_roomsize empty
+0 -8 0 10 -66577 -260097 -260097 0 256;
+#X obj -131 -1489 nbx 4 14 -1e+037 1e+037 0 0 empty knob_absorption
+empty 0 -8 0 10 -66577 -260097 -260097 0 256;
+#X obj -216 -1547 cnv 10 10 10 empty empty Raumgröße 10 7 0 11 -99865
+-261682 0;
+#X obj -141 -1547 cnv 10 10 10 empty empty Absorption 10 7 0 11 -99865
+-261682 0;
+#X obj -216 -1670 cnv 10 10 10 empty empty Global 10 7 0 11 -99865
+-261682 0;
+#X obj -12 -1751 bng 18 250 50 0 7-GUI-bang 7-GUI-bang_r Drumpad-7
+25 10 0 11 -99865 -260097 -1;
+#X obj 91 -1750 bng 18 250 50 0 8-GUI-bang 8-GUI-bang_r Drumpad-8 25
+10 0 11 -99865 -260097 -1;

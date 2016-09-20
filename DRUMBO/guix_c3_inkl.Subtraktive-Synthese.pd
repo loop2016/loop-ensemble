@@ -1,0 +1,212 @@
+#N canvas 377 82 582 842 10;
+#X obj 18 102 loadbang;
+#X msg 18 123 symbol ---;
+#X obj 18 144 s symbol\$1;
+#X obj 100 100 cnv 15 375 629 empty empty empty 20 14 0 14 -33289 -261682
+0;
+#X obj 228 338 cnv 15 120 100 empty empty FM-Synthese 10 10 0 11 -66577
+-260097 0;
+#X obj 104 130 cnv 15 90 100 empty empty Lautstärke 10 10 0 11 -66577
+-260097 0;
+#X obj 352 338 cnv 15 120 254 empty empty Waveform 10 10 0 11 -66577
+-260097 0;
+#X obj 104 338 cnv 15 120 100 empty empty AM-Synthese 10 10 0 11 -66577
+-260097 0;
+#X obj 374 376 vradio 17 1 0 6 waveform_VCO_\$1 waveform_VCO_\$1_in
+Träger -6 -10 0 11 -54094 -260097 -261682 1;
+#X obj 433 376 vradio 17 1 0 6 waveform_LFO_\$1 waveform_LFO_\$1_in
+Mod -2 -10 0 11 -54094 -260097 -261682 1;
+#X text 401 374 sin;
+#X text 401 391 rec;
+#X text 401 409 saw;
+#X text 401 426 isw;
+#X text 401 444 tri;
+#X text 402 460 pls;
+#X obj 104 442 cnv 15 244 150 empty empty Tonhöhen 10 10 0 11 -66577
+-260097 0;
+#X obj 104 234 cnv 15 244 100 empty empty LevelEnvelope 10 10 0 11
+-66577 -260097 0;
+#X obj 120 270 knob 35 35 0.1 500 1 0 knob_levenv_attack_\$1 knob_levenv_attack_\$1_in
+empty 0 -8 0 11 -262144 -260097 -261682 972 1;
+#X obj 172 270 knob 35 35 1 1500 1 0 knob_levenv_decay_\$1 knob_levenv_decay_\$1_in
+empty 0 -8 0 11 -262144 -260097 -261682 2960 1;
+#X obj 233 270 knob 35 35 0 1 0 1 knob_levenv_sustain_\$1 knob_levenv_sustain_\$1_in
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 290 270 knob 35 35 1 1500 1 1 knob_levenv_release_\$1 knob_levenv_release_\$1_in
+empty 0 -8 0 11 -262144 -260097 -261682 2960 1;
+#X obj 111 313 nbx 4 14 0 500 0 0 xxxx att\$1 empty 0 -8 0 11 -54094
+-260097 -260097 1.14149 256;
+#X obj 170 313 nbx 4 14 -1e+037 1e+037 0 0 yyyyy dec\$1 empty 0 -8
+0 11 -54094 -260097 -260097 582.194 256;
+#X obj 228 313 nbx 4 14 -1e+037 1e+037 0 0 zzzzz sus\$1 empty 0 -8
+0 11 -54094 -260097 -260097 0 256;
+#X obj 288 313 nbx 4 14 -1e+037 1e+037 0 0 ccccc rel\$1 empty 0 -8
+0 11 -54094 -260097 -260097 582.194 256;
+#X obj 242 375 knob 35 35 1.27 127 1 0 knob_lfo_freq_\$1 knob_lfo_freq_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 2173 1;
+#X obj 294 375 knob 35 35 0 127 0 0 knob_lfo_int_\$1 knob_lfo_int_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 809 1;
+#X obj 352 596 cnv 15 120 130 empty empty VCF 10 10 0 11 -66577 -260097
+0;
+#X obj 366 635 knob 35 35 0 127 0 0 knob_vcf_cut_\$1 knob_vcf_cut_\$1_in
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 417 635 knob 35 35 0 127 0 0 knob_vcf_q_\$1 knob_vcf_q_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 116 375 knob 35 35 1.27 127 1 0 knob_am_freq_\$1 knob_am_freq_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 169 375 knob 35 35 0 127 0 0 knob_am_int_\$1 knob_am_int_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 352 234 cnv 15 120 100 empty empty Reverb 10 10 0 11 -66577
+-260097 0;
+#X obj 385 270 knob 35 35 0 0.75 0 0 knob_reverb_\$1 knob_reverb_\$1_in
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 381 314 nbx 4 14 -1e+037 1e+037 0 0 empty knob_reverb_\$1 empty
+0 -8 0 11 -54094 -260097 -260097 0 256;
+#X obj 360 674 nbx 4 14 -1e+037 1e+037 0 0 empty \$1-vcf-freq-gui empty
+0 -8 0 11 -54094 -260097 -260097 0 256;
+#X obj 416 674 nbx 4 14 -1e+037 1e+037 0 0 empty \$1-vcf-q-gui empty
+0 -8 0 11 -54094 -260097 -260097 0 256;
+#X obj 111 416 nbx 4 14 -1e+037 1e+037 0 0 empty \$1-AM-freq empty
+0 -8 0 11 -54094 -260097 -260097 1.51935 256;
+#X obj 167 416 nbx 4 14 -1e+037 1e+037 0 0 empty \$1-AM-int empty 0
+-8 0 11 -54094 -260097 -260097 0 256;
+#X obj 234 416 nbx 4 14 -1e+037 1e+037 0 0 empty \$1-LFO-freq empty
+0 -8 0 11 -54094 -260097 -260097 38.3751 256;
+#X obj 292 416 nbx 4 14 -1e+037 1e+037 0 0 empty \$1-LFO-int empty
+0 -8 0 11 -54094 -260097 -260097 11.5602 256;
+#X obj 103 103 tgl 24 0 channel\$1_send channel\$1_on empty 17 7 0
+10 -66577 -260097 -1 1 1;
+#X obj 128 104 cnv 20 320 22 empty pad-on-off\$1 Pad-\$1 8 12 0 12
+-260097 -261682 0;
+#X symbolatom 353 110 15 0 0 0 - symbol#1 xxxxxxx;
+#X obj 449 103 bng 24 250 50 0 \$1-GUI-bang \$1-GUI-bang_r empty 17
+7 0 10 -66577 -260097 -1;
+#X obj 127 479 knob 35 35 0 750 0 1 knob_pitenv_time2_\$1_in knob_pitenv_time2_\$1_in
+empty 0 -8 0 11 -262144 -260097 -261682 183 1;
+#X obj 119 519 nbx 5 14 -1e+037 1e+037 0 0 xxxxxxxxxxxx tim\$1 empty
+0 -8 0 11 -54094 -260097 -260097 40.35 256;
+#X obj 195 519 nbx 5 14 -1e+037 1e+037 0 0 yyyyyyyyyyy fq1\$1 empty
+0 -8 0 11 -54094 -260097 -260097 132 256;
+#X obj 276 478 knob 35 35 0 127 0 1 knob_pitenv_freq2_\$1_in knob_pitenv_freq2_\$1_in
+empty 0 -6 0 11 -204786 -260097 -261682 121 1;
+#X obj 268 519 nbx 5 14 -1e+037 1e+037 0 0 vvvvvvvv fq2\$1 empty 0
+-8 0 11 -54094 -260097 -260097 18.1892 256;
+#X obj 203 479 knob 35 35 20 6362 0 1 knob_pitenv_freq1_\$1_in knob_pitenv_freq1_\$1_in
+empty 0 -6 0 11 -262144 -260097 -261682 60 1;
+#X obj 268 572 nbx 5 14 -1e+037 1e+037 0 0 vvvvvvvvv freq2_anzeige_\$1
+empty 0 -8 0 11 -54094 -4032 -4032 18.1892 256;
+#X obj 195 572 nbx 5 14 -1e+037 1e+037 0 0 vvvvvvvvvvv freq1_anzeige_\$1
+empty 0 -8 0 11 -54094 -4032 -4032 132 256;
+#X obj 198 556 hsl 50 12 0 127 0 0 xxxxxxxxxxx freq2_globe empty -2
+-10 0 11 -54094 -4032 -261682 0 1;
+#X obj 270 556 hsl 50 12 0 127 0 0 xxxxxxxxxxx freq2_globe empty -2
+-10 0 11 -54094 -4032 -261682 0 1;
+#X obj 198 130 cnv 15 130 100 empty empty Komponenten 10 10 0 11 -66577
+-260097 0;
+#X obj 332 130 cnv 15 140 100 empty empty Noisefilter 10 10 0 11 -66577
+-260097 0;
+#X obj 219 168 knob 35 35 0 1 0 1 knob_wave_level_\$1 knob_wave_level_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 3400 1;
+#X obj 271 168 knob 35 35 0 1 0 0 knob_noise_level_\$1 knob_noise_level_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 969 1;
+#X obj 348 168 knob 35 35 0 12000 0 1 knob_noise_lp_\$1 knob_noise_lp_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 324 1;
+#X obj 409 168 knob 35 35 0 12000 0 0 knob_noise_hp_\$1 knob_noise_hp_\$1_in
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 218 150 cnv 12 30 12 empty empty Wave 0 7 0 11 -66577 -261682
+0;
+#X obj 270 150 cnv 12 30 12 empty empty Noise 0 7 0 11 -66577 -261682
+0;
+#X obj 348 150 cnv 12 30 12 empty empty LP 0 7 0 11 -66577 -261682
+0;
+#X obj 410 150 cnv 12 30 12 empty empty HP 0 7 0 11 -66577 -261682
+0;
+#X obj 120 253 cnv 12 30 12 empty empty A 0 7 0 11 -66577 -261682 0
+;
+#X obj 173 253 cnv 12 30 12 empty empty D 0 7 0 11 -66577 -261682 0
+;
+#X obj 234 253 cnv 12 30 12 empty empty S 0 7 0 11 -66577 -261682 0
+;
+#X obj 290 253 cnv 12 30 12 empty empty R 0 7 0 11 -66577 -261682 0
+;
+#X obj 242 358 cnv 12 30 12 empty empty Freq 0 7 0 11 -66577 -261682
+0;
+#X obj 293 358 cnv 12 30 12 empty empty Int 0 7 0 11 -66577 -261682
+0;
+#X obj 116 357 cnv 12 30 12 empty empty Freq 0 7 0 11 -66577 -261682
+0;
+#X obj 167 357 cnv 12 30 12 empty empty Int 0 7 0 11 -66577 -261682
+0;
+#X obj 383 254 cnv 12 30 12 empty empty Dry/Wet 0 7 0 11 -66577 -261682
+0;
+#X obj 364 615 cnv 12 30 12 empty empty Cutoff 0 7 0 11 -66577 -261682
+0;
+#X obj 418 615 cnv 12 30 12 empty empty Q 0 7 0 11 -66577 -261682 0
+;
+#X obj 126 464 cnv 12 30 12 empty empty Time 0 7 0 11 -66577 -261682
+0;
+#X obj 201 464 cnv 12 30 12 empty empty Freq-1 0 7 0 11 -66577 -261682
+0;
+#X obj 274 462 cnv 12 30 12 empty empty Freq-2 0 7 0 11 -66577 -261682
+0;
+#X obj 201 540 cnv 12 30 12 empty empty Global 0 7 0 11 -66577 -261682
+0;
+#X obj 274 541 cnv 12 30 12 empty empty Global 0 7 0 11 -66577 -261682
+0;
+#X obj 420 505 knob 35 35 0 0.975 0 0 knob_pulse_LFO_\$1 knob_pulse_LFO_\$1_in
+empty 0 -6 0 11 -228856 -260097 -261682 0 1;
+#X obj 364 504 knob 35 35 0 0.975 0 0 knob_pulse_VCO_\$1 knob_pulse_VCO_\$1_in
+empty 0 -6 0 11 -228856 -260097 -261682 0 1;
+#X obj 368 487 cnv 12 30 12 empty empty Pulsbreite 0 7 0 11 -66577
+-261682 0;
+#X obj 104 596 cnv 15 244 130 empty empty Subtraktive 10 10 0 11 -66577
+-260097 0;
+#X obj 122 634 knob 35 35 16 5000 0 1 Drumbo_hp_freq_\$1 Drumbo_hp_freq_ctl_\$1
+empty 0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 245 634 knob 35 35 100 20000 1 1 Drumbo_lp_freq_\$1 Drumbo_lp_freq_ctl_\$1
+empty 0 -8 0 11 -262144 -260097 -261682 3400 1;
+#X obj 241 673 nbx 5 14 -1e+037 1e+037 0 0 empty Drumbo_lp_freq_\$1
+empty 0 -8 0 10 -54094 -260097 -1 20000 256;
+#X obj 119 673 nbx 5 14 -1e+037 1e+037 0 0 empty Drumbo_hp_freq_\$1
+empty 0 -8 0 10 -54094 -260097 -1 16 256;
+#X obj 186 636 vsl 16 65 0.767 21 0 1 Drumbo_hp_q_\$1 Drumbo_hp_q_ctl_\$1
+empty 0 -10 0 11 -54094 -260097 -261682 0 1;
+#X obj 311 636 vsl 16 65 0.1 21 0 1 Drumbo_lp_q_\$1 Drumbo_lp_q_ctl_\$1
+empty 0 -10 0 11 -54094 -260097 -261682 0 1;
+#X obj 172 709 nbx 5 14 -1e+037 1e+037 0 0 empty Drumbo_hp_q_\$1 empty
+0 -8 0 10 -54094 -260097 -1 0.767 256;
+#X obj 291 709 nbx 5 14 -1e+037 1e+037 0 0 empty Drumbo_lp_q_\$1 empty
+0 -8 0 10 -54094 -260097 -1 0.1 256;
+#X obj 233 614 cnv 15 50 13 empty empty Tiefpass 10 10 0 11 -66577
+-261682 0;
+#X obj 210 208 nbx 4 14 0 500 0 0 xxxx knob_wave_level_\$1 empty 0
+-8 0 11 -54094 -260097 -260097 1 256;
+#X obj 269 208 nbx 4 14 -1e+037 1e+037 0 0 yyyyyyyyy knob_noise_level_\$1
+empty 0 -8 0 11 -54094 -260097 -260097 0.285 256;
+#X obj 339 208 nbx 5 14 -1e+037 1e+037 0 0 zzzzz knob_noise_lp_\$1
+empty 0 -8 0 11 -54094 -260097 -260097 1143.53 256;
+#X obj 407 208 nbx 5 14 -1e+037 1e+037 0 0 ccccc knob_noise_hp_\$1
+empty 0 -8 0 11 -54094 -260097 -260097 0 256;
+#X obj 108 614 cnv 15 50 13 empty empty Hochpass 10 10 0 11 -66577
+-261682 0;
+#X obj 125 208 nbx 4 14 -1e+037 1e+037 0 0 yyyyyyyyy knob_vol_\$1 empty
+0 -8 0 11 -54094 -260097 -260097 1 256;
+#X obj 131 168 knob 35 35 0 1 0 0 knob_vol_\$1 knob_vol_\$1_in empty
+0 -8 0 11 -228856 -260097 -261682 3400 1;
+#X obj 129 150 cnv 12 30 12 empty empty Pad-\$1 0 7 0 11 -66577 -261682
+0;
+#X obj 360 545 nbx 4 14 -1e+037 1e+037 0 0 empty knob_pulse_VCO_\$1
+empty 0 -8 0 11 -54094 -260097 -260097 0 256;
+#X obj 418 545 nbx 4 14 -1e+037 1e+037 0 0 empty knob_pulse_LFO_\$1
+empty 0 -8 0 11 -54094 -260097 -260097 0 256;
+#X obj 197 596 cnv 15 50 13 empty empty Synthese 0 10 0 11 -66577 -260097
+0;
+#X obj 175 444 cnv 12 30 12 empty empty Hüllkurve 0 7 0 11 -66577
+-260097 0;
+#X obj 178 614 cnv 15 10 13 empty empty Q 10 10 0 11 -66577 -261682
+0;
+#X obj 302 614 cnv 15 10 13 empty empty Q 10 10 0 11 -66577 -261682
+0;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X coords 0 -1 1 1 376 629 1 100 100;

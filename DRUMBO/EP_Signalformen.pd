@@ -1,0 +1,259 @@
+#N canvas 134 58 983 664 10;
+#N canvas 66 765 581 152 guts 0;
+#N canvas 639 465 877 230 globalisierung 0;
+#X obj 38 25 r waveform_VCO;
+#X obj 484 27 r knob_pulse_VCO;
+#X obj 38 152 EP_Signalformen_globalisierung 5;
+#X obj 248 152 EP_Signalformen_globalisierung 6;
+#X obj 458 152 EP_Signalformen_globalisierung 7;
+#X obj 668 152 EP_Signalformen_globalisierung 8;
+#X obj 668 182 EP_Signalformen_globalisierung 4;
+#X obj 458 182 EP_Signalformen_globalisierung 3;
+#X obj 248 182 EP_Signalformen_globalisierung 2;
+#X obj 38 182 EP_Signalformen_globalisierung 1;
+#X connect 0 0 2 0;
+#X connect 0 0 3 0;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 0 0 6 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X connect 0 0 9 0;
+#X connect 1 0 2 1;
+#X connect 1 0 3 1;
+#X connect 1 0 4 1;
+#X connect 1 0 9 1;
+#X connect 1 0 8 1;
+#X connect 1 0 7 1;
+#X connect 1 0 5 1;
+#X connect 1 0 6 1;
+#X restore 39 25 pd globalisierung;
+#N canvas 1098 232 659 736 darstellung_und_presets 0;
+#X obj 96 54 clip~ -0.6 0.6;
+#X msg 124 181 stop;
+#X obj 151 213 metro 100;
+#X obj 124 131 sel 0;
+#X obj 324 172 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 443 289 s knob_pulse_VCO;
+#X obj 553 289 s knob_pulse_LFO;
+#X msg 443 267 0;
+#X msg 553 267 0;
+#X msg 443 311 0;
+#X msg 553 311 0;
+#X obj 443 333 s waveform_VCO;
+#X obj 553 333 s waveform_LFO;
+#X obj 324 288 s bangtonal_sine;
+#X msg 275 311 1500;
+#X obj 115 415 s freq2_globe;
+#X obj 275 335 s knob_levenv_release_1_in;
+#X obj 275 355 s knob_levenv_decay_1_in;
+#X obj 3 85 spigot~;
+#X obj 275 375 s knob_levenv_release_2_in;
+#X obj 275 395 s knob_levenv_decay_2_in;
+#X obj 275 435 s knob_levenv_decay_3_in;
+#X obj 275 415 s knob_levenv_release_3_in;
+#X obj 275 455 s knob_levenv_release_4_in;
+#X obj 275 475 s knob_levenv_decay_4_in;
+#X obj 275 495 s knob_levenv_release_5_in;
+#X obj 275 515 s knob_levenv_decay_5_in;
+#X obj 275 535 s knob_levenv_release_6_in;
+#X obj 275 555 s knob_levenv_decay_6_in;
+#X obj 275 575 s knob_levenv_release_7_in;
+#X obj 275 595 s knob_levenv_decay_7_in;
+#X obj 275 615 s knob_levenv_release_8_in;
+#X obj 275 635 s knob_levenv_decay_8_in;
+#N canvas 188 203 842 358 spektrum_sf 0;
+#X obj 11 32 rfft~;
+#X obj 11 59 *~;
+#X obj 38 59 *~;
+#X obj 11 123 biquad~ 0 0 0 0 1;
+#X obj 11 101 q8_sqrt~;
+#X obj 112 225 loadbang;
+#X text 173 239 Beschriftung X-Achse Spektrum;
+#X text 320 18 Blockgröße;
+#X obj 11 146 clip~ 0 256;
+#X obj -91 1 inlet~;
+#X obj 149 21 tgl 15 0 empty EP_Signalformen_onoff empty 17 7 0 10
+-262144 -1 -1 1 1;
+#X msg 149 81 stop;
+#X obj 149 121 metro 100;
+#X obj 149 47 sel 0;
+#X obj 239 18 block~ 4096;
+#X obj -92 192 tabwrite~ spektrum_signalformen;
+#X msg 100 262 \; spektrum_signalformen xticks 0 9.5 5;
+#X msg 115 302 \; spektrum_signalformen yticks -1 20 20;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 1 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 17 0;
+#X connect 5 0 16 0;
+#X connect 8 0 15 0;
+#X connect 9 0 0 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 15 0;
+#X connect 13 0 11 0;
+#X connect 13 1 12 0;
+#X restore 2 253 pd spektrum_sf;
+#X obj 95 253 tabwrite~ zeitsignal_signalformen;
+#X obj 124 9 r EP_Signalformen_onoff;
+#X text 66 389 500 Hz;
+#X msg 115 390 70.43;
+#X obj 144 331 del 88;
+#X obj 275 289 del 88;
+#X obj 97 -58 r~ darstellung_EP;
+#X connect 0 0 34 0;
+#X connect 1 0 2 0;
+#X connect 2 0 34 0;
+#X connect 3 0 1 0;
+#X connect 3 1 2 0;
+#X connect 3 1 4 0;
+#X connect 4 0 7 0;
+#X connect 4 0 8 0;
+#X connect 4 0 9 0;
+#X connect 4 0 10 0;
+#X connect 4 0 13 0;
+#X connect 4 0 38 0;
+#X connect 4 0 39 0;
+#X connect 7 0 5 0;
+#X connect 8 0 6 0;
+#X connect 9 0 11 0;
+#X connect 10 0 12 0;
+#X connect 14 0 16 0;
+#X connect 14 0 17 0;
+#X connect 14 0 19 0;
+#X connect 14 0 20 0;
+#X connect 14 0 22 0;
+#X connect 14 0 21 0;
+#X connect 14 0 23 0;
+#X connect 14 0 24 0;
+#X connect 14 0 25 0;
+#X connect 14 0 26 0;
+#X connect 14 0 29 0;
+#X connect 14 0 30 0;
+#X connect 14 0 32 0;
+#X connect 14 0 31 0;
+#X connect 14 0 28 0;
+#X connect 14 0 27 0;
+#X connect 18 1 33 0;
+#X connect 35 0 18 1;
+#X connect 35 0 3 0;
+#X connect 37 0 15 0;
+#X connect 38 0 37 0;
+#X connect 39 0 14 0;
+#X connect 40 0 0 0;
+#X connect 40 0 18 0;
+#X restore 39 0 pd darstellung_und_presets;
+#X obj 337 5 closebang;
+#X msg 337 28 0;
+#X obj 314 102 tgl 30 0 EP_Signalformen_onoff empty Patch-An/Aus -17
+-8 0 10 -3394 -1 -1 1 1;
+#X obj 257 5 loadbang;
+#X msg 257 28 1;
+#X obj 400 80 s bang808;
+#X connect 2 0 3 0;
+#X connect 2 0 7 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X restore 922 577 pd guts;
+#X obj -12 -66 cnv 15 980 660 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj 9 38 cnv 15 100 225 empty empty Waveform 10 12 0 13 -99865 -260097
+0;
+#X obj 38 225 knob 28 28 0 0.975 0 0 knob_pulse_VCO knob_pulse_VCO
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 43 78 vradio 17 1 0 6 waveform_VCO waveform_VCO Träger 0 -8
+0 9 -66577 -260097 -261682 0;
+#X text 67 77 sin;
+#X text 67 94 rec;
+#X text 67 111 saw;
+#X text 67 128 isw;
+#X text 67 146 tri;
+#X text 68 162 pls;
+#X obj 9 267 cnv 15 100 120 empty empty Träger 10 12 0 13 -99865 -260097
+0;
+#X obj 27 304 knob 35 35 0 127 0 0 freq2_globe freq2_globe empty 0
+-8 0 11 -262144 -260097 -261682 1886 1;
+#X obj 29 345 hsl 39 10 0 127 0 0 freq2_globe freq2_globe empty -2
+-8 0 10 -99865 -4032 -1 2107 1;
+#X obj 26 361 nbx 6 14 -1e+037 1e+037 0 0 vvvvvvvv freq2_anzeige_1
+empty 0 -8 0 11 -66577 -260097 -260097 500.004 256;
+#X obj 9 185 cnv 15 90 20 empty empty Pulsbreite 10 12 0 13 -99865
+-260097 0;
+#X obj 160 -4 bng 18 250 50 0 1-GUI-bang 1-GUI-bang_r Drumpad-1 25
+10 0 11 -99865 -260097 -1;
+#X text 514 564 2 KHz;
+#X text 326 564 1 KHz;
+#X text 234 564 500 Hz;
+#X text 141 306 0;
+#X text 135 369 -1;
+#X text 141 244 1;
+#X text 148 564 0 Hz;
+#X obj 154 244 cnv 15 400 140 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array zeitsignal_signalformen 200 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 0.6 199 -0.6 400 140 1 0 0;
+#X restore 154 244 graph;
+#X obj 154 410 cnv 15 800 150 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array spektrum_signalformen 400 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 256 400 0 800 150 1 0 0;
+#X restore 154 410 graph;
+#X obj -12 -60 cnv 15 980 22 empty empty what?-Signalformen 20 11 0
+14 -260097 -33289 0;
+#X obj 568 31 cnv 15 380 170 empty empty ToDo 10 12 0 11 -260097 -1
+0;
+#X text 167 94 rec = Rechtecksignal;
+#X text 168 111 saw = Sägezahnsignal (ansteigend);
+#X text 168 128 isw = invetierter Sägezahnsignal (abfallend);
+#X text 168 146 tri = Dreieckssignal;
+#X text 578 55 Vergleiche die Form der unterschiedlichen Signale im
+Zeitsignal- und im Spektralfenster miteinander.;
+#X text 168 163 pls = Pulssignal (konfigurierbar über den Regler Pulsbreite)
+;
+#X text 158 33 Hier werden die unterschiedlichen Oszillatorsignale
+vorgeführt \, die DRUMBO zur Verfügung stellt.;
+#X text 704 564 3 kHz;
+#X text 894 564 4 KHz;
+#X text 578 89 Das Sägezahnsignal hat beispielsweise Obertöne bei
+der doppelten \, dreifachen \, vierfachen \, fünffachen \, etc. Frequenz
+der Grundschwingung. Dabei nimmt die Amplitude stetig ab.;
+#X obj 868 -11 dspcon;
+#X text 578 147 Versuche nachzuvollziehen \, wie sich die Obertonspektren
+der verschiedenen Signale voneinander unterscheidet und wie sie den
+Klang beeinflussen.;
+#X text 168 77 sin = Sinussignal (reine Schwingung);
+#X text 611 564 2 \, 5 kHz;
+#X text 796 564 3 \, 5 KHz;
+#X text 414 564 1 \, 5 KHz;
+#X obj 26 289 cnv 10 10 10 empty empty Frequenz 0 7 0 11 -99865 -261682
+0;
+#X obj 37 209 cnv 10 10 10 empty empty Träger 0 7 0 11 -99865 -261682
+0;

@@ -1,0 +1,92 @@
+#N canvas 684 227 407 468 10;
+#N canvas 359 588 626 300 guts 0;
+#X msg 61 70 250;
+#X obj 61 118 s autark_carrier;
+#X msg 281 70 150;
+#X msg 171 70 1;
+#X obj 171 118 s autark_mod;
+#X obj 281 118 s autark_int;
+#X obj 61 28 loadbang;
+#X obj -96 61 closebang;
+#X obj -96 98 s closebang-autark;
+#X connect 0 0 1 0;
+#X connect 2 0 5 0;
+#X connect 3 0 4 0;
+#X connect 6 0 0 0;
+#X connect 6 0 3 0;
+#X connect 6 0 2 0;
+#X connect 7 0 8 0;
+#X restore -1098 390 pd guts;
+#X obj -1114 -29 cnv 15 400 460 empty empty empty 7 12 0 9 -162280
+-66577 0;
+#X obj -974 153 cnv 15 104 23 empty empty empty 20 12 0 14 -260097
+-66577 0;
+#X obj -1078 295 cnv 15 90 23 empty empty empty 20 12 0 14 -260097
+-66577 0;
+#X obj -1000 31 cnv 15 230 110 empty empty empty 20 12 0 14 -99865
+-66577 0;
+#X obj -1022 298 osc~;
+#X obj -904 156 osc~;
+#X obj -982 241 +~;
+#X obj -903 190 *~;
+#X text -968 156 Modulator;
+#X text -1070 298 Träger;
+#X obj -939 324 hsl 200 15 0 500 0 0 empty empty empty -2 -8 0 10 -99865
+-260097 -1 15838 1;
+#X obj -942 298 unsig~ 1;
+#X obj -981 391 dac~;
+#X obj -1021 352 spigot~;
+#X obj -936 360 tgl 15 0 empty autark-onoff On/Off -6 -7 0 8 -99865
+-260097 -1 0 1;
+#X obj -840 312 cnv 1 1 40 empty empty 250-Hz -10 -10 0 9 -1 -66577
+0;
+#X obj -904 74 knob 30 30 0 50 0 1 empty autark_mod empty 0 -8 0 11
+-262144 -260097 -260097 58 1;
+#X obj -982 74 knob 30 30 0 500 0 1 empty autark_carrier empty 0 -8
+0 11 -262144 -260097 -260097 1450 1;
+#X obj -830 74 knob 30 30 0 250 0 1 empty autark_int empty 0 -8 0 11
+-262144 -260097 -260097 1740 1;
+#X obj -982 116 int;
+#X obj -904 116 int;
+#X obj -830 116 int;
+#X obj -982 116 nbx 3 17 0 500 0 0 empty empty empty 0 -8 0 11 -66577
+-260097 -260097 250 256;
+#X obj -904 116 nbx 3 17 0 50 0 0 empty empty empty 0 -8 0 11 -66577
+-260097 -260097 1 256;
+#X obj -831 116 nbx 3 17 0 250 0 0 empty empty empty 0 -8 0 11 -66577
+-260097 -260097 150 256;
+#X obj -938 391 s~ darstellung_EP_FMsynth_mini;
+#X obj -1021 325 *~ 0.5;
+#X text -917 359 Audio Output;
+#X obj -1114 -24 cnv 15 400 22 empty empty what?-FM-Synthese 20 11
+0 14 -260097 -33289 0;
+#X obj -983 38 cnv 15 50 15 empty empty Träger 0 10 0 13 -99865 -260097
+0;
+#X obj -904 38 cnv 15 50 15 empty empty Modulator 0 10 0 13 -99865
+-260097 0;
+#X obj -983 59 cnv 10 10 10 empty empty Freq 0 7 0 11 -99865 -261682
+0;
+#X obj -831 59 cnv 10 10 10 empty empty Int 0 7 0 11 -99865 -261682
+0;
+#X obj -906 59 cnv 10 10 10 empty empty Freq 0 7 0 11 -99865 -261682
+0;
+#X connect 5 0 27 0;
+#X connect 6 0 8 0;
+#X connect 7 0 12 0;
+#X connect 7 0 5 0;
+#X connect 8 0 7 1;
+#X connect 12 0 11 0;
+#X connect 14 1 13 0;
+#X connect 14 1 13 1;
+#X connect 14 1 26 0;
+#X connect 15 0 14 1;
+#X connect 17 0 21 0;
+#X connect 18 0 20 0;
+#X connect 19 0 22 0;
+#X connect 20 0 23 0;
+#X connect 21 0 24 0;
+#X connect 22 0 25 0;
+#X connect 23 0 7 0;
+#X connect 24 0 6 0;
+#X connect 25 0 8 1;
+#X connect 27 0 14 0;

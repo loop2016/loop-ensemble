@@ -1,0 +1,13 @@
+#N canvas 328 495 496 300 10;
+#X obj 100 66 inlet;
+#X obj 160 66 inlet;
+#X obj 218 66 inlet;
+#X obj 278 66 inlet;
+#X obj 100 126 s knob_levenv_attack_\$1_in;
+#X obj 160 147 s knob_levenv_decay_\$1_in;
+#X obj 218 167 s knob_levenv_sustain_\$1_in;
+#X obj 278 186 s knob_levenv_release_\$1_in;
+#X connect 0 0 4 0;
+#X connect 1 0 5 0;
+#X connect 2 0 6 0;
+#X connect 3 0 7 0;

@@ -1,0 +1,183 @@
+#N canvas 62 55 1102 603 10;
+#N canvas 399 300 524 411 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 625 113 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2821 -330 /~ 1024;
+#X obj -2820 -309 clip~ 0 1;
+#X obj -2821 -281 tabwrite~ Add-VolumeSpektrum;
+#X obj -2998 -380 r Add_EPVOLon;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 9 0;
+#X connect 3 0 2 0;
+#X connect 5 0 11 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 5 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -2911 -532 r~ Add_out;
+#X obj -3020 -494 sel 1;
+#X obj -3020 -442 s Add_reset;
+#X obj -2982 -420 delay 50;
+#X obj -2982 -375 s Add_mainfreqmidi;
+#X msg -2982 -398 93;
+#X obj -2999 -310 s Add_relvolon;
+#X obj -2999 -353 - 1;
+#X obj -2999 -334 abs;
+#X obj -2901 -252 s Add_notein1_dissctl;
+#X msg -2901 -272 0;
+#X obj -3050 -264 r Add_notein1_diss;
+#X obj -3050 -235 spigot;
+#X obj -3050 -209 s Add_notein1;
+#X obj -2738 -382 closebang;
+#X msg -2738 -356 0;
+#X obj -2910 -468 tabwrite~ Add-Volume;
+#X obj -2998 -554 r Add_EPVOLon;
+#X msg -2960 -334 1;
+#X obj -2914 -351 loadbang;
+#X msg -2945 -200 0;
+#X obj -2945 -223 sel 0;
+#X obj -2738 -328 s Add_EPVOLon;
+#X obj -2637 -536 tgl 35 0 Add_EPVOLon Add_EPVOLon_ctl An/Aus -70 20
+0 17 -99865 -1 -1 0 1;
+#X obj -2703 -497 loadbang;
+#X msg -2703 -477 1;
+#X obj -2703 -455 s Add_EPVOLon_ctl;
+#X obj -2687 -572 bng 15 250 50 0 empty ADD_EPRelVol_reset empty 17
+7 0 10 -262144 -1 -1;
+#X obj -2686 -554 del 10;
+#X connect 0 0 18 0;
+#X connect 2 0 1 0;
+#X connect 2 0 18 0;
+#X connect 3 0 4 0;
+#X connect 3 0 5 0;
+#X connect 5 0 7 0;
+#X connect 7 0 6 0;
+#X connect 9 0 10 0;
+#X connect 10 0 8 0;
+#X connect 12 0 11 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 16 0 17 0;
+#X connect 17 0 24 0;
+#X connect 19 0 0 0;
+#X connect 19 0 3 0;
+#X connect 19 0 9 0;
+#X connect 19 0 14 1;
+#X connect 19 0 12 0;
+#X connect 19 0 23 0;
+#X connect 20 0 8 0;
+#X connect 21 0 20 0;
+#X connect 22 0 15 0;
+#X connect 23 0 22 0;
+#X connect 26 0 27 0;
+#X connect 27 0 28 0;
+#X connect 29 0 30 0;
+#X connect 29 0 25 0;
+#X connect 30 0 25 0;
+#X restore 767 -1251 pd guts;
+#X obj -273 -1818 cnv 15 1100 600 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Add-VolumeSpektrum 3000 float 2;
+#X coords 0 0.5 3000 0 500 180 1 0 0;
+#X restore -233 -1595 graph;
+#X text -218 -1414 1000 Hz;
+#X text -156 -1414 3000 Hz;
+#X text -94 -1414 5000 Hz;
+#X text -32 -1414 7000 Hz;
+#X text 29 -1414 9000 Hz;
+#X text 92 -1414 11000 Hz;
+#X text 153 -1414 13000 Hz;
+#X obj 312 -1682 tgl 35 0 Add_notein1_diss Add_notein1_dissctl Ton
+7 -10 0 12 -99865 -260097 -260097 0 127;
+#X obj -233 -1594 cnv 30 500 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -60 -1757 bng 15 250 50 0 Add_tonepreset1 Add_tonepreset1 Sinus
+-8 -8 0 12 -99865 -260097 -261682;
+#X obj -9 -1757 bng 15 250 50 0 Add_tonepreset2 Add_tonepreset2 Saw
+-3 -8 0 12 -99865 -260097 -261682;
+#X obj 41 -1757 bng 15 250 50 0 Add_tonepreset3 Add_tonepreset3 Square
+-13 -8 0 12 -99865 -260097 -261682;
+#X obj 98 -1757 bng 15 250 50 0 Add_tonepreset4 Add_tonepreset4 Triangle
+-16 -8 0 12 -99865 -260097 -261682;
+#X obj 398 -1670 cnv 15 380 142 empty empty ToDo 20 8 0 10 -260097
+-66577 0;
+#X obj -273 -1811 cnv 15 1100 22 empty empty what?-Lautstärkeanpassung
+20 11 0 14 -260097 -33289 0;
+#X obj 279 -1506 tgl 42 0 Add_relvolon Add_relvolon An/Aus 45 29 0
+15 -260097 -1 -1 1 1;
+#X obj -248 -1720 cnv 15 106 95 empty empty Grundton 5 12 0 14 -99865
+-262144 0;
+#X obj -212 -1678 vsl 30 40 0 127 0 0 Add_mainvolctl Add_mainvolctl
+Gesamtlautstärke -32 -9 0 10 -99865 -260097 -1 3900 1;
+#X obj -143 -1720 cnv 15 88 95 empty empty 1.Oberton 5 12 0 14 -99865
+-262144 0;
+#X obj -112 -1678 vsl 15 40 0 127 0 0 Add_OT1volctl Add_OT1volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj -54 -1720 cnv 15 88 95 empty empty 2.Oberton 5 12 0 14 -99865
+-262144 0;
+#X obj 35 -1720 cnv 15 88 95 empty empty 3.Oberton 5 12 0 14 -99865
+-262144 0;
+#X obj -24 -1678 vsl 15 40 0 127 0 0 Add_OT2volctl Add_OT2volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 64 -1678 vsl 15 40 0 127 0 0 Add_OT3volctl Add_OT3volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 123 -1720 cnv 15 88 95 empty empty 4.Oberton 5 12 0 14 -99865
+-262144 0;
+#X obj 212 -1720 cnv 15 88 95 empty empty 5.Oberton 5 12 0 14 -99865
+-262144 0;
+#X obj 153 -1678 vsl 15 40 0 127 0 0 Add_OT4volctl Add_OT4volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 241 -1678 vsl 15 40 0 127 0 0 Add_OT5volctl Add_OT5volctl Lautstärke
+-20 -9 0 10 -99865 -260097 -1 0 1;
+#X obj 345 -1506 cnv 15 10 10 empty empty Lautstärkeanpassung -20
+12 0 14 -128992 -1 0;
+#X obj -122 -1762 cnv 15 10 10 empty empty Presets: -20 12 0 14 -128992
+-1 0;
+#X text 409 -1626 Beachte die Lautstärkenverhältnisse der einzelnen
+am Gesamtton beteiligten Obertöne und die resultierende Gesamtlautstärke
+des Tons bei aus- und bei eingeschalteter Lautstärkeanpassung.;
+#X text 405 -1461 Die Lautstärkeanpassung sorgt dafür \, dass die
+von ADD produzierten Klänge immer eine ähnliche Lautstärke haben.
+;
+#X text 409 -1573 Du kannst auch mithilfe der Regler oder des Nanokontrols
+eigene komplexe Klänge erzeugen und die Obertöne in ihrer Lautstärke
+verändern.;
+#X obj 302 -1781 cnv 15 370 50 empty empty empty 20 12 0 14 -258113
+-66577 0;
+#X obj 573 -1759 bng 20 250 50 0 what-addsyn xxxx what? 25 9 0 10 -99865
+-260097 -1;
+#X text 404 -1427 Ist die Lautstärkeanpassung deaktiviert \, so wird
+der Klang lauter \, wenn Obertöne hinzugefügt werden. Mehr aufsummierte
+Schwingungen bedeuten generell mehr akustische Energie \, also eine
+höhere Lautstärke. Das wird vor allem bei dem Vergleich eines einzelnen
+Sinustons mit obertonreichen Signalen deutlich \, z.B. dem Sägezahn
+(Saw) oder dem Rechteck (Triangle).;
+#X text 404 -1335 Um dieser ständigen Lautstärkeveränderung entgegenzuwirken
+\, wird die Lautstärkesumme aller am Klang beteiligten Schwingungen
+gebildet. Dieser Wert regelt dann die Gesamtlautstärke.;
+#X text 404 -1290 Das ist sehr gut daran zu erkennen \, dass bei eingeschalteter
+Lautstärkeanpassung der Grundton immer leiser bzw. lauter wird \,
+wenn Obertöne in ihrer Lautstärke abgesenkt bzw. angehoben werden.
+;
+#X text 309 -1779 Um dieses Patch verstehen zu können solltest du
+bereits die ADDITIVE KLANGSYNTHESE verstanden haben.;
+#X text 408 -1655 Erzeuge mit ADD Klänge und probiere dabei die unterschiedlichen
+Ton-Presets aus.;
+#X obj 740 -1772 bng 25 250 50 0 ADD_EPRelVol_reset ADD_EPRelVol_reset_ctl
+zurücksetzen -26 34 0 11 -99865 -260097 -1;

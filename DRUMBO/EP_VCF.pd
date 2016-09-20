@@ -1,0 +1,335 @@
+#N canvas 139 9 853 723 10;
+#N canvas 481 193 602 192 guts 0;
+#N canvas 0 318 1268 328 globalisierung 0;
+#X obj 38 25 r knob_wave_level_global;
+#X obj 303 27 r knob_noise_level_global;
+#X obj 38 182 EP_VCF_globalisierung 1;
+#X obj 568 25 r knob_vcf_cut_global;
+#X obj 833 27 r knob_vcf_q_global;
+#X obj 38 152 EP_VCF_globalisierung 5;
+#X obj 348 152 EP_VCF_globalisierung 6;
+#X obj 348 182 EP_VCF_globalisierung 2;
+#X obj 644 152 EP_VCF_globalisierung 7;
+#X obj 954 153 EP_VCF_globalisierung 8;
+#X obj 954 183 EP_VCF_globalisierung 4;
+#X obj 644 182 EP_VCF_globalisierung 3;
+#X obj 857 71 r knob_noise_lp_global;
+#X obj 1138 68 r knob_noise_hp_global;
+#X connect 0 0 2 0;
+#X connect 0 0 5 0;
+#X connect 0 0 6 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X connect 0 0 9 0;
+#X connect 0 0 10 0;
+#X connect 0 0 11 0;
+#X connect 1 0 2 1;
+#X connect 1 0 5 1;
+#X connect 1 0 6 1;
+#X connect 1 0 7 1;
+#X connect 1 0 8 1;
+#X connect 1 0 9 1;
+#X connect 1 0 10 1;
+#X connect 1 0 11 1;
+#X connect 3 0 2 2;
+#X connect 3 0 5 2;
+#X connect 3 0 6 2;
+#X connect 3 0 7 2;
+#X connect 3 0 8 2;
+#X connect 3 0 9 2;
+#X connect 3 0 10 2;
+#X connect 3 0 11 2;
+#X connect 4 0 2 3;
+#X connect 4 0 5 3;
+#X connect 4 0 6 3;
+#X connect 4 0 7 3;
+#X connect 4 0 8 3;
+#X connect 4 0 9 3;
+#X connect 4 0 10 3;
+#X connect 4 0 11 3;
+#X connect 12 0 5 4;
+#X connect 12 0 2 4;
+#X connect 12 0 6 4;
+#X connect 12 0 7 4;
+#X connect 12 0 8 4;
+#X connect 12 0 11 4;
+#X connect 12 0 9 4;
+#X connect 12 0 10 4;
+#X connect 13 0 9 5;
+#X connect 13 0 10 5;
+#X connect 13 0 8 5;
+#X connect 13 0 11 5;
+#X connect 13 0 6 5;
+#X connect 13 0 7 5;
+#X connect 13 0 5 5;
+#X connect 13 0 2 5;
+#X restore 49 35 pd globalisierung;
+#N canvas 253 22 826 736 darstellung_und_presets 0;
+#X msg 144 181 stop;
+#X obj 171 213 metro 100;
+#X obj 144 131 sel 0;
+#X obj 324 172 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 368 292 s bangtonal_sine;
+#X msg 305 357 1500;
+#X obj 147 398 s freq2_globe;
+#X obj 305 381 s knob_levenv_release_1_in;
+#X obj 305 401 s knob_levenv_decay_1_in;
+#X obj 3 85 spigot~;
+#X obj 305 421 s knob_levenv_release_2_in;
+#X obj 305 441 s knob_levenv_decay_2_in;
+#X obj 305 481 s knob_levenv_decay_3_in;
+#X obj 305 461 s knob_levenv_release_3_in;
+#X obj 305 501 s knob_levenv_release_4_in;
+#X obj 305 521 s knob_levenv_decay_4_in;
+#X obj 305 541 s knob_levenv_release_5_in;
+#X obj 305 561 s knob_levenv_decay_5_in;
+#X obj 305 581 s knob_levenv_release_6_in;
+#X obj 305 601 s knob_levenv_decay_6_in;
+#X obj 275 575 s knob_levenv_release_7_in;
+#X obj 275 595 s knob_levenv_decay_7_in;
+#X obj 275 615 s knob_levenv_release_8_in;
+#X obj 275 635 s knob_levenv_decay_8_in;
+#X obj 144 9 r EP_Rauschen_onoff;
+#X msg 162 334 94.435;
+#X text 106 333 1 kHz;
+#X obj 116 54 clip~ -0.3 0.3;
+#X obj 291 293 del 35;
+#X obj 117 -58 r~ darstellung_EP;
+#N canvas 188 203 842 358 spektrum_noise 0;
+#X obj 11 32 rfft~;
+#X obj 11 59 *~;
+#X obj 38 59 *~;
+#X obj 11 123 biquad~ 0 0 0 0 1;
+#X obj 11 101 q8_sqrt~;
+#X obj 112 225 loadbang;
+#X text 173 239 Beschriftung X-Achse Spektrum;
+#X text 320 18 Blockgröße;
+#X obj -91 1 inlet~;
+#X obj 149 21 tgl 15 0 empty EP_Rauschen_onoff empty 17 7 0 10 -262144
+-1 -1 1 1;
+#X msg 149 81 stop;
+#X obj 149 121 metro 100;
+#X obj 149 47 sel 0;
+#X msg 112 302 \; spektrum_Rauschen yticks -1 20 20;
+#X obj 239 18 block~ 2048;
+#X msg 112 262 \; spektrum_Rauschen xticks 0 9.5 5;
+#X obj 11 146 clip~ 0 14;
+#X obj -92 192 tabwrite~ spektrum_VCF;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 1 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 16 0;
+#X connect 4 0 3 0;
+#X connect 5 0 13 0;
+#X connect 5 0 15 0;
+#X connect 8 0 0 0;
+#X connect 9 0 12 0;
+#X connect 10 0 11 0;
+#X connect 11 0 17 0;
+#X connect 12 0 10 0;
+#X connect 12 1 11 0;
+#X connect 16 0 17 0;
+#X restore 42 284 pd spektrum_noise;
+#X msg 611 226 0;
+#X msg 611 284 0;
+#X obj 611 370 s knob_wave_level_global;
+#X obj 611 423 s knob_noise_level_global;
+#X msg 611 340 0;
+#X msg 611 395 1;
+#X obj 611 262 s knob_vcf_cut_global;
+#X obj 611 312 s knob_vcf_q_global;
+#X msg 642 531 12000;
+#X msg 635 469 0;
+#X obj 642 567 s knob_noise_lp_global;
+#X obj 635 503 s knob_noise_hp_global;
+#X obj 115 253 tabwrite~ zeitsignal_VCF;
+#X connect 0 0 1 0;
+#X connect 1 0 43 0;
+#X connect 2 0 0 0;
+#X connect 2 1 1 0;
+#X connect 2 1 3 0;
+#X connect 3 0 4 0;
+#X connect 3 0 28 0;
+#X connect 5 0 7 0;
+#X connect 5 0 8 0;
+#X connect 5 0 10 0;
+#X connect 5 0 11 0;
+#X connect 5 0 13 0;
+#X connect 5 0 12 0;
+#X connect 5 0 14 0;
+#X connect 5 0 15 0;
+#X connect 5 0 16 0;
+#X connect 5 0 17 0;
+#X connect 5 0 20 0;
+#X connect 5 0 21 0;
+#X connect 5 0 23 0;
+#X connect 5 0 22 0;
+#X connect 5 0 19 0;
+#X connect 5 0 18 0;
+#X connect 9 1 30 0;
+#X connect 24 0 9 1;
+#X connect 24 0 2 0;
+#X connect 25 0 6 0;
+#X connect 27 0 43 0;
+#X connect 28 0 5 0;
+#X connect 28 0 31 0;
+#X connect 28 0 32 0;
+#X connect 28 0 35 0;
+#X connect 28 0 36 0;
+#X connect 28 0 25 0;
+#X connect 28 0 40 0;
+#X connect 28 0 39 0;
+#X connect 29 0 9 0;
+#X connect 29 0 27 0;
+#X connect 31 0 37 0;
+#X connect 32 0 38 0;
+#X connect 35 0 33 0;
+#X connect 36 0 34 0;
+#X connect 39 0 41 0;
+#X connect 40 0 42 0;
+#X restore 49 10 pd darstellung_und_presets;
+#X obj 371 16 closebang;
+#X msg 371 39 0;
+#X obj 308 120 tgl 30 0 EP_Rauschen_onoff empty Patch-An/Aus -17 -8
+0 10 -3394 -1 -1 1 1;
+#X msg 296 41 1;
+#X obj 296 18 loadbang;
+#X obj 408 63 s bang808;
+#X obj 49 181 s 1-MIDI-bang;
+#X msg 49 115 50;
+#X msg 118 143 0;
+#X obj 118 112 delay 2000;
+#X obj 49 64 r 1-GUI-bang-NO_EP;
+#X connect 2 0 3 0;
+#X connect 2 0 7 0;
+#X connect 3 0 4 0;
+#X connect 5 0 4 0;
+#X connect 6 0 5 0;
+#X connect 9 0 8 0;
+#X connect 10 0 8 0;
+#X connect 11 0 10 0;
+#X connect 12 0 9 0;
+#X connect 12 0 11 0;
+#X restore 790 637 pd guts;
+#X obj -12 -66 cnv 15 850 720 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj 30 -7 bng 18 250 50 0 1-GUI-bang-NO_EP 1-GUI-bang-NO_EP_r Drumpad-1
+25 10 0 11 -99865 -260097 -1;
+#X text 139 624 2 KHz;
+#X text 76 624 1 KHz;
+#X text 411 366 0;
+#X text 405 429 -1;
+#X text 411 304 1;
+#X text 18 624 0 Hz;
+#X obj 424 304 cnv 15 400 140 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array zeitsignal_VCF 200 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 0.3 199 -0.3 400 140 1 0 0;
+#X restore 424 304 graph;
+#X obj 24 470 cnv 15 800 150 empty empty empty 20 12 0 14 -204786 -66577
+0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array spektrum_VCF 600 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 14 599 0 800 150 1 0 0;
+#X restore 24 470 graph;
+#X obj -12 -60 cnv 15 850 22 empty empty what?-VCF: 20 11 0 14 -260097
+-1 0;
+#X obj 443 50 cnv 15 380 150 empty empty ToDo 10 12 0 11 -260097 -1
+0;
+#X text 203 624 3 kHz;
+#X text 265 624 4 KHz;
+#X obj 24 27 cnv 15 118 100 empty empty Komponenten 10 12 0 13 -99865
+-260097 0;
+#X obj 146 27 cnv 15 145 100 empty empty VCF 10 12 0 13 -99865 -260097
+0;
+#X obj 38 64 knob 35 35 0 1 0 1 knob_wave_level_global knob_wave_level_global
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 90 64 knob 35 35 0 1 0 0 knob_noise_level_global knob_noise_level_global
+empty 0 -8 0 11 -228856 -260097 -261682 3400 1;
+#X obj 158 64 knob 35 35 0 127 0 1 knob_vcf_cut_global knob_vcf_cut_global
+empty 0 -8 0 11 -228856 -260097 -261682 1600 1;
+#X obj 228 64 knob 35 35 0 127 0 0 knob_vcf_q_global knob_vcf_q_global
+empty 0 -8 0 11 -228856 -260097 -261682 1600 1;
+#X text 329 624 5 KHz;
+#X text 393 624 6 KHz;
+#X text 456 624 7 kHz;
+#X text 519 624 8 KHz;
+#X text 583 624 9 KHz;
+#X text 645 624 10 KHz;
+#X text 707 624 11 kHz;
+#X text 771 624 12 KHz;
+#X obj 155 107 nbx 5 14 -1e+037 1e+037 0 0 1-vcf-freq-gui_s 1-vcf-freq-gui
+empty 0 -8 0 10 -66577 -260097 -1 2423.25 256;
+#X obj 225 107 nbx 5 14 -1e+037 1e+037 0 0 1-vcf-q-gui_s 1-vcf-q-gui
+empty 0 -8 0 10 -66577 -260097 -1 4.70588 256;
+#X obj 36 107 nbx 4 14 -1e+037 1e+037 0 0 knob_wave_level_global knob_wave_level_global
+empty 0 -8 0 10 -66577 -260097 -1 0 256;
+#X obj 87 107 nbx 4 14 -1e+037 1e+037 0 0 knob_noise_level_global knob_noise_level_global
+empty 0 -8 0 10 -66577 -260097 -1 1 256;
+#X obj 748 -11 dspcon;
+#X obj 157 50 cnv 10 10 10 empty empty Frequenz 0 7 0 11 -99865 -261682
+0;
+#X obj 226 50 cnv 10 10 10 empty empty Q 0 7 0 11 -99865 -261682 0
+;
+#X obj 38 50 cnv 10 10 10 empty empty Wave 0 7 0 11 -99865 -261682
+0;
+#X obj 89 50 cnv 10 10 10 empty empty Noise 0 7 0 11 -99865 -261682
+0;
+#X obj 97 -60 cnv 15 100 22 empty empty Bandpassfilter 0 11 0 14 -260097
+-1 0;
+#X text 3 236 BANDPASSFILTER lassen einen voreingestellten Frequenzbereich
+passieren und blockieren die Frequenzen über- und unterhalb dieses
+Bereiches. Die FREQUENZ steuert dabei den Mittelpunkt \, an dem das
+Filter ansetzt.;
+#X text 3 293 Die FILTERGÜTE (Q) bestimmt dabei vor allem die Breite
+des Frequenzbereichs \, der durchgelassen wird. Eine niedrige Filtergüte
+führt zu einem breiten Durchlassbereich. Eine hohe Filtergüte zu
+einem schmalen Durchlassbereich.;
+#X obj 337 371 bng 12 250 50 0 what-Rauschen xxx what? 15 6 0 10 -2097
+-260097 -1;
+#X text 3 351 Bandpassfilter können auch als eine Zusammenschaltung
+eines Hochpass- und eines Tiefpassfilters verstanden werden.;
+#X text 454 76 Verändere den Frequenz- und den Q-regler und beobachte
+die Auswirkungen auf das Spektrum.;
+#X text 454 145 Ein Bandpass \, dessen Filtergüte Q erhöht wird \,
+dämpft die Frequenzen um die Mittenfrequenz immer stärker ab.;
+#X text 3 142 DRUMBOS Klänge können am Ende der Klangerzeugung mithilfe
+eines BANDPASSFILTERS abschließend geformt werden.;
+#X text 3 177 Beim Bau elektronischer Instrumente werden die verwendeten
+Filter häufig als VOLTAGE CONTROLLED FILTER (VCF) bezeichnet \, also
+als 'spannungsgesteuerte Filter' \, da sie mithilfe elektrischer Spannungen
+gesteuert werden.;
+#X text 3 392 In diesem Beispiel wird der Bandpassfilter auf WEISSES
+RAUSCHEN angewandt \, das theoretisch ALLE hörbaren Frequenzen enhält.
+Daher ist der Effekt des Filterns besonders gut wahrnehmbar.;
+#X text 454 110 Ein Bandpass \, dessen Filtergüte Q niedrig eingestellt
+ist \, lässt Signale nahezu ungehindert passieren.;

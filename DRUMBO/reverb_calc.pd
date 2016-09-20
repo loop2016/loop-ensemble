@@ -1,0 +1,24 @@
+#N canvas 575 280 545 263 10;
+#X obj 99 -9 inlet;
+#X obj 99 213 outlet;
+#X obj 99 84 -;
+#X floatatom 99 118 5 0 0 0 - - -;
+#X obj 99 43 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 99 178 + 0.25;
+#X obj 99 155 * 0.75;
+#X obj 99 16 * 0.75;
+#X obj 49 71 outlet;
+#X msg 99 63 0.75;
+#X text 150 88 Berechnung und Skalierung des Dry bzw. des Wet-Werts
+für den Einlass in den Reverb.;
+#X connect 0 0 7 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 4 0 9 0;
+#X connect 5 0 1 0;
+#X connect 6 0 5 0;
+#X connect 7 0 4 0;
+#X connect 7 0 2 1;
+#X connect 7 0 8 0;
+#X connect 9 0 2 0;

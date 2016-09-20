@@ -1,0 +1,117 @@
+#N canvas 52 98 1105 645 10;
+#N canvas 469 32 420 401 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 622 118 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2998 -380 r Jerry_timefreqon;
+#X obj -2820 -281 tabwrite~ Jerry-Spektrum;
+#X obj -2821 -330 /~ 1024;
+#X obj -2820 -309 clip~ 0 0.2;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 11 0;
+#X connect 3 0 2 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 5 0;
+#X connect 11 0 12 0;
+#X connect 12 0 10 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -2911 -532 r~ Jerry_mainOut;
+#X obj -2998 -554 r Jerry_timefreqon;
+#X obj -2910 -468 tabwrite~ Jerry-Zeitbereich;
+#X obj -2984 -398 s jerry-key-1;
+#X obj -2985 -428 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -2961 -275 s JERRY_delfeedback_ctl;
+#X obj -2907 -301 s JERRY_deltime_ctl;
+#X msg -2961 -332 0.2;
+#X msg -2907 -332 60;
+#X obj -2763 -368 closebang;
+#X msg -2763 -340 0;
+#X obj -2763 -310 s Jerry_timefreqon;
+#X obj -2770 -406 tgl 30 0 Jerry_timefreqon empty An/Aus -60 15 0 15
+-99865 -260097 -1 0 1;
+#X obj -2730 -458 loadbang;
+#X msg -2721 -430 1;
+#X connect 0 0 4 0;
+#X connect 2 0 1 0;
+#X connect 2 0 4 0;
+#X connect 3 0 0 0;
+#X connect 3 0 6 0;
+#X connect 6 0 5 0;
+#X connect 6 0 9 0;
+#X connect 6 0 10 0;
+#X connect 9 0 7 0;
+#X connect 10 0 8 0;
+#X connect 11 0 12 0;
+#X connect 12 0 13 0;
+#X connect 15 0 16 0;
+#X connect 16 0 14 0;
+#X restore 977 563 pd guts;
+#X text -33 112 0;
+#X text 389 137 -1;
+#X obj -74 -51 cnv 15 1100 640 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj 206 131 cnv 30 400 120 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Jerry-Zeitbereich 2000 float 4;
+#X coords 0 0.4 1999 -0.4 400 120 1 0 0;
+#X restore 206 131 graph;
+#X obj -43 373 cnv 30 650 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Jerry-Spektrum 2048 float 2;
+#X coords 0 0.2 2048 0 650 180 1 0 0;
+#X restore -43 373 graph;
+#X text 1 553 1000 Hz;
+#X text 117 553 3000 Hz;
+#X text 59 553 2000 Hz;
+#X text 177 553 4000 Hz;
+#X text 235 553 5000 Hz;
+#X text 294 553 6000 Hz;
+#X text 354 553 7000 Hz;
+#X text 414 553 8000 Hz;
+#X text 471 554 9000 Hz;
+#X text 531 554 10000 Hz;
+#X obj 203 292 cnv 15 100 60 empty empty ⇩ 20 12 0 150 -128992 -1
+0;
+#X obj 472 311 image Fourier.gif;
+#X text 633 126 Im ZEITBEREICH wird das Signal in seinem Verlauf über
+die Zeit dargestellt. Die Y-Achse zeigt dabei die Amplitudehöhe der
+Schwingung.;
+#X obj -40 9 cnv 15 390 100 empty empty ToDo 20 8 0 10 -260097 -66577
+0;
+#X obj -74 -45 cnv 15 1100 22 empty empty what?-Fouriertransformation
+20 11 0 14 -260097 -33289 0;
+#X text 179 -42 Aus dem Zeitbereich in den Frequenzbereich;
+#X text 631 272 Mit Hilfe der Fouriertransformation werden die periodischen
+Schwingungen aus dem ZEITBEREICH in den FREQUENZBEREICH übertragen.
+Dabei wird mathematisch analysiert \, welche einzelnen Sinusschwingungen
+am Ausgangssignal beteiligt sind und diese werden in ihrer Lautstärkenamplitude
+dargestellt.;
+#X text 630 370 Besteht das Signal nur aus einem Sinuston \, so lässt
+sich im Frequenzspektrum nur eine Schwingung \, also eine schmale Anhebung
+auf einer bestimmten Frequenz sehen. Besteht das Signal aus mehreren
+Sinustönen \, so sind diese zwar im ZEITBEREICH nur schwer visuell
+voneinander zu trennen \, nach der Analyse wird im FREQUENZBEREICH
+die Zusammensetzung des Signals aus den einzelnen Schwingungen aber
+deutlich.;
+#X text -23 55 Versuche nachzuvollziehen \, wie das resultierende Signal
+im ZEITBEREICH dargestellt wird und aus dem ZEITBEREICH in den FREQUENZBEREICH
+übertragen wird.;
+#X text -23 24 Aktiviere den Erklärungspatch und erzeuge mit JERRY
+Sinustöne. (TASTE B);

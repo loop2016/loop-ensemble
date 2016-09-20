@@ -1,0 +1,70 @@
+#N canvas 295 75 863 626 10;
+#X obj -206 -257 cnv 15 860 620 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -206 -251 cnv 15 860 22 empty empty what?-Sequencer 20 11 0
+14 -260097 -33289 0;
+#X obj -59 -251 cnv 15 10 10 empty empty DRUMBO 0 11 0 14 -260097 -33289
+0;
+#X obj 577 -216 dspcon;
+#X text -121 206 Die Spalten repräsentieren den zeitlichen Verlauf
+\, die Zeilen sind die acht unterschiedlichen Klänge \, die vorher
+per Preset geladen oder manuell eingestellt wurden.;
+#X obj -129 -212 cnv 15 170 110 empty empty Presets 10 12 0 13 -99865
+-260097 0;
+#X obj -41 -159 bng 15 250 50 0 bang808slick empty 808slick 22 7 0
+9 -99865 -260097 -260097;
+#X obj -106 -138 bng 15 250 50 0 bangtonal_saw empty saw 22 7 0 9 -99865
+-260097 -260097;
+#X obj -41 -138 bng 15 250 50 0 bang808square empty 808sqr 22 7 0 9
+-99865 -260097 -260097;
+#X obj -106 -158 bng 15 250 50 0 bangtonal_square empty rect 22 7 0
+9 -99865 -260097 -260097;
+#X obj -50 -183 cnv 15 50 16 empty empty Perkussiv: 10 9 0 11 -99865
+-261682 0;
+#X obj -116 -183 cnv 15 50 16 empty empty Tonal: 10 9 0 11 -99865 -261682
+0;
+#X obj 129 -147 cnv 15 135 45 empty empty empty 10 12 0 13 -99865 -260097
+0;
+#X obj 166 -141 cnv 15 20 20 empty empty Sequencer 10 12 0 11 -99865
+-260097 0;
+#X obj 146 -135 bng 20 500 10 0 opensqr empty GUI-öffnen 30 20 0 11
+-260097 -66577 -260097;
+#X obj 45 -212 cnv 15 80 110 empty empty Tempo 10 12 0 13 -99865 -260097
+0;
+#X obj -128 -77 cnv 15 388 80 empty empty ToDo 10 12 0 11 -260097 -66577
+0;
+#X text -116 -57 Wähle ein Preset \, stelle einen BPM-Wert ein und
+öffne die Sequencer-GUI. Starte den Sequenzer und erstelle ein rhytmisches
+Muster.;
+#X text -122 259 Die erstellten Muster können in benachbarte Clips
+kopiert werden. Das erspart händisches Kopieren und ermöglicht unkompliziert
+mehrere Muster mit leichten Variationen.;
+#X text -122 18 Ein Sequenzer speichert und übermittelt vorher festgelegte
+Einstellungen an einen Klangzeuger. Dabei können alle möglichen Eigenschaften
+der Klänge angesteuert und somit automatisiert werden \, z.B. die
+Tonhöhe \, die Lautstärke \, die Tondauer \, usw.. Der Sequenzer
+gibt dann in einer vorher festgelegten zeitlichen Reihenfolge und Geschwindigkeit
+die Daten an den Klangerzeuger weiter.;
+#X text 287 24 Der BPM-Regler steuert das Tempo des Sequencers. BPM
+steht hierbei für „beats per minute“ / „Schläge pro Minute“.
+Ein Schlag ist hierbei eine Viertelnote \, das entspricht jedem vierten
+Step im Sequencer.;
+#X text 288 92 DRUMBOS Step-Sequenzer erzeugt in der Regel (gerade
+auch der Übersichtlichkeit in der Bedienbarkeit wegen) eher kurze
+LOOPS. LOOPS sind relativ kurze Sequenzen \, die sich immer wiederholen
+und während dieses wiederholten Abspielens verändert werden können.
+LOOPS werden sehr häufig in elektronischer Musik eingesetzt.;
+#X obj 65 -167 knob 35 35 50 240 0 0 bpm_to_int bpm_to_int empty 0
+-10 0 11 -262144 -260097 -260097 0 1;
+#X obj 62 -125 nbx 4 14 -1e+037 1e+037 0 0 empty bpm empty 0 -8 0 10
+-99865 -260097 -1 0 256;
+#X obj 62 -188 cnv 15 15 15 empty empty BPM 0 12 0 11 -99865 -261682
+0;
+#X text -122 314 Mit dem "clear"-Knopf können die Sequenzen gelöscht
+werden.;
+#X text -122 118 DRUMBOs 16-Step-Sequenzer ermöglicht das Erstellen
+von rhythmischen Ton bzw. Klangfolgen. Er bietet dafür vier Clips
+\, also vier Matrizen \, in denen die rhytmischen Muster eingegeben
+werden können. Nach Ablauf eines Durchlaufs von 16 Schritten \, die
+den 16-teln im 4/4-Takt entsprechen \, springt der Sequencer wieder
+auf die erste Position.;

@@ -1,0 +1,8 @@
+#N canvas 0 0 1131 723 10;
+#X obj -518 -1798 cnv 15 1100 700 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -518 -1790 cnv 15 1100 22 empty empty What?-Jerry 20 11 0 14
+-260097 -66577 0;
+#X obj -281 -1539 cnv 15 609 188 empty empty empty 20 12 0 14 -66577
+-66577 0;
+#X obj 24 -1444 image Jerry_Symbolbild_Noisefilter.gif;

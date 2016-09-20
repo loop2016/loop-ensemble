@@ -1,0 +1,350 @@
+#N canvas 98 5 1103 693 10;
+#N canvas 577 248 604 486 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 616 128 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2821 -281 tabwrite~ Add-SubSyn-Spektrum;
+#X obj -2998 -380 r Add_addsubsynon;
+#X obj -2694 -387 /~ 4096;
+#X obj -2695 -365 log~ 10;
+#X obj -2696 -316 clip~ -200 0;
+#X obj -2696 -342 *~ 20;
+#X obj -2821 -330 /~ 1024;
+#X obj -2820 -309 clip~ 0 0.2;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 15 0;
+#X connect 3 0 2 0;
+#X connect 5 0 9 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 10 0 5 0;
+#X connect 11 0 12 0;
+#X connect 12 0 14 0;
+#X connect 14 0 13 0;
+#X connect 15 0 16 0;
+#X connect 16 0 9 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -3020 -494 sel 1;
+#X obj -3020 -442 s Add_reset;
+#X obj -2972 -420 delay 50;
+#X obj -2998 -554 r Add_addsubsynon;
+#X obj -2911 -447 tabwrite~ Add-SubSyn-Zeitsignal;
+#X msg -2972 -398 0;
+#N canvas 411 258 950 572 examples 0;
+#X msg 78 -1486 1;
+#X msg 426 -1436 127;
+#X obj 426 -1382 s Add_waveclipctl;
+#X obj 268 -1560 noise~;
+#X obj 269 -1159 s~ Add_testnoise;
+#X obj 78 -1451 s Add_finalvol;
+#X msg 106 -1486 1;
+#X obj 78 -1579 r Add_SubSyn_ex;
+#X obj 78 -1550 sel 0 1 2;
+#X obj 269 -1473 *~ 1;
+#X msg 351 -1533 1;
+#X obj 312 -1490 line;
+#X obj 448 -1465 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 466 -1436 97;
+#X obj 466 -1405 s Add_mainfreqmidi;
+#X obj 463 -1518 s Add_reset;
+#X obj 448 -1490 delay 50;
+#X obj 448 -1533 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 699 -1465 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 714 -1518 s Add_reset;
+#X obj 699 -1490 delay 50;
+#X obj 699 -1533 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 720 -1438 116;
+#X obj 720 -1413 s Add_mainfreqmidi;
+#X obj 699 -1380 s Add_tonepreset3;
+#X obj 699 -1341 delay 20;
+#X msg 699 -1317 127;
+#X obj 686 -1270 s Add_OT1volctl;
+#X obj 697 -1248 s Add_OT2volctl;
+#X obj 710 -1226 s Add_OT3volctl;
+#X obj 719 -1200 s Add_OT4volctl;
+#X obj 731 -1173 s Add_OT5volctl;
+#X obj 448 -1304 s Add_ctlmode_verbfil_ctl;
+#X msg 448 -1336 1;
+#X obj 196 -1533 delay 20;
+#X obj 196 -1508 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 196 -1488 s Add_reset;
+#X obj 196 -1452 delay 20;
+#X obj 297 -1540 loadbang;
+#X obj 268 -1235 *~ 1;
+#X obj 311 -1252 line;
+#X obj 310 -1331 r Add_addsubsynon;
+#X obj 278 -1133 r Add_notein1_diss;
+#X obj 278 -1104 spigot;
+#X obj 278 -1078 s Add_notein1;
+#X obj 312 -1457 r Add_notein1_diss;
+#X obj 269 -1362 *~ 1;
+#X obj 312 -1379 line;
+#X obj 328 -1426 sel 0;
+#X msg 278 -1404 1 1500;
+#X msg 328 -1404 0 200;
+#X obj 287 -1307 sel 1;
+#X obj 332 -1307 sel 0;
+#X msg 287 -1285 1 1500;
+#X msg 332 -1285 0 200;
+#X msg 297 -1512 0 200;
+#X msg 351 -1512 1 1500;
+#X obj 278 -1426 sel 127;
+#X msg 134 -1485 0.01;
+#X obj 363 -1219 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj 267 -1195 spigot~;
+#X obj 363 -1247 r Add_addsubsynon;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 3 0 9 0;
+#X connect 6 0 5 0;
+#X connect 7 0 8 0;
+#X connect 8 0 17 0;
+#X connect 8 0 0 0;
+#X connect 8 0 55 0;
+#X connect 8 1 6 0;
+#X connect 8 1 21 0;
+#X connect 8 1 55 0;
+#X connect 8 2 58 0;
+#X connect 8 2 10 0;
+#X connect 8 2 34 0;
+#X connect 9 0 46 0;
+#X connect 10 0 56 0;
+#X connect 11 0 9 1;
+#X connect 12 0 13 0;
+#X connect 12 0 1 0;
+#X connect 12 0 33 0;
+#X connect 13 0 14 0;
+#X connect 16 0 12 0;
+#X connect 17 0 15 0;
+#X connect 17 0 16 0;
+#X connect 18 0 22 0;
+#X connect 18 0 24 0;
+#X connect 18 0 25 0;
+#X connect 18 0 33 0;
+#X connect 20 0 18 0;
+#X connect 21 0 19 0;
+#X connect 21 0 20 0;
+#X connect 22 0 23 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 26 0 28 0;
+#X connect 26 0 29 0;
+#X connect 26 0 30 0;
+#X connect 26 0 31 0;
+#X connect 33 0 32 0;
+#X connect 34 0 35 0;
+#X connect 35 0 36 0;
+#X connect 35 0 37 0;
+#X connect 37 0 33 0;
+#X connect 38 0 55 0;
+#X connect 38 0 54 0;
+#X connect 39 0 60 0;
+#X connect 40 0 39 1;
+#X connect 41 0 43 1;
+#X connect 41 0 51 0;
+#X connect 41 0 52 0;
+#X connect 42 0 43 0;
+#X connect 43 0 44 0;
+#X connect 45 0 48 0;
+#X connect 45 0 57 0;
+#X connect 46 0 39 0;
+#X connect 47 0 46 1;
+#X connect 48 0 50 0;
+#X connect 49 0 47 0;
+#X connect 50 0 47 0;
+#X connect 51 0 53 0;
+#X connect 52 0 54 0;
+#X connect 53 0 40 0;
+#X connect 54 0 40 0;
+#X connect 55 0 11 0;
+#X connect 56 0 11 0;
+#X connect 57 0 49 0;
+#X connect 58 0 5 0;
+#X connect 59 0 60 1;
+#X connect 60 1 4 0;
+#X connect 61 0 59 0;
+#X restore -2813 -394 pd examples;
+#X obj -2911 -476 clip~ -0.2 0.2;
+#X obj -2998 -320 s Add_relvolon;
+#X obj -2998 -363 - 1;
+#X obj -2998 -344 abs;
+#X msg -2900 -282 0;
+#X obj -2900 -305 sel 0;
+#X obj -2972 -377 s Add_SubSyn_ex_ctl;
+#X obj -2770 -299 closebang;
+#X obj -2770 -254 s Add_addsubsynon;
+#X msg -2770 -276 0;
+#X obj -2900 -238 s Add_notein1;
+#X obj -2689 -225 s Add_finalvol;
+#X msg -2689 -282 1;
+#X obj -2974 -477 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -2900 -262 s Add_notein1_dissctl;
+#X floatatom -2934 -501 5 0 0 0 - - -;
+#X obj -2911 -532 r~ Add_Filtersignal;
+#X obj -2685 -615 tgl 35 0 Add_addsubsynon Add_addsubsynon_ctl An/Aus
+-70 20 0 17 -99865 -1 -1 1 1;
+#X obj -2809 -616 loadbang;
+#X msg -2809 -593 1;
+#X obj -2809 -568 s Add_addsubsynon_ctl;
+#X obj -2601 -656 bng 15 250 50 0 empty ADD_EPSubSyn_reset empty 17
+7 0 10 -262144 -1 -1;
+#X obj -2665 -654 del 15;
+#X connect 0 0 6 0;
+#X connect 2 0 3 0;
+#X connect 2 0 13 0;
+#X connect 2 0 22 0;
+#X connect 2 0 4 0;
+#X connect 4 0 7 0;
+#X connect 5 0 0 0;
+#X connect 5 0 2 0;
+#X connect 5 0 11 0;
+#X connect 5 0 14 0;
+#X connect 5 0 24 0;
+#X connect 7 0 15 0;
+#X connect 9 0 6 0;
+#X connect 11 0 12 0;
+#X connect 12 0 10 0;
+#X connect 13 0 19 0;
+#X connect 13 0 23 0;
+#X connect 14 0 13 0;
+#X connect 16 0 18 0;
+#X connect 16 0 13 0;
+#X connect 16 0 21 0;
+#X connect 16 0 3 0;
+#X connect 18 0 17 0;
+#X connect 21 0 20 0;
+#X connect 25 0 1 0;
+#X connect 25 0 9 0;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 30 0 31 0;
+#X connect 30 0 26 0;
+#X connect 31 0 26 0;
+#X restore 777 -1157 pd guts;
+#X obj -258 -1818 cnv 15 1100 690 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -258 -1810 cnv 16 1100 22 empty empty what?-Subtraktive 20 11
+0 14 -260097 -66577 0;
+#X text -195 -1150 1000 Hz;
+#X text -95 -1150 3000 Hz;
+#X text 2 -1150 5000 Hz;
+#X text 100 -1150 7000 Hz;
+#X text 198 -1150 9000 Hz;
+#X text 293 -1150 11000 Hz;
+#X text 391 -1150 13000 Hz;
+#X text 489 -1150 15000 Hz;
+#X obj -227 -1330 cnv 30 800 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Add-SubSyn-Spektrum 3000 float 2;
+#X coords 0 0.2 3000 0 800 180 1 0 0;
+#X restore -227 -1330 graph;
+#X obj -231 -1777 cnv 15 186 200 empty empty Filter 10 12 0 11 -99865
+-260097 0;
+#X obj -213 -1717 knob 32 32 16 15000 0 0 Add_hp_freq Add_hp_freq_ctl
+Frequenz 0 -8 0 10 -262144 -260097 -261682 0 1;
+#X obj -118 -1718 knob 32 32 100 16000 0 0 Add_lp_freq Add_lp_freq_ctl
+Frequenz 0 -8 0 10 -262144 -260097 -261682 3100 1;
+#X obj -213 -1642 knob 32 32 0.1 21 0 0 Add_hp_q Add_hp_q_ctl Q 0 -8
+0 10 -262144 -260097 -261682 99 1;
+#X obj -117 -1643 knob 32 32 0 21 0 0 Add_lp_q Add_lp_q_ctl Q 0 -8
+0 10 -262144 -260097 -261682 113 1;
+#X obj -118 -1683 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -66577 -260097 -1 16000 256;
+#X obj -213 -1682 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -66577 -260097 -1 16 256;
+#X obj -117 -1608 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -66577 -260097 -1 0.765484 256;
+#X obj -213 -1607 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -66577 -260097 -1 0.767452 256;
+#X text -216 -1754 HOCHPASS;
+#X text -122 -1754 TIEFPASS;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Add-SubSyn-Zeitsignal 300 float 4;
+#X coords 0 0.2 299 -0.2 265 180 1 0 0;
+#X restore -228 -1546 graph;
+#X text -247 -1464 0;
+#X obj -228 -1546 cnv 30 265 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X text -252 -1550 0.2;
+#X text -258 -1378 -0.2;
+#X obj 428 -1722 vradio 40 1 0 3 Add_SubSyn_ex Add_SubSyn_ex_ctl empty
+0 -8 0 10 -99865 -260097 -1 0;
+#X text 471 -1671 Bsp. 2: Signal auf 1000 Hz mit 5 ungeraden \, sehr
+lauten Obertönen.;
+#X obj -27 -1618 tgl 40 0 Add_notein1_diss Add_notein1_dissctl Ton
+9 -10 0 12 -99865 -260097 -260097 0 127;
+#X text 49 -1806 Hoch- und Tiefpassfilter;
+#X obj 435 -1493 cnv 15 380 120 empty empty ToDo 20 8 0 10 -260097
+-66577 0;
+#X text 472 -1726 Bsp. 1: Ausgangspunkt ist ein Rechtecksignal auf
+500 Hz. Die für das Signal typischen ungeraden Obertöne sind durch
+Waveshaping erzeugt.;
+#X text 474 -1629 Bsp. 3: Weißes Rauschen - Signal auf allen Frequenzen
+(ACHTUNG! Gesamtlautstärke wird stark reduziert!);
+#X obj -96 -1810 cnv 15 100 16 empty empty Klangsynthese: 0 11 0 14
+-260097 -66577 0;
+#X text 57 -1512 Je größer Q \, umso höher ist die Lautstärke bei
+der Grenzfrequenz (Resonanzspitze). Darüberhinaus sind die Flanken
+\, die zu dieser Spitze führen \, steiler. Das führt dazu \, dass
+wenige Frequenzen unterhalb und oberhalb der Grenzfrequenz beeinflusst
+werden. Der Filter hat eine enge Bandbreite. Je kleiner das Q \, umso
+tiefer ist die Amplitude bei der Grenzfrequenz. Die Flanken sind flacher
+\, so dass mehr Frequenzen um die Grenzfrequenz beeinflusst werden.
+Die Bandbreite des Filters ist also größer.;
+#X text 1 -1778 Während bei der additiven Klangsynthese Sounds konstruktiv
+aus Sinustönen zusammengesetzt werden \, werden bei der subtraktiven
+Synthese dem Signal FREQUENZEN GENOMMEN. Dies geschieht mit Hilfe von
+Filtern.;
+#X text 34 -1715 Die meisten FILTER dämpfen gewisse vorgegebene Frequenzbereich
+in ihrer Lautstärke ab \, während sie andere Bereiche ungedämpft
+passieren lassen. Es gibt zahlreiche verschiedene Filterformen \, bei
+den hier eingesetzten handelt es sich im einen Hochpass- und einen
+Tiefpassfilter. Der Hochpassfilter dämpft Frequenzen unterhalb \,
+der Tiefpassfilter dagegen Frequenzen überhalb einer variierbaren
+GRENZFREQUENZ (der Cut-Off-Frequenz).;
+#X text 443 -1578 Durch den Einsatz dieser Filter kann durch Subtraktion
+von Frequenzen somit Klang geformt werden. Durch Hohe Q-Werte können
+dabei Frequenzen betont werden. Diese Betonung bezeichnet man als Resonanz
+\, die betonten Frequenzen als Formanten. Diese geben einen sehr markanten
+Klang.;
+#X text 57 -1587 Der zweite einstellbare Parameter ist der GÜTEFAKTOR
+Q. Der Begriff 'Güte' sagt nichts über eine 'gute' oder 'schlechte'
+Qualität des Filters aus \, sondern nur über seinen Wirkungsweise.
+Q bestimmt das Verhalten des Filters bei der Grenzfrequenz und um sie
+herum:;
+#X text 57 -1399 Bei einem Wert von 0.767 ist Resonanzspitze neutral
+\, d.h. der Filterverlauf bei der Resonanzfrequenz ist flach. Wird
+der Wert vergrößert \, so wächst die Spitze. Eine Verkleinerung
+senkt sie ab.;
+#X obj 778 -1778 bng 25 250 50 0 ADD_EPSubSyn_reset ADD_EPSubSyn_reset_ctl
+zurücksetzen -28 34 0 11 -99865 -260097 -1;
+#X text 447 -1471 Erzeuge Klänge mit ADD und spiele mit den Parametern
+der beiden Filter (auf dem Controller Knob und Fader 7 und 8) Nutze
+entweder die oben wählbaren Klangbeispiele \, die das Prinzip der
+subtraktiven Synthese sehr deutlich machen oder erzeuge eigene Klänge.
+Achte dabei darauf \, wie die Veränderungen den Klang des Signals
+beeinflussen.;
+#X connect 14 0 19 0;
+#X connect 15 0 18 0;
+#X connect 16 0 21 0;
+#X connect 17 0 20 0;

@@ -1,0 +1,179 @@
+#N canvas 87 21 1102 682 10;
+#N canvas 272 242 716 411 guts 0;
+#N canvas 625 113 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2821 -330 /~ 1024;
+#X obj -2821 -281 tabwrite~ Jerry-DelaySpektrum;
+#X obj -2998 -380 r Jerry_Delayon;
+#X obj -2820 -309 clip~ 0 0.3;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 9 0;
+#X connect 3 0 2 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 12 0;
+#X connect 11 0 5 0;
+#X connect 12 0 10 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -2911 -532 r~ Jerry_mainOut;
+#X obj -3025 -554 r Jerry_Delayon;
+#X obj -2910 -468 tabwrite~ Jerry-DelaySumme;
+#X obj -3025 -518 metro 100;
+#X obj -3013 -409 r Jerry_OpenEPDelayline;
+#X obj -3015 -376 getdir;
+#X msg -3015 -349 \; pd open EP_JerryDelayline.pd \$1;
+#X obj -2734 -413 r Jerry_EPDelayEX1;
+#X msg -2680 -380 30;
+#X obj -2734 -323 s JERRY_delfeedback_ctl;
+#X obj -2680 -349 s JERRY_deltime_ctl;
+#X obj -2733 -198 s JERRY_delfeedback_ctl;
+#X obj -2679 -224 s JERRY_deltime_ctl;
+#X obj -2733 -288 r Jerry_EPDelayEX2;
+#X obj -2535 -256 s JERRY_delfeedback_ctl;
+#X obj -2481 -282 s JERRY_deltime_ctl;
+#X obj -2535 -346 r Jerry_EPDelayEX3;
+#X msg -2679 -255 300;
+#X msg -2535 -313 0.98;
+#X msg -2481 -313 250;
+#X msg -2734 -380 0.7;
+#X msg -2733 -255 0.7;
+#X obj -2539 -505 tgl 30 0 Jerry_Delayon Jerry_Delayon_ctl An/Aus -60
+17 0 15 -99865 -1 -1 1 1;
+#X obj -2638 -519 loadbang;
+#X obj -2638 -469 s Jerry_Delayon_ctl;
+#X msg -2638 -495 1;
+#X obj -2717 -439 s Jerry_Seq_on_ctl;
+#X msg -2717 -459 0;
+#X connect 1 0 0 0;
+#X connect 1 0 3 0;
+#X connect 2 0 4 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 8 0 21 0;
+#X connect 8 0 9 0;
+#X connect 9 0 11 0;
+#X connect 14 0 22 0;
+#X connect 14 0 18 0;
+#X connect 17 0 19 0;
+#X connect 17 0 20 0;
+#X connect 18 0 13 0;
+#X connect 19 0 15 0;
+#X connect 20 0 16 0;
+#X connect 21 0 10 0;
+#X connect 22 0 12 0;
+#X connect 24 0 26 0;
+#X connect 24 0 28 0;
+#X connect 26 0 25 0;
+#X connect 28 0 27 0;
+#X restore 766 -1180 pd guts;
+#X obj -273 -1818 cnv 15 1100 680 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Jerry-DelaySumme 200 float 2;
+#X coords 0 0.5 200 -0.5 265 200 1 0 0;
+#X restore -231 -1358 graph;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Jerry-DelaySpektrum 3000 float 2;
+#X coords 0 0.3 3000 0 500 100 1 0 0;
+#X restore -266 -1504 graph;
+#X text -250 -1267 0;
+#X text -251 -1403 1000 Hz;
+#X text -189 -1403 3000 Hz;
+#X text -127 -1403 5000 Hz;
+#X text -65 -1403 7000 Hz;
+#X text -4 -1403 9000 Hz;
+#X text 59 -1403 11000 Hz;
+#X text 120 -1403 13000 Hz;
+#X obj -266 -1504 cnv 30 500 100 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -231 -1358 cnv 30 265 200 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -273 -1811 cnv 15 1100 22 empty empty what?-Delay 20 11 0 14
+-260097 -33289 0;
+#X obj -264 -1654 cnv 20 150 120 empty empty empty 10 12 0 13 -33289
+-260097 0;
+#X obj -259 -1649 cnv 20 140 110 empty empty Delay 10 12 0 13 -66577
+-260097 0;
+#X obj -181 -1608 knob 42 42 0 1000 0 1 JERRY_deltime JERRY_deltime_ctl
+empty 0 -10 0 11 -262144 -260097 -260097 451 1;
+#X obj -244 -1608 knob 42 42 0 1 0 0 JERRY_delfeedback JERRY_delfeedback_ctl
+empty 0 -10 0 11 -262144 -260097 -260097 0 1;
+#X obj -181 -1562 nbx 5 14 -1e+037 1e+037 0 0 empty JERRY_deltime empty
+0 -8 0 10 -54094 -260097 -260097 110 256;
+#X obj -245 -1562 nbx 5 14 -1e+037 1e+037 0 0 empty JERRY_delfeedback
+empty 0 -8 0 10 -54094 -260097 -260097 0 256;
+#X obj -246 -1626 cnv 15 15 15 empty empty Feedback 0 8 0 11 -66577
+-261682 0;
+#X obj -183 -1626 cnv 15 15 15 empty empty Time 0 8 0 11 -66577 -261682
+0;
+#X text -255 -1359 0.5;
+#X text -262 -1175 -0.5;
+#X text -139 -1809 Klangeffekte durch Verzögerung;
+#X text -219 -1759 Für den Delayeffekt werden eine bzw. mehrere KOPIEN
+des Signals erzeugt und diese dann zeitverzögert ausgeben.;
+#X text -219 -1724 Dadurch entsteht ein Klangeffekt \, der dem ECHO
+sehr ähnlich ist. Ein Delay kann also als eine aufeinanderfolgende
+Reihe von einzelnen ECHOS begriffen werden.;
+#X text 331 -1369 Der Effekt funktioniert mithilfe einer sogenannten
+DELAYLINE. Hier wird das Signal im Speicher des Computers eingeschrieben.
+;
+#X text 331 -1327 Das erste Echo entsteht dadurch \, dass das Signal
+wieder ausgelesen und ausgegeben wird.;
+#X text 331 -1252 Dieser Vorgang wird wiederholt \, bis die ECHOs so
+leise sind \, dass sie nicht mehr zu hören sind.;
+#X text 331 -1296 Durch das FEEDBACK (dt.: Rückkopplung) wird dieses
+erste Echosignal (in der Regel etwas leiser) zurück in die DELAYLINE
+geschrieben \, sodass ein Echo des Echos entsteht.;
+#X text -88 -1643 Die DELAYTIME (dt.: Verzögerungszeit) regelt die
+Zeit \, die zwischen dem Originalsignal und seinem Echo bzw. zwischen
+seinen mehreren aufeinander folgenden Echos liegt.;
+#X obj 467 -1210 bng 30 250 50 0 Jerry_OpenEPDelayline empty <--Beispiel-Delayline
+35 15 0 15 -66577 -260097 -260097;
+#X text -232 -1779 GRUNDSÄTZLICHES;
+#X text -102 -1662 PARAMETER;
+#X text 316 -1389 FUNKTIONSWEISE;
+#X text 320 -1628 BEISPIELE;
+#X obj 700 -1599 bng 30 250 50 0 Jerry_EPDelayEX1 empty anwenden -7
+40 0 10 -66577 -260097 -1;
+#X obj 700 -1533 bng 30 250 50 0 Jerry_EPDelayEX2 empty anwenden -7
+40 0 10 -66577 -260097 -1;
+#X obj 700 -1466 bng 30 250 50 0 Jerry_EPDelayEX3 empty anwenden -7
+40 0 10 -66577 -260097 -1;
+#X text 328 -1545 Ist eine Delaytime GRÖßER ALS 50 ms eingestellt
+\, so kann unser Gehör das Originalsignal von den Wiederholungen trennen
+und diese erklingen als Echos. Das FEEDBACK regelt jetzt die Anzahl
+der Echos.;
+#X text 328 -1474 Ist das FEEDBACK sehr noch eingestellt \, so erklingen
+sehr viele ECHOS. Bei einem FEEDBACK von 1 erklingt das DELAY sogar
+ENDLOS LANG.;
+#X obj 296 -1779 cnv 15 390 120 empty empty ToDo 10 12 0 11 -260097
+-66577 0;
+#X text 312 -1716 Du kannst dafür außerdem die Beispiele aktivieren.
+;
+#X text 313 -1759 Versuche die Auswirkungen des DELAYs auf den Sound
+zu verstehen \, indem du mit JERRY Klänge erzeugst und dabei mit den
+DELAY-Parametern spielst.;
+#X text 311 -1693 Versuche dann die Funktionsweise des DELAYs zu verstehen
+\, indem du mit dem Beispiel für eine DELAYLINE spielst.;
+#X text 328 -1606 Ist eine DELAYTIME UNTER 50 ms eingestellt (ECHOSCHWELLE)
+\, so kann unser Gehör das Orginalsignal nicht von den Echos trennen
+und beide VERSCHMELZEN zu einem eigenem Klang.;
+#X text -87 -1592 Das FEEDBACK (dt.: Rückkopplung) regelt die Lautstärke
+\, mit der das Echo zurück in die Delayline gegeben wird. Je höher
+der FEEDBACK-Wert \, desto häufiger wird das Signal wiederholt. Er
+regelt also die Anzahl der Echos. Bei einem Wert von 1 enstehen ENDLOS
+VIELE Echos \, bei einem Wert von 0 nur ein einziges Echo.;

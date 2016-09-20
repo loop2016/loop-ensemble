@@ -1,0 +1,271 @@
+#N canvas 165 82 1002 582 10;
+#N canvas 62 120 449 453 guts 0;
+#N canvas 322 18 761 567 init 0;
+#X obj 268 52 t b f;
+#X obj 178 217 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 17750 256;
+#X obj 427 80 loadbang;
+#X obj 95 182 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1 1
+;
+#X obj 163 255 f;
+#X obj 95 228 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 38 153 r EP_ADDADSR_onoff;
+#X obj 178 -42 r Add_attack;
+#X obj 268 -1 r Add_release;
+#X msg 163 286 \; Add-Huellkurve resize \$1;
+#X obj 54 83 tabwrite~ Add-Huellkurve;
+#X obj -10 -147 r Add_notein1;
+#X obj 55 -95 > 0;
+#X obj 55 -72 sel 1;
+#X msg 55 -48 1;
+#X obj 111 -93 sel 0;
+#X msg 111 -69 0;
+#X obj 314 80 t b f;
+#X obj 314 34 r Add_EPAR_hold;
+#X obj -69 -120 r EP-ADSR-BANG;
+#X obj -69 -84 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 55 58 vline~;
+#X obj 55 -4 pack f f;
+#X obj 111 16 pack f f;
+#X msg 445 107 \; Add-Huellkurve yticks 0 0.125 2;
+#X msg 444 147 \; Add-Huellkurve xticks 0 441 10;
+#X obj 95 205 metro 1000;
+#X obj 178 119 expr $f1 + $f2 + $f3;
+#X obj 178 156 + 5;
+#X obj 178 185 * 50;
+#X connect 0 0 27 0;
+#X connect 0 1 27 1;
+#X connect 1 0 4 1;
+#X connect 2 0 24 0;
+#X connect 2 0 25 0;
+#X connect 3 0 26 0;
+#X connect 4 0 9 0;
+#X connect 5 0 4 0;
+#X connect 6 0 3 0;
+#X connect 7 0 22 1;
+#X connect 7 0 27 0;
+#X connect 8 0 0 0;
+#X connect 8 0 23 1;
+#X connect 11 0 12 0;
+#X connect 11 0 15 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 22 0;
+#X connect 15 0 16 0;
+#X connect 16 0 23 0;
+#X connect 17 0 27 0;
+#X connect 17 1 27 2;
+#X connect 18 0 17 0;
+#X connect 19 0 20 0;
+#X connect 20 0 10 0;
+#X connect 20 0 5 0;
+#X connect 21 0 10 0;
+#X connect 22 0 21 0;
+#X connect 23 0 21 0;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 29 0 1 0;
+#X restore 284 -178 pd init;
+#N canvas 20 177 476 248 bangs 0;
+#X obj 173 -112 r bang75-100;
+#X obj 316 -115 r bang75-400;
+#X obj 64 -54 delay 50;
+#X obj 26 84 s Add_notein1_ctl;
+#X msg 64 -23 0;
+#X obj 26 -115 r bang75-50;
+#X obj 173 87 s Add_notein1_ctl;
+#X msg 211 -17 0;
+#X msg 354 -27 0;
+#X obj 316 86 s Add_notein1_ctl;
+#X obj 200 45 s Add_EPAR_hold;
+#X msg 129 0 50;
+#X obj 280 -36 loadbang;
+#X obj 140 120 s EP-ADSR-BANG;
+#X msg 264 -3 500;
+#X msg 377 0 1000;
+#X obj 211 -51 delay 500;
+#X obj 354 -50 delay 1000;
+#X connect 0 0 6 0;
+#X connect 0 0 14 0;
+#X connect 0 0 13 0;
+#X connect 0 0 16 0;
+#X connect 1 0 9 0;
+#X connect 1 0 15 0;
+#X connect 1 0 13 0;
+#X connect 1 0 17 0;
+#X connect 2 0 4 0;
+#X connect 4 0 3 0;
+#X connect 5 0 2 0;
+#X connect 5 0 3 0;
+#X connect 5 0 11 0;
+#X connect 5 0 13 0;
+#X connect 7 0 6 0;
+#X connect 8 0 9 0;
+#X connect 11 0 10 0;
+#X connect 12 0 11 0;
+#X connect 14 0 10 0;
+#X connect 15 0 10 0;
+#X connect 16 0 7 0;
+#X connect 17 0 8 0;
+#X restore 335 -178 pd bangs;
+#X obj 137 -151 closebang;
+#X msg 137 -125 0;
+#X msg 12 -75 97;
+#X obj 12 -44 s Add_mainfreqmidi;
+#X obj 12 -160 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 12 -140 s Add_reset;
+#X obj 12 -104 delay 20;
+#X obj 12 -222 r EP_ADDADSR_onoff;
+#X obj 12 -190 sel 1;
+#X obj 137 -103 s EP_ADDADSR_onoff;
+#X msg 156 -49 100;
+#X msg 209 -54 200;
+#X obj 156 -19 s Add_attack;
+#X obj 209 9 s Add_release;
+#X obj 316 -53 bng 15 250 50 0 Add_tonepreset5 empty Bell -4 -8 0 11
+-66577 -260097 -261682;
+#X obj 316 -127 r Add_EPBell;
+#X obj 361 -34 bng 15 250 50 0 bang75-50_ctl empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X obj 362 -65 del 10;
+#X obj 320 -7 r Add_EPBell_wrong;
+#X obj 321 56 bng 15 250 50 0 Add_tonepreset5 empty Bell -4 -8 0 11
+-66577 -260097 -261682;
+#X obj 356 162 bng 15 250 50 0 bang75-50_ctl empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X obj 357 131 del 10;
+#X obj 350 87 s Add_attack;
+#X obj 403 115 s Add_release;
+#X obj 351 32 del 10;
+#X msg 350 55 50;
+#X msg 403 52 50;
+#X obj 315 -104 spigot;
+#X obj 320 13 spigot;
+#X obj 59 129 tgl 35 0 EP_ADDADSR_onoff EP_ADDADSR_onoff_ctl An/Aus
+40 18 0 15 -99865 -1 -1 1 1;
+#X obj 175 80 loadbang;
+#X msg 175 101 1;
+#X obj 175 122 s EP_ADDADSR_onoff_ctl;
+#X obj 120 80 bng 15 250 50 0 empty ADD_EPAR_reset empty 17 7 0 10
+-262144 -1 -1;
+#X obj 120 102 del 10;
+#X obj 208 -134 s Add_reset;
+#X connect 2 0 3 0;
+#X connect 2 0 37 0;
+#X connect 3 0 11 0;
+#X connect 4 0 5 0;
+#X connect 6 0 7 0;
+#X connect 6 0 8 0;
+#X connect 8 0 4 0;
+#X connect 8 0 12 0;
+#X connect 8 0 13 0;
+#X connect 9 0 10 0;
+#X connect 9 0 29 1;
+#X connect 9 0 30 1;
+#X connect 10 0 6 0;
+#X connect 12 0 14 0;
+#X connect 13 0 15 0;
+#X connect 17 0 29 0;
+#X connect 19 0 18 0;
+#X connect 20 0 30 0;
+#X connect 23 0 22 0;
+#X connect 26 0 27 0;
+#X connect 26 0 28 0;
+#X connect 26 0 23 0;
+#X connect 27 0 24 0;
+#X connect 28 0 25 0;
+#X connect 29 0 16 0;
+#X connect 29 0 19 0;
+#X connect 30 0 21 0;
+#X connect 30 0 26 0;
+#X connect 32 0 33 0;
+#X connect 33 0 34 0;
+#X connect 35 0 36 0;
+#X connect 35 0 31 0;
+#X connect 36 0 31 0;
+#X restore 859 158 pd guts;
+#X obj -90 -219 cnv 15 1000 580 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -90 -212 cnv 15 1000 22 empty empty what? 20 11 0 14 -260097
+-33289 0;
+#X obj -24 -212 cnv 15 50 22 empty empty Lautstärkehüllkurve 0 11
+0 14 -260097 -33289 0;
+#X obj -71 175 cnv 15 335 100 empty empty Lautstärkehüllkurve 6 10
+0 11 -99865 -260097 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Add-Huellkurve 65250 float 2;
+#X coords 0 1 65250 0 600 160 1 0 0;
+#X restore 300 189 graph;
+#X obj 300 189 cnv 15 600 160 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -70 279 cnv 15 335 70 empty empty empty 6 10 0 11 -99865 -260097
+0;
+#X obj 0 287 bng 15 250 50 0 bang75-50 bang75-50_ctl Bang 20 7 0 10
+-99865 -260097 -260097;
+#X obj 0 307 bng 15 250 50 0 bang75-100 empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X obj 0 327 bng 15 250 50 0 bang75-400 empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X text -67 29 Attack [ms];
+#X text -66 79 Release [ms];
+#X text -61 41 (dt. Anstieg);
+#X text 417 171 *Die großen Markierungsstriche auf der X-Achse markieren
+;
+#X text 756 171 jeweils 100 ms;
+#X obj 371 -184 cnv 15 430 110 empty empty ToDo 10 12 0 12 -260097
+-1 0;
+#X text 59 286 50 ms Tastendruck;
+#X obj 12 221 nbx 5 14 -1e+037 1e+037 0 0 empty Add_attack empty 0
+-8 0 10 -66577 -260097 -260097 100 256;
+#X obj 169 243 nbx 5 14 -1e+037 1e+037 0 0 empty Add_release empty
+0 -8 0 10 -66577 -260097 -260097 200 256;
+#X obj -44 205 hsl 120 16 0 1500 0 0 Add_attack Add_attack_ctl Attack
+8 24 0 11 -66577 -260097 -261682 159 1;
+#X obj 106 227 hsl 120 16 30 3000 0 0 Add_release Add_release_ctl Release
+8 24 0 11 -66577 -260097 -261682 280 1;
+#X text 57 30 Zeit \, in der das Signal von Wert Null auf den Wert
+der Anschlagsstärke (0 - 1) linear anschwillt \, wenn eine Taste gedrückt
+wird.;
+#X text 59 326 1000 ms Tastendruck;
+#X text 59 306 500 ms Tastendruck;
+#X text -67 -31 ADD arbeitet dagegen mit einem sehr simplen Hüllkurvengenerator
+\, der nur zwei Werte benötigt: Den ATTACK-Wert und den RELEASE-Wert.
+;
+#X text -66 -74 In den meisten Klangerzeugern werden komplexere Hüllkurven
+verwendet \, die in der Regel mit 4 Werten funktionieren.;
+#X text -68 -51 (s. ADSR-Hüllkruve bei DRUMBO).;
+#X text -66 -112 LAUTSTÄRKEVERLÄUFE von Signalen werden mittels Hüllkurven
+geformt.;
+#X text 56 79 Zeit \, die sich das Signal nimmt \, um die Lautärke
+linear auf den Wert Null abschwellen zu lassen \, wenn die Taste losgelassen
+wird.;
+#X text 423 -122 Wähle einen Attack-Wert \, der größer ist als die
+Zeit \, die die Taste gehalten wird. Aktiviere dann unten einen entsprechenden
+Tastendruck. Was fällt dir auf?;
+#X obj 689 78 bng 15 250 50 0 Add_EPBell xxxx Anschlagen 20 7 0 11
+-66577 -260097 -261682;
+#X text -61 93 (dt. Ausklingen);
+#X text 440 -69 Der Lautstärkeverlauf hat einen maßgeblichen Einfluss
+auf den Charakter des Klanges. Zum Beispiel haben streicherähnliche
+Klänge häufig eine lange Attack-Zeit \, da es dauert bis durch das
+Streichen mit dem Bogen ein Ton entsteht.;
+#X obj 690 145 bng 15 250 50 0 Add_EPBell_wrong xxxx Anschlagen 20
+7 0 11 -66577 -260097 -261682;
+#X text 438 0 Perkussive Klänge dagegen haben häufig ein sehr kurze
+Attack-Zeit \, die dem schnellen Impuls beim Schlagen eines solchen
+Instrumentes entspricht. Ein Beispiel hierfür sind Glockenklänge
+\, für die außerdem aufgrund ihres langen Ausklinges eine lange Release-Zeit
+typisch ist.;
+#X text 438 101 Verändert man hier allerdings die Hüllkurve \, so
+klingt der Klang nicht mehr wie eine Glocke.;
+#X text 437 77 GLOCKENKLANG mit typischer Hüllkurve:;
+#X text 439 143 GLOCKENKLANG mit veränderter Hüllkurve:;
+#X obj 841 -173 bng 25 250 50 0 ADD_EPAR_reset ADD_EPAR_reset_ctl zurücksetzen
+-28 34 0 11 -99865 -260097 -1;
+#X text 422 -173 Spiele mit dem Attack- und dem Release-Wert und erzeuge
+mit den Bang-Buttons (links unten) Töne. Beobachte \, wie sich die
+Lautstärkehüllkurve verändert und höre \, wie sie sich auf den
+Klang auswirkt.;

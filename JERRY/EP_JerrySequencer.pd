@@ -1,0 +1,182 @@
+#N canvas 100 124 1006 527 10;
+#N canvas 376 172 790 268 guts 0;
+#X obj -1681 81 s JERRY_attack_ctl;
+#X obj -1649 107 s JERRY_release_ctl;
+#X obj -1681 -8 loadbang;
+#X msg -1825 47 0;
+#X obj -1857 85 s JERRY_delfeedback_ctl;
+#X obj -1893 142 s JERRY_deltime_ctl;
+#X msg -1681 53 20;
+#X obj -1935 67 s jerry-key-7;
+#X obj -1760 135 s Jerry_Seq_Beat1_ctl;
+#X obj -1759 157 s Jerry_Seq_Beat2_ctl;
+#X obj -1759 176 s Jerry_Seq_Beat3_ctl;
+#X obj -1758 198 s Jerry_Seq_Beat4_ctl;
+#X obj -1625 156 s Jerry_Seq_Beat5_ctl;
+#X obj -1625 175 s Jerry_Seq_Beat6_ctl;
+#X obj -1624 197 s Jerry_Seq_Beat7_ctl;
+#X obj -1626 134 s Jerry_Seq_Beat8_ctl;
+#X obj -1911 179 s Jerry_Seq_on_ctl_ctl;
+#X obj -1561 47 s Jerry_Seq_BPM_ctl_ctl;
+#X msg -1561 23 120;
+#X obj -1451 0 closebang;
+#X obj -1404 29 s jerry-key-1;
+#X obj -1297 100 s Jerry_Seq_on_ctl_ctl;
+#X msg -1364 80 0;
+#X obj -1759 38 del 20;
+#X obj -1487 134 s Jerry_Seq_Beat9_ctl;
+#X obj -1486 156 s Jerry_Seq_Beat10_ctl;
+#X obj -1486 175 s Jerry_Seq_Beat11_ctl;
+#X obj -1485 197 s Jerry_Seq_Beat12_ctl;
+#X obj -1353 133 s Jerry_Seq_Beat13_ctl;
+#X obj -1352 155 s Jerry_Seq_Beat14_ctl;
+#X obj -1352 174 s Jerry_Seq_Beat15_ctl;
+#X obj -1351 196 s Jerry_Seq_Beat16_ctl;
+#X msg -1649 52 40;
+#X connect 2 0 6 0;
+#X connect 2 0 32 0;
+#X connect 2 0 7 0;
+#X connect 2 0 18 0;
+#X connect 2 0 23 0;
+#X connect 3 0 4 0;
+#X connect 3 0 5 0;
+#X connect 3 0 8 0;
+#X connect 3 0 9 0;
+#X connect 3 0 10 0;
+#X connect 3 0 11 0;
+#X connect 3 0 12 0;
+#X connect 3 0 13 0;
+#X connect 3 0 14 0;
+#X connect 3 0 15 0;
+#X connect 3 0 16 0;
+#X connect 3 0 24 0;
+#X connect 3 0 25 0;
+#X connect 3 0 26 0;
+#X connect 3 0 27 0;
+#X connect 3 0 28 0;
+#X connect 3 0 29 0;
+#X connect 3 0 30 0;
+#X connect 3 0 31 0;
+#X connect 6 0 0 0;
+#X connect 18 0 17 0;
+#X connect 19 0 18 0;
+#X connect 19 0 20 0;
+#X connect 19 0 22 0;
+#X connect 22 0 21 0;
+#X connect 22 0 8 0;
+#X connect 22 0 15 0;
+#X connect 22 0 12 0;
+#X connect 22 0 13 0;
+#X connect 22 0 14 0;
+#X connect 22 0 9 0;
+#X connect 22 0 10 0;
+#X connect 22 0 11 0;
+#X connect 22 0 24 0;
+#X connect 22 0 25 0;
+#X connect 22 0 26 0;
+#X connect 22 0 27 0;
+#X connect 22 0 28 0;
+#X connect 22 0 29 0;
+#X connect 22 0 30 0;
+#X connect 22 0 31 0;
+#X connect 23 0 3 0;
+#X connect 32 0 1 0;
+#X restore 847 -204 pd guts;
+#X obj -90 -219 cnv 15 1000 520 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -90 -212 cnv 15 1000 22 empty empty what? 20 11 0 14 -260097
+-33289 0;
+#X obj -22 -212 cnv 15 50 22 empty empty Sequenzer 0 11 0 14 -260097
+-33289 0;
+#X obj 467 -176 cnv 15 380 80 empty empty ToDo 10 12 0 11 -260097 -1
+0;
+#X text -24 164 NETZWERK;
+#X text 481 126 Sehr häufig sind Sequenzer als sogenannte STEP-SEQUENZER
+angelegt. Die Bezeichnung rührt daher \, dass eine SEQUENZ in einzelne
+Klangereignisse aufgeteilt wird und dann jeder einzelne Klang (z.B.
+jede Note) SCHRITT FÜR SCHRITT in seinen Parametern bearbeitet und
+ausgegeben werden kann.;
+#X text 482 198 Der Step-Sequenzer erzeugt in der Regel (gerade auch
+der Übersichtlichkeit in der Bedienbarkeit wegen) eher kurze LOOPS.
+LOOPS sind relativ kurze Sequenzen \, die sich immer wiederholen und
+während dieses wiederholten Abspielens verändert werden können.
+LOOPS werden sehr häufig in elektronischer Musik eingesetzt.;
+#X text 483 -12 Ein SEQUENZER ist ein Gerät oder eine Software zur
+Aufnahme \, Bearbeitung und Wiedergabe von Daten zur Erstellung von
+Musik.;
+#X text 482 34 Ein Sequenzer speichert und übermittelt eine Partitur
+an einen Klangzeuger. Dabei können alle möglichen Eigenschaften der
+Klänge voreingestellt und somit automatisiert werden \, z.B. die Tonhöhe
+\, die Lautstärke \, die Tondauer \, usw.. Der Sequenzer gibt dann
+in einer vorher festgelegten zeitlichen Reihenfolge und Geschwindigkeit
+die Daten an den Klangerzeuger weiter.;
+#X text 475 -38 GENERELLES;
+#X text -12 -38 JERRY verfügt über einen sehr einfach gehaltenen
+STEP-SEQUENZER mit 16 Schritten. Der Sequenzer löst lediglich Töne
+aus \, er simuliert also einen Druck auf die SPACE-Taste.;
+#X text -10 87 Die durch den Sequenzer ausgelöste Anschlagslänge
+entspricht der ATTACKZEIT der Lautstärkehüllkurve.;
+#X text -11 20 Es können eintaktige Anschlagsmuster angelegt werden
+\, die dann mit der angegebenen Geschwindigkeit (BPM = Beats per minute
+= Schläge pro Minute) als LOOP immer wiederholt werden. Die 16 Stufen
+des Sequenzers stehen in diesem Sinne für SECHZEHNTELNOTEN.;
+#X obj 304 95 bng 12 250 50 0 Jerry_what-env xxxaretr what? 15 7 0
+10 -2097 -260097 -1;
+#X text -11 186 Im Netzwerk mit ADD und DRUMBO wird die Geschwindigkeit
+des Sequenzers von DRUMBO gesteuert.;
+#X text 480 -152 Aktiviere den Sequenzer und wähle ein Tempo.;
+#X obj -22 -171 cnv 10 450 80 empty empty empty 10 12 0 13 -33289 -260097
+0;
+#X obj -16 -165 cnv 20 440 70 empty empty Sequencer 10 12 0 13 -66577
+-260097 0;
+#X obj 99 -121 cnv 20 260 23 empty empty empty 10 12 0 13 -128992 -260097
+0;
+#X obj 103 -117 tgl 15 0 Jerry_Seq_Beat1 Jerry_Seq_Beat1_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 118 -117 tgl 15 0 Jerry_Seq_Beat2 Jerry_Seq_Beat2_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 133 -117 tgl 15 0 Jerry_Seq_Beat3 Jerry_Seq_Beat3_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 148 -117 tgl 15 0 Jerry_Seq_Beat4 Jerry_Seq_Beat4_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 167 -117 tgl 15 0 Jerry_Seq_Beat5 Jerry_Seq_Beat5_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 182 -117 tgl 15 0 Jerry_Seq_Beat6 Jerry_Seq_Beat6_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 197 -117 tgl 15 0 Jerry_Seq_Beat7 Jerry_Seq_Beat7_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 212 -117 tgl 15 0 Jerry_Seq_Beat8 Jerry_Seq_Beat8_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 231 -117 tgl 15 0 Jerry_Seq_Beat9 Jerry_Seq_Beat9_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 246 -117 tgl 15 0 Jerry_Seq_Beat10 Jerry_Seq_Beat10_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 261 -117 tgl 15 0 Jerry_Seq_Beat11 Jerry_Seq_Beat11_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 276 -117 tgl 15 0 Jerry_Seq_Beat12 Jerry_Seq_Beat12_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 295 -117 tgl 15 0 Jerry_Seq_Beat13 Jerry_Seq_Beat13_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 310 -117 tgl 15 0 Jerry_Seq_Beat14 Jerry_Seq_Beat14_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 325 -117 tgl 15 0 Jerry_Seq_Beat15 Jerry_Seq_Beat15_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 340 -117 tgl 15 0 Jerry_Seq_Beat16 Jerry_Seq_Beat16_ctl empty
+17 7 0 10 -66577 -260097 -1 0 1;
+#X obj 271 -158 bng 12 250 50 0 Jerry_clearSeq Jerry_clearSeq_ctl zurücksetzen
+15 6 0 10 -99865 -1 -260097;
+#X obj 101 -142 hradio 16 1 0 16 jerry_seqr_count_ctl jerry_seqr_count
+empty 0 -8 0 10 -99865 -260097 -258113 0;
+#X obj 377 -147 knob 32 32 30 240 0 0 Jerry_Seq_BPM Jerry_Seq_BPM empty
+0 -8 0 11 -262144 -260097 -262144 0 1;
+#X obj 377 -112 nbx 3 14 -1e+037 1e+037 0 0 empty Jerry_Seq_BPM_int
+empty 0 -8 0 10 -54094 -260097 -1 0 256;
+#X obj 376 -163 cnv 15 15 15 empty empty BPM 0 8 0 11 -66577 -261682
+0;
+#X obj 70 -145 cnv 15 15 15 empty empty B+N 5 12 0 10 -66577 -260097
+0;
+#X text 482 -131 Entwickle ein eigenes Sequenzmuster \, indem du links
+in den unteren Kästchen Anschläge auswählst.;
+#X obj -5 -126 go;
+#X obj -5 -147 cnv 15 50 20 empty empty Start/Stop 0 12 0 11 -66577
+-261682 0;

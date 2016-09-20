@@ -1,0 +1,69 @@
+#N canvas 157 88 1004 502 10;
+#N canvas 259 64 841 703 guts 0;
+#X obj 280 -126 closebang;
+#X msg 280 -103 0;
+#X obj 257 -37 tgl 30 0 EP_pitch_onoff empty Patch_An/Aus -16 -6 0
+10 -3266 -1 -1 1 1;
+#X obj 173 -137 loadbang;
+#X obj 173 -108 del 40;
+#X msg 213 -77 1;
+#X obj 311 -104 s bang808;
+#X connect 0 0 1 0;
+#X connect 0 0 6 0;
+#X connect 1 0 2 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 2 0;
+#X restore 843 260 pd guts;
+#X obj -90 -219 cnv 15 1000 500 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -90 -212 cnv 15 1000 22 empty empty what? 20 11 0 14 -260097
+-33289 0;
+#X obj -20 -212 cnv 15 50 22 empty empty Presets 0 11 0 14 -260097
+-33289 0;
+#X obj 833 -172 dspcon;
+#X text -74 -163 DRUMBO verfügt über 12 voreingestellte Klang - PRESETS.
+;
+#X text 355 -98 Mithilfe der vier TONALEN Presets können mit DRUMBO
+auch Töne \, Melodien und Akkorde gespielt werden. Die Presets unterscheiden
+sich in ihrem Klangcharakter und entsprechen dabei den vier Grundsignalformen
+Sinus \, Rechteck (Rect) \, Dreickeck (Tri) und Sägezahn (Saw).;
+#X obj -62 -122 cnv 15 70 12 empty empty Perkussiv 0 12 0 11 -128992
+-261682 0;
+#X obj 347 -122 cnv 15 70 12 empty empty Tonal 0 12 0 11 -128992 -261682
+0;
+#X obj 277 -60 bng 12 250 50 0 what-Sequencer what-Sequencer_ctl what?
+15 6 0 10 -2097 -260097 -1;
+#X obj 574 -49 bng 12 250 50 0 what-Signalformen what-Signalformen_r
+what? 15 6 0 10 -2097 -260097 -1;
+#X text -57 -98 Die acht PERKUSSIVEN Presets sind unterschiedliche
+klangliche Nachbildungen gängiger elektronischer Drumkits \, allen
+voran des Roland TR-808. Unter Einsatz dieser Sounds können vor allem
+mit dem SEQUENCER elektronische Beats gestaltet und abgespielt werden.
+;
+#X obj 541 139 bng 93 150 50 0 1-GUI-bang 1-GUI-bang_r empty 17 7 0
+10 -54094 -260097 -1;
+#X obj 625 118 bng 15 250 50 0 open-dp1 empty empty 20 7 0 10 -54094
+-260097 -1;
+#X obj 540 118 cnv 15 10 10 empty empty PAD-1 0 12 0 10 -128992 -262144
+0;
+#X obj 523 122 cnv 15 5 5 empty empty -----------> 0 0 0 14 -128992
+-1 0;
+#X text 176 90 In DRUMBO können auch EIGENE PRESETS erstellt bzw.
+die voreingestellten Presets verändert werden.;
+#X text 645 116 öffnet die Soundeinstellungen von Kanal 1;
+#X text 176 115 Jeder Sound auf den 8 Kanälen kann also einzeln gestaltet
+werden. Mithilfe der 'Preset - sichern' Funktion werden dann alle Sounds
+außerhalb des Programmes gespeichert. Somit können erstellte Presets
+in DRUMBO auch auf anderen Computern geladen werden.;
+#X obj 237 200 cnv 15 230 50 empty empty Preset 10 12 0 13 -66577 -260097
+0;
+#X obj 254 227 bng 16 250 50 0 DRUMBO_save_sound DRUMBO_save_sound_ctl
+sichern 22 8 0 10 -54094 -260097 -261682;
+#X obj 332 227 bng 16 250 50 0 DRUMBO_load_SOUND DRUMBO_load_SOUND_ctl
+laden 22 8 0 10 -54094 -260097 -261682;
+#X text 356 -28 PAD 1 steuert dann die unter 'Tonhöhe' einstellbare
+Grundfrequenz an. PAD 2 spielt einen Ganzton \, PAD 3 die Quarte und
+PAD 4 die Quinte darüber. PAD 5 die Oktave \, PAD 6 \, 7 und 8 dann
+wieder den Ganzton \, die Quarte und die Quinte über dieser Oktave.
+;

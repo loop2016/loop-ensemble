@@ -1,0 +1,190 @@
+#N canvas 84 0 1105 715 10;
+#N canvas 870 0 321 404 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 622 118 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2998 -380 r Add_timefreqon;
+#X obj -2820 -281 tabwrite~ Add-Spektrum;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2821 -330 /~ 1024;
+#X obj -2820 -309 clip~ 0 0.6;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 11 0;
+#X connect 3 0 2 0;
+#X connect 5 0 8 0;
+#X connect 6 0 9 0;
+#X connect 7 0 5 0;
+#X connect 9 0 0 0;
+#X connect 9 0 0 1;
+#X connect 9 1 1 0;
+#X connect 9 1 1 1;
+#X connect 11 0 12 0;
+#X connect 12 0 8 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -2911 -532 r~ Add_out;
+#X obj -2998 -554 r Add_timefreqon;
+#X obj -2910 -468 tabwrite~ Add-Zeitbereich;
+#X obj -3038 -490 sel 1;
+#X obj -3038 -460 s Add_reset;
+#X obj -2963 -446 delay 50;
+#X obj -2963 -401 s Add_mainfreqmidi;
+#X msg -2963 -424 93;
+#X obj -2998 -348 s Add_relvolon;
+#X obj -2998 -391 - 1;
+#X obj -2998 -372 abs;
+#X obj -2900 -290 s Add_notein1_dissctl;
+#X msg -2900 -310 0;
+#X obj -3060 -314 r Add_notein1_diss;
+#X obj -3060 -285 spigot;
+#X obj -3060 -259 s Add_notein1;
+#X obj -2824 -392 closebang;
+#X obj -2824 -349 s Add_timefreqon;
+#X msg -2824 -369 0;
+#X obj -3003 -620 loadbang;
+#X msg -3003 -600 1;
+#X obj -3003 -581 s Add_timefreqon_ctl;
+#X obj -2810 -613 tgl 30 0 Add_timefreqon Add_timefreqon_ctl An/Aus
+-60 15 0 15 -99865 -260097 -1 1 1;
+#X obj -2766 -576 bng 15 250 50 0 empty ADD_EPTimeFreq_reset empty
+17 7 0 10 -262144 -1 -1;
+#X obj -2766 -552 del 15;
+#X connect 0 0 4 0;
+#X connect 2 0 1 0;
+#X connect 2 0 4 0;
+#X connect 3 0 0 0;
+#X connect 3 0 5 0;
+#X connect 3 0 11 0;
+#X connect 3 0 16 1;
+#X connect 3 0 14 0;
+#X connect 5 0 6 0;
+#X connect 5 0 7 0;
+#X connect 7 0 9 0;
+#X connect 9 0 8 0;
+#X connect 11 0 12 0;
+#X connect 12 0 10 0;
+#X connect 14 0 13 0;
+#X connect 14 0 17 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 18 0 20 0;
+#X connect 20 0 19 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 25 0 24 0;
+#X connect 25 0 26 0;
+#X connect 26 0 24 0;
+#X restore 977 625 pd guts;
+#X text 503 207 0;
+#X text 305 151 1;
+#X text 385 222 -1;
+#X obj -74 -51 cnv 15 1100 710 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj 166 21 knob 32 32 0 127 0 0 Add_OT2ctl Add_OT2ctl empty 0 -8
+0 10 -228856 -260097 -261682 0 1;
+#X obj 164 104 vsl 15 80 0 127 0 0 Add_OT2volctl Add_OT2volctl Lautstärke
+0 -11 0 11 -99865 -260097 -261682 0 1;
+#X obj 164 61 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq2 empty 0 -8
+0 10 -99865 -260097 -1 1320 256;
+#X obj 86 21 knob 32 32 0 127 0 0 Add_OT1ctl Add_OT1ctl empty 0 -8
+0 10 -228856 -260097 -261682 0 1;
+#X obj 85 104 vsl 15 80 0 127 0 0 Add_OT1volctl Add_OT1volctl Lautstärke
+0 -11 0 11 -99865 -260097 -261682 0 1;
+#X obj 85 61 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq1 empty 0 -8
+0 10 -99865 -260097 -1 880 256;
+#X obj 323 21 knob 32 32 0 127 0 0 Add_OT4ctl Add_OT4ctl empty 0 -8
+0 10 -228856 -260097 -261682 0 1;
+#X obj 321 104 vsl 15 80 0 127 0 0 Add_OT4volctl Add_OT4volctl Lautstärke
+0 -11 0 11 -99865 -260097 -261682 0 1;
+#X obj 321 61 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq4 empty 0 -8
+0 10 -99865 -260097 -1 2200 256;
+#X obj 243 22 knob 32 32 0 127 0 0 Add_OT3ctl Add_OT3ctl empty 0 -8
+0 10 -228856 -260097 -261682 0 1;
+#X obj 242 105 vsl 15 80 0 127 0 0 Add_OT3volctl Add_OT3volctl Lautstärke
+0 -11 0 11 -99865 -260097 -261682 0 1;
+#X obj 242 62 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq3 empty 0 -8
+0 10 -99865 -260097 -1 1760 256;
+#X obj 402 22 knob 32 32 0 127 0 0 Add_OT5ctl Add_OT5ctl empty 0 -8
+0 10 -228856 -260097 -261682 0 1;
+#X obj 400 105 vsl 15 80 0 127 0 0 Add_OT5volctl Add_OT5volctl Lautstärke
+0 -11 0 11 -99865 -260097 -261682 0 1;
+#X obj 400 62 nbx 5 14 -1e+037 1e+037 0 0 empty Add_freq5 empty 0 -8
+0 10 -99865 -260097 -1 2640 256;
+#X obj -42 12 knob 40 40 0 127 0 0 Add_mainfreqmidi Add_mainfreqmidi
+empty 0 -8 0 10 -228856 -260097 -261682 2856 1;
+#X obj -43 103 vsl 20 80 0 127 0 0 Add_mainvolctl Add_mainvolctl Gesamtlautstärke
+0 -11 0 11 -99865 -260097 -261682 7900 1;
+#X obj -43 60 nbx 5 14 -1e+037 1e+037 0 0 empty Add_basicfreq empty
+0 -8 0 10 -99865 -260097 -1 440 256;
+#X obj 202 216 cnv 30 400 120 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Add-Zeitbereich 2000 float 4;
+#X coords 0 0.4 1999 -0.4 400 120 1 0 0;
+#X restore 202 216 graph;
+#X obj -49 448 cnv 30 650 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Add-Spektrum 2048 float 2;
+#X coords 0 0.3 2048 0 650 180 1 0 0;
+#X restore -49 448 graph;
+#X text -5 628 1000 Hz;
+#X text 111 628 3000 Hz;
+#X text 53 628 2000 Hz;
+#X text 171 628 4000 Hz;
+#X text 229 628 5000 Hz;
+#X text 288 628 6000 Hz;
+#X text 348 628 7000 Hz;
+#X text 408 628 8000 Hz;
+#X text 465 629 9000 Hz;
+#X text 525 629 10000 Hz;
+#X obj 199 367 cnv 15 100 60 empty empty ⇩ 20 12 0 150 -128992 -1
+0;
+#X obj 468 390 image Fourier.gif;
+#X obj 504 7 tgl 30 0 Add_notein1_diss Add_notein1_dissctl Ton 4 -8
+0 12 -99865 -260097 -1 0 127;
+#X text 625 216 Im ZEITBEREICH wird das Signal in seinem Verlauf über
+die Zeit dargestellt. Die Y-Achse zeigt dabei die Amplitudehöhe der
+Schwingung.;
+#X obj 500 82 cnv 15 380 80 empty empty ToDo 20 8 0 10 -260097 -66577
+0;
+#X text 515 99 Aktiviere das Patch und erzeuge mit ADD Töne. Verändere
+die Obertöne und versuche nachzuvollziehen \, wie das resultierende
+Signal im ZEITBEREICH dargestellt wird und aus dem ZEITBEREICH in den
+FREQUENZBEREICH übertragen wird.;
+#X obj -74 -45 cnv 15 1100 22 empty empty what?-Fouriertransformation
+20 11 0 14 -260097 -33289 0;
+#X text 193 -41 Aus dem Zeitbereich in den Frequenzbereich;
+#X text 626 352 Mit Hilfe der Fouriertransformation werden die periodischen
+Schwingungen aus dem ZEITBEREICH in den FREQUENZBEREICH übertragen.
+Dabei wird mathematisch analysiert \, welche einzelnen Sinusschwingungen
+am Ausgangssignal beteiligt sind und diese werden in ihrer Lautstärkenamplitude
+dargestellt.;
+#X text 626 465 Besteht das Signal nur aus einem Sinuston \, so lässt
+sich im Frequenzspektrum nur eine Schwingung \, also eine schmale Anhebung
+auf einer bestimmten Frequenz sehen. Besteht das Signal aus mehreren
+Sinustönen \, so sind diese zwar im ZEITBEREICH nur schwer visuell
+voneinander zu trennen \, nach der Analyse wird im FREQUENZBEREICH
+die Zusammensetzung des Signals aus den einzelnen Schwingungen aber
+deutlich.;
+#X obj -49 -3 cnv 15 10 10 empty empty Grundfrequenz 5 7 0 11 -128992
+-261682 0;
+#X obj 80 5 cnv 15 10 10 empty empty Oberton-1 5 7 0 11 -128992 -261682
+0;
+#X obj 160 5 cnv 15 10 10 empty empty Oberton-2 5 7 0 11 -128992 -261682
+0;
+#X obj 240 5 cnv 15 10 10 empty empty Oberton-3 5 7 0 11 -128992 -261682
+0;
+#X obj 320 5 cnv 15 10 10 empty empty Oberton-4 5 7 0 11 -128992 -261682
+0;
+#X obj 400 5 cnv 15 10 10 empty empty Oberton-5 5 7 0 11 -128992 -261682
+0;
+#X obj 953 -4 bng 25 250 50 0 ADD_EPTimeFreq_reset ADD_EPTimeFreq_reset_ctl
+zurücksetzen -26 34 0 11 -99865 -260097 -1;

@@ -1,0 +1,140 @@
+#N canvas 214 103 833 585 10;
+#N canvas 217 142 612 361 guts 0;
+#X obj 108 116 noise~;
+#X obj 176 94 osc~;
+#X obj 28 35 loadbang;
+#X obj 28 77 metro 100;
+#N canvas 616 128 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2823 -261 clip~ 0 1;
+#X obj -2822 -233 tabwrite~ Jerry-Rauschen-Spektrum;
+#X obj -2998 -380 loadbang;
+#X obj -2998 -352 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj -2823 -304 /~ 256;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 13 0;
+#X connect 3 0 2 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 10 0;
+#X connect 11 0 12 0;
+#X connect 12 0 5 0;
+#X connect 13 0 9 0;
+#X restore 214 174 pd spektrum;
+#X obj 108 194 clip~ -1 1;
+#X obj 108 223 tabwrite~ Jerry-Rauschen-Zeitsignal;
+#X obj 108 146 *~;
+#X obj 176 143 *~;
+#X floatatom 124 84 5 0 1 0 - - -;
+#X floatatom 222 82 5 0 1 0 - - -;
+#X obj 144 7 r Jerry_EPMoreNoise_Noise;
+#X obj 178 -40 r Jerry_EPMoreNoise_OSC;
+#X msg 202 -17 1 100;
+#X msg 163 -18 0 100;
+#X msg 125 36 1 100;
+#X msg 158 36 0 100;
+#X obj 223 55 line;
+#X obj 123 62 line;
+#X msg 176 66 2000;
+#X obj 176 119 *~ 0.8;
+#X obj 312 146 dac~;
+#X obj 316 122 *~;
+#X obj 351 62 r Jerry_EPNoiseMore_Vol;
+#X msg 351 84 \$1 50;
+#X obj 351 107 line;
+#X connect 0 0 7 0;
+#X connect 1 0 20 0;
+#X connect 2 0 3 0;
+#X connect 2 0 19 0;
+#X connect 3 0 6 0;
+#X connect 5 0 6 0;
+#X connect 7 0 5 0;
+#X connect 7 0 4 0;
+#X connect 7 0 22 0;
+#X connect 8 0 5 0;
+#X connect 8 0 4 0;
+#X connect 8 0 22 0;
+#X connect 9 0 7 1;
+#X connect 10 0 8 1;
+#X connect 11 0 15 0;
+#X connect 11 0 16 0;
+#X connect 12 0 13 0;
+#X connect 12 0 14 0;
+#X connect 13 0 17 0;
+#X connect 14 0 18 0;
+#X connect 15 0 18 0;
+#X connect 16 0 17 0;
+#X connect 17 0 10 0;
+#X connect 18 0 9 0;
+#X connect 19 0 1 0;
+#X connect 20 0 8 0;
+#X connect 22 0 21 0;
+#X connect 22 0 21 1;
+#X connect 23 0 24 0;
+#X connect 24 0 25 0;
+#X connect 25 0 22 1;
+#X restore 531 -1249 pd guts;
+#X obj -248 -1808 cnv 15 830 580 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -248 -1800 cnv 16 830 22 empty empty what?-Rauschen-Sinuston
+20 11 0 14 -260097 -66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Jerry-Rauschen-Zeitsignal 300 float 4;
+#X coords 0 1 299 -1 265 180 1 0 0;
+#X restore -134 -1447 graph;
+#X text -153 -1365 0;
+#X obj -134 -1447 cnv 30 265 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X text -153 -1451 1;
+#X text -160 -1280 -1;
+#X obj 188 -1446 cnv 30 265 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Jerry-Rauschen-Spektrum 3000 float 2;
+#X coords 0 1 3000 0 265 180 1 0 0;
+#X restore 188 -1446 graph;
+#X obj 41 -1566 bng 30 250 50 0 Jerry_EPMoreNoise_Noise empty Rauschen
+0 -10 0 11 -66577 -260097 -261682;
+#X obj 40 -1509 bng 30 250 50 0 Jerry_EPMoreNoise_OSC empty Sinus(2000Hz)
+0 -10 0 11 -66577 -260097 -261682;
+#X text 205 -1264 2000 Hz;
+#X text 303 -1264 8000 Hz;
+#X text 398 -1264 14000 Hz;
+#X obj 157 -1563 vsl 15 80 0 0.25 0 0 Jerry_EPNoiseMore_Vol blbla Lautstärke
+0 -12 0 11 -66577 -260097 -261682 0 1;
+#X text -212 -1767 WEIßES RAUSCHEN ist in der Theorie ein gänzlich
+stochastisches (zufälliges) Signal. Ein Zufallsalgorithmus bestimmt
+also den Lautstärkeverlauf. Daher wiederholen sich theoretisch keine
+Lautstärkebewegungen. Wenn keine Wiederholung \, z.B. im Sinne einer
+Sinusschwingung \, auftritt \, ist keine Tonhöhe wahrnehmbar. Vielmehr
+resultiert ein Klang \, in dem alle hörbaren Schwingungen enthalten
+sind \, da Lautstärkeverläufe jeglicher Geschwindigkeit auftreten.
+Das ist im chaotischen Zeitsignal zu erkennen.;
+#X text -212 -1645 WEIßES RAUSCHEN enthält also alle hörbaren Frequenzen.
+Das ist im Frequenzspektrum zu erkennen.;
+#X text 193 -1767 Ein SINUSTON ist ein HARMONISCHE SCHWINGUNG auf einer
+Frequenz. Diese ist periodisch \, die Schwingung wiederholt sich also
+ständig. Daher ist eine klare Tonhöhe zu hören. Diese ist im Frequenzspektrum
+deutlich zu erkennen. Das Zeitsignal entspicht einer fortschreitenden
+Sinuskurve.;
+#X obj 193 -1691 cnv 15 320 70 empty empty ToDo 10 12 0 11 -260097
+-1 0;
+#X text 211 -1673 Vergleiche das weiße Rauschen mit dem Sinuston.
+;
+#X text 212 -1655 Du kannst beides über die jeweiligen Buttons;
+#X text 212 -1644 erzeugen durch Erhöhung der Lautstärke anhören.
+;

@@ -1,0 +1,325 @@
+#N canvas 159 59 956 674 10;
+#N canvas 448 51 487 143 guts 0;
+#N canvas 780 540 743 230 globalisierung 0;
+#X obj 38 25 r waveform_VCO;
+#X obj 38 152 EP_AMsynth_globalisierung 5;
+#X obj 38 182 EP_AMsynth_globalisierung 1;
+#X obj 208 152 EP_AMsynth_globalisierung 6;
+#X obj 208 182 EP_AMsynth_globalisierung 2;
+#X obj 378 152 EP_AMsynth_globalisierung 7;
+#X obj 378 182 EP_AMsynth_globalisierung 3;
+#X obj 548 152 EP_AMsynth_globalisierung 8;
+#X obj 548 182 EP_AMsynth_globalisierung 4;
+#X connect 0 0 1 0;
+#X connect 0 0 2 0;
+#X connect 0 0 3 0;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 0 0 6 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X restore 39 25 pd globalisierung;
+#N canvas 642 330 775 638 darstellung_und_presets 0;
+#X obj 124 105 tgl 15 0 empty EP_AMsynth_onoff empty 17 7 0 10 -262144
+-1 -1 1 1;
+#X obj 96 54 clip~ -0.6 0.6;
+#X msg 124 181 stop;
+#X obj 151 213 metro 100;
+#X obj 124 131 sel 0;
+#X obj 324 172 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 324 288 s bangtonal_sine;
+#X obj 273 315 s sustain_globe;
+#X msg 273 281 1;
+#X msg 243 311 0;
+#X obj 243 345 s EP_FMsynth_onoff;
+#X obj 97 -59 r~ darstellung_EP;
+#X obj 95 253 tabwrite~ zeitsignal_AM;
+#N canvas 188 203 842 358 spektrum_AM 0;
+#X obj 11 32 rfft~;
+#X obj 11 59 *~;
+#X obj 38 59 *~;
+#X obj 11 123 biquad~ 0 0 0 0 1;
+#X obj 11 101 q8_sqrt~;
+#X obj 112 225 loadbang;
+#X text 173 239 Beschriftung X-Achse Spektrum;
+#X text 320 18 Blockgröße;
+#X obj 11 146 clip~ 0 256;
+#X obj -91 1 inlet~;
+#X obj 149 21 tgl 15 0 empty EP_AMsynth_onoff empty 17 7 0 10 -262144
+-1 -1 1 1;
+#X msg 149 81 stop;
+#X obj 149 121 metro 100;
+#X obj 149 47 sel 0;
+#X text 371 195 Array graphs can be given "ticks" on both the x and
+y axis to help you visually measure your data. The tick messages require
+3 values: (the index or value of the FIRST large tick \, then the interval
+between ticks \, then finally the number of ticks overall per large
+tick).;
+#X text 370 281 Arrays can be given labels to describe the x and y
+axis. Give a y value and a bunch of x values or vice versa:;
+#X obj 239 18 block~ 4096;
+#X obj -92 192 tabwrite~ spektrum_AM;
+#X msg 174 264 \; spektrum_AM xticks 0 9.5 5;
+#X msg 175 302 \; spektrum_AM yticks -1 20 20;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 1 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 18 0;
+#X connect 5 0 19 0;
+#X connect 8 0 17 0;
+#X connect 9 0 0 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 17 0;
+#X connect 13 0 11 0;
+#X connect 13 1 12 0;
+#X restore -2 253 pd spektrum_AM;
+#X obj 3 205 spigot~;
+#X msg 445 221 1500;
+#X obj 445 245 s knob_levenv_release_1_in;
+#X obj 445 265 s knob_levenv_decay_1_in;
+#X obj 445 285 s knob_levenv_release_2_in;
+#X obj 445 305 s knob_levenv_decay_2_in;
+#X obj 445 345 s knob_levenv_decay_3_in;
+#X obj 445 325 s knob_levenv_release_3_in;
+#X obj 445 365 s knob_levenv_release_4_in;
+#X obj 445 385 s knob_levenv_decay_4_in;
+#X obj 445 405 s knob_levenv_release_5_in;
+#X obj 445 425 s knob_levenv_decay_5_in;
+#X obj 445 445 s knob_levenv_release_6_in;
+#X obj 445 465 s knob_levenv_decay_6_in;
+#X obj 445 485 s knob_levenv_release_7_in;
+#X obj 445 505 s knob_levenv_decay_7_in;
+#X obj 445 525 s knob_levenv_release_8_in;
+#X obj 445 545 s knob_levenv_decay_8_in;
+#X obj 445 199 del 50;
+#X connect 0 0 4 0;
+#X connect 0 0 14 1;
+#X connect 1 0 12 0;
+#X connect 2 0 3 0;
+#X connect 3 0 12 0;
+#X connect 4 0 2 0;
+#X connect 4 1 3 0;
+#X connect 4 1 5 0;
+#X connect 5 0 6 0;
+#X connect 5 0 8 0;
+#X connect 5 0 9 0;
+#X connect 5 0 32 0;
+#X connect 8 0 7 0;
+#X connect 9 0 10 0;
+#X connect 11 0 1 0;
+#X connect 11 0 14 0;
+#X connect 14 1 13 0;
+#X connect 15 0 16 0;
+#X connect 15 0 17 0;
+#X connect 15 0 18 0;
+#X connect 15 0 19 0;
+#X connect 15 0 21 0;
+#X connect 15 0 20 0;
+#X connect 15 0 22 0;
+#X connect 15 0 23 0;
+#X connect 15 0 24 0;
+#X connect 15 0 25 0;
+#X connect 15 0 28 0;
+#X connect 15 0 29 0;
+#X connect 15 0 31 0;
+#X connect 15 0 30 0;
+#X connect 15 0 27 0;
+#X connect 15 0 26 0;
+#X connect 32 0 15 0;
+#X restore 39 0 pd darstellung_und_presets;
+#N canvas 489 575 1302 273 erklär-presets 0;
+#X obj 18 31 bng 15 250 50 0 empty amsynth-preset1 amsynth-preset1
+17 7 0 10 -262144 -1 -1;
+#X obj 231 212 s freq2_globe;
+#X obj 438 31 bng 15 250 50 0 empty amsynth-preset2 amsynth-preset2
+17 7 0 10 -262144 -1 -1;
+#X obj 868 31 bng 15 250 50 0 empty amsynth-preset3 amsynth-preset3
+17 7 0 10 -262144 -1 -1;
+#X obj 325 212 s waveform_VCO;
+#X msg 325 139 0;
+#X obj 745 212 s waveform_VCO;
+#X msg 745 139 0;
+#X text 344 160 Sinus;
+#X text 764 160 Sinus;
+#X obj 1175 212 s waveform_VCO;
+#X msg 1175 139 0;
+#X text 1194 160 Sinus;
+#X obj 18 212 s am_freq_globe;
+#X obj 128 212 s am_int_globe;
+#X msg 18 139 1.387;
+#X text 24 160 3 Hz;
+#X msg 231 140 70.43;
+#X text 244 160 500 Hz;
+#X msg 128 139 127;
+#X text 138 160 1;
+#X msg 548 139 127;
+#X text 558 160 1;
+#X msg 651 139 70.43;
+#X text 664 160 500 Hz;
+#X text 444 160 300 Hz;
+#X obj 438 212 s am_freq_globe;
+#X obj 548 212 s am_int_globe;
+#X obj 651 212 s freq2_globe;
+#X obj 1081 212 s freq2_globe;
+#X obj 978 212 s am_int_globe;
+#X obj 868 212 s am_freq_globe;
+#X msg 438 139 115.48;
+#X text 988 160 1;
+#X msg 978 139 127;
+#X text 1095 80 200 Hz;
+#X msg 1081 59 38.71;
+#X msg 1081 139 70.43;
+#X text 1094 160 500 Hz;
+#X msg 868 139 289.25;
+#X text 874 160 900 Hz;
+#X connect 0 0 17 0;
+#X connect 0 0 15 0;
+#X connect 0 0 19 0;
+#X connect 0 0 5 0;
+#X connect 2 0 23 0;
+#X connect 2 0 32 0;
+#X connect 2 0 21 0;
+#X connect 2 0 7 0;
+#X connect 3 0 37 0;
+#X connect 3 0 39 0;
+#X connect 3 0 34 0;
+#X connect 3 0 11 0;
+#X connect 5 0 4 0;
+#X connect 7 0 6 0;
+#X connect 11 0 10 0;
+#X connect 15 0 13 0;
+#X connect 17 0 1 0;
+#X connect 19 0 14 0;
+#X connect 21 0 27 0;
+#X connect 23 0 28 0;
+#X connect 32 0 26 0;
+#X connect 34 0 30 0;
+#X connect 37 0 29 0;
+#X connect 39 0 31 0;
+#X restore 39 50 pd erklär-presets;
+#X obj 342 5 closebang;
+#X msg 342 28 0;
+#X obj 283 92 tgl 30 0 EP_AMsynth_onoff empty Patch-An/Aus -17 -8 0
+10 -3394 -1 -1 1 1;
+#X obj 222 5 loadbang;
+#X msg 222 28 1;
+#X obj 158 99 s amsynth-preset1-r;
+#X obj 183 68 del 88;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 6 0 7 0;
+#X connect 6 0 9 0;
+#X connect 7 0 5 0;
+#X connect 9 0 8 0;
+#X restore 901 594 pd guts;
+#X obj -2 -56 cnv 15 950 668 empty empty empty 20 15 0 14 -128992 -33289
+0;
+#X obj 19 58 cnv 15 170 140 empty empty Träger 10 12 0 13 -99865 -260097
+0;
+#X obj 37 104 vradio 17 1 0 5 waveform_VCO waveform_VCO Waveform 0
+-10 0 11 -66577 -260097 -261682 0;
+#X text 59 103 sin;
+#X text 59 120 rec;
+#X text 59 137 saw;
+#X text 59 154 isw;
+#X text 59 172 tri;
+#X obj 194 58 cnv 15 180 140 empty empty Amplitudenmodulation 10 12
+0 13 -99865 -260097 0;
+#X text 891 580 2 KHz;
+#X text 700 580 1 KHz;
+#X text 608 580 500 Hz;
+#X text 794 580 1.5 KHz;
+#X text 515 322 0;
+#X text 509 385 -1;
+#X text 515 260 1;
+#X text 522 580 0 Hz;
+#X obj 528 260 cnv 15 400 140 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array zeitsignal_AM 200 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 0.6 199 -0.6 400 140 1 0 0;
+#X restore 528 260 graph;
+#X obj 528 426 cnv 15 400 150 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array spektrum_AM 200 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 256 200 0 400 150 1 0 0;
+#X restore 528 426 graph;
+#X obj -2 -50 cnv 15 950 22 empty empty what?-Amplitudenmodulations-Synthese
+20 11 0 14 -260097 -33289 0;
+#X obj 19 228 cnv 15 450 330 empty empty ToDo 10 12 0 12 -260097 -1
+0;
+#X obj 537 2 bng 18 250 50 0 1-GUI-bang 1-GUI-bang_r Drumpad-1 25 9
+0 11 -99865 -260097 -1;
+#X obj 108 104 knob 35 35 0 127 0 0 freq2_globe freq2_globe empty 0
+-10 0 11 -262144 -260097 -261682 1886 1;
+#X obj 106 146 nbx 5 14 -1e+037 1e+037 0 0 vvvvvvvv freq2_anzeige_1
+empty 0 -8 0 11 -66577 -260097 -260097 500.004 256;
+#X obj 410 286 bng 15 250 50 0 amsynth-preset1 amsynth-preset1-r click
+20 8 0 9 -99865 -260097 -1;
+#X obj 410 358 bng 15 250 50 0 amsynth-preset2 empty click 20 8 0 9
+-99865 -260097 -1;
+#X obj 410 438 bng 15 250 50 0 amsynth-preset3 empty click 20 8 0 9
+-99865 -260097 -1;
+#X text 31 432 Ist die Modulationsfrequenz größer als die Trägerfrequenz
+\, entsteht das linke Seitenband im negativen Frequenzbereich. Dadurch
+wird es an der Y-Achse in den hörbaren Bereich gespiegelt. Bei diesem
+Beispiel sind die Seitenbänder 900 Hz entfernt von dem Träger bei
+500 Hz. Das linke Seitenband bei -400 Hz wird auf 400 Hz gespiegelt.
+Das rechte liegt bei 1400 Hz.;
+#X obj 214 147 nbx 5 14 -1e+037 1e+037 0 0 empty 1-AM-freq empty 0
+-8 0 11 -66577 -260097 -260097 3.00013 256;
+#X obj 213 105 knob 35 35 0 300 0 0 am_freq_globe am_freq_globe empty
+0 -10 0 11 -262144 -260097 -261682 16 1;
+#X obj 282 105 knob 35 35 0 127 0 0 am_int_globe am_int_globe empty
+0 -10 0 11 -262144 -260097 -261682 3400 1;
+#X obj 280 147 nbx 5 14 -1e+037 1e+037 0 0 empty 1-AM-int empty 0 -8
+0 11 -66577 -260097 -260097 1 256;
+#X obj 859 -1 dspcon;
+#X text 31 250 Stelle die Trägerfrequenz auf 500 Hz und die Modulationsfrequenz
+der AM auf 3 Hz. Bei solch einer geringen Frequenz (bis 30 Hz) ist
+ein Tremolo-Effekt zu hören. Tremolo ist ein Zittern der Lautstärke.
+D.h. der Ton wird schnell leiser und wieder lauter (die Geschwindigkeit
+mit der dies geschieht \, ist abhängig von der Frequenz der AM). Dieser
+Effekt wird auch Amplituden-Vibrato bezeichnet.;
+#X text 31 346 Wird die AM Modulationsfrequenz weiter erhöht \, z.B.
+auf einen Wert von 300 Hz \, ist das Vibrato nicht mehr wahrnehmbar.
+Dafür entstehen zwei neue Töne um die Trägerfrequenz (hier 500 Hz).
+Diese haben den Abstand der Modulationsfrequenz. In diesem Fall landen
+diese also bei 200 und 800 Hz.;
+#X text 531 33 Indem das Signal mit einer zweiten Schwingung multipliziert
+wird \, verändert sich periodisch seine Lautstärke. Dies wird AMPLITUDENMODULATION
+genannt.;
+#X text 531 86 Die Multiplikation erzeugt neue Töne bei den Summen
+und Differenzen der Frequenzen der beiden beteiligten Schwingungen.
+Wir hören also auch die Schwingung der Amplitude als Ton. Bei einer
+sehr kleinen Modulationsfrequenz enstehen Töne sehr nah an der Grundfrequenz
+\, die dann mit dem ursprünglichen Ton verschmelzen \, dabei allerdings
+zu SCHWEBUNGEN (s. ADD) führen. Bei höheren Modulationsfrequenzen
+sind die neuen resultierenden Schwingungen weiter von der Grundfrequenz
+entfernt und so erklingen sie als eigenständige Töne.;
+#X obj 108 87 cnv 10 10 10 empty empty Frequenz 0 7 0 11 -99865 -261682
+0;
+#X obj 213 87 cnv 10 10 10 empty empty Frequenz 0 7 0 11 -99865 -261682
+0;
+#X obj 283 87 cnv 10 10 10 empty empty Intensität 0 7 0 11 -99865
+-261682 0;

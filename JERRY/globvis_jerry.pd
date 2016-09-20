@@ -1,0 +1,139 @@
+#N canvas 3 558 845 415 10;
+#N canvas 1031 303 670 431 guts 0;
+#X obj -2457 -665 closebang;
+#X msg -2457 -633 0;
+#X obj -2711 -628 clip~ -0.6 0.6;
+#X msg -2683 -431 stop;
+#X obj -2656 -399 metro 100;
+#X obj -2683 -481 sel 0;
+#X obj -2918 -432 spigot~;
+#X obj -2769 -565 tgl 30 0 empty empty Patch-An/Aus -17 -8 0 10 -3394
+-1 -1 1 1;
+#X obj -2517 -666 loadbang;
+#X msg -2517 -633 1;
+#X obj -2424 -633 s reactivate_globvis_jerry;
+#X obj -2649 -518 s aktiviere_signalfluss_globvis_jerry;
+#X obj -2823 -693 r~ globvis_jerry;
+#X obj -2712 -359 tabwrite~ zeitsignal_globvis_jerry;
+#N canvas 325 243 977 394 spektrum_globvis_jerry 0;
+#X obj 11 32 rfft~;
+#X obj 11 59 *~;
+#X obj 38 59 *~;
+#X obj 11 123 biquad~ 0 0 0 0 1;
+#X obj 11 101 q8_sqrt~;
+#X obj 112 225 loadbang;
+#X text 173 239 Beschriftung X-Achse Spektrum;
+#X text 320 18 Blockgröße;
+#X obj -91 1 inlet~;
+#X obj 149 21 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 149 81 stop;
+#X obj 149 121 metro 100;
+#X obj 149 47 sel 0;
+#X obj 239 18 block~ 2048;
+#X obj 149 -8 inlet;
+#X obj 11 151 clip~ 0 48;
+#X obj -92 192 tabwrite~ spektrum_globvis_jerry;
+#X msg 112 262 \; spektrum_globvis_jerry xticks 0 9.5 5;
+#X msg 112 302 \; spektrum_globvis_jerry yticks -1 20 20;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 1 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 15 0;
+#X connect 4 0 3 0;
+#X connect 5 0 18 0;
+#X connect 5 0 17 0;
+#X connect 8 0 0 0;
+#X connect 9 0 12 0;
+#X connect 10 0 11 0;
+#X connect 11 0 16 0;
+#X connect 12 0 10 0;
+#X connect 12 1 11 0;
+#X connect 14 0 9 0;
+#X connect 15 0 16 0;
+#X restore -2880 -337 pd spektrum_globvis_jerry;
+#X connect 0 0 1 0;
+#X connect 0 0 10 0;
+#X connect 1 0 7 0;
+#X connect 2 0 13 0;
+#X connect 3 0 4 0;
+#X connect 4 0 13 0;
+#X connect 5 0 3 0;
+#X connect 5 1 4 0;
+#X connect 6 1 14 0;
+#X connect 7 0 5 0;
+#X connect 7 0 6 1;
+#X connect 7 0 11 0;
+#X connect 7 0 14 1;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 12 0 2 0;
+#X connect 12 0 6 0;
+#X restore 553 -1409 pd guts;
+#X obj -238 -1798 cnv 15 840 410 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -238 -1790 cnv 15 840 22 empty empty JERRY 15 11 0 14 -260097
+-1 0;
+#X text -229 -1677 0;
+#X text -235 -1614 -1;
+#X text -229 -1739 1;
+#X obj -216 -1739 cnv 15 400 140 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array zeitsignal_globvis_jerry 200 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 0.6 199 -0.6 400 140 1 0 0;
+#X restore -216 -1739 graph;
+#X obj -179 -1790 cnv 15 20 22 empty empty - 0 11 0 14 -260097 -1 0
+;
+#X obj -170 -1790 cnv 15 20 22 empty empty Globale 0 11 0 14 -260097
+-1 0;
+#X obj -107 -1790 cnv 15 20 22 empty empty Visualisierung 0 11 0 14
+-260097 -1 0;
+#X obj 23 -1790 cnv 15 20 22 empty empty Zeitsignal/Frequenzspektrum
+0 11 0 14 -260097 -1 0;
+#X text -101 -1423 2 KHz;
+#X text -164 -1423 1 KHz;
+#X text -222 -1423 0 Hz;
+#X obj -216 -1577 cnv 15 800 150 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array spektrum_globvis_jerry 600 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 48 600 0 800 150 1 0 0;
+#X restore -216 -1577 graph;
+#X text -37 -1423 3 kHz;
+#X text 25 -1423 4 KHz;
+#X text 89 -1423 5 KHz;
+#X text 153 -1423 6 KHz;
+#X text 216 -1423 7 kHz;
+#X text 279 -1423 8 KHz;
+#X text 343 -1423 9 KHz;
+#X text 405 -1423 10 KHz;
+#X text 467 -1423 11 kHz;
+#X text 531 -1423 12 KHz;

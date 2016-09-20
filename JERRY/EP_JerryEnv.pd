@@ -1,0 +1,273 @@
+#N canvas 140 99 1005 585 10;
+#N canvas 62 120 674 360 guts 0;
+#N canvas 322 18 761 567 init 0;
+#X obj 268 52 t b f;
+#X obj 178 217 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 14234.5 256;
+#X obj 427 80 loadbang;
+#X obj 95 182 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1 1
+;
+#X obj 163 255 f;
+#X obj 95 228 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 55 -95 > 0;
+#X obj 55 -72 sel 1;
+#X msg 55 -48 1;
+#X obj 111 -93 sel 0;
+#X msg 111 -69 0;
+#X obj 314 80 t b f;
+#X obj -69 -120 r EP-ADSR-BANG;
+#X obj -69 -84 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 55 58 vline~;
+#X obj 55 -4 pack f f;
+#X obj 111 16 pack f f;
+#X obj 95 205 metro 1000;
+#X obj 178 119 expr $f1 + $f2 + $f3;
+#X obj 178 156 + 5;
+#X obj 178 185 * 50;
+#X obj 314 34 r JERRY_EPAR_hold;
+#X obj 54 83 tabwrite~ Jerry-Huellkurve;
+#X obj 38 153 r EP_Jerry_env_onoff;
+#X msg 163 286 \; Jerry-Huellkurve resize \$1;
+#X msg 445 107 \; Jerry-Huellkurve yticks 0 0.125 2;
+#X msg 444 147 \; Jerry-Huellkurve xticks 0 441 10;
+#X obj 40 -153 r JERRY_trig_Noise;
+#X obj 163 -150 r JERRY_trig_OSC;
+#X obj 85 -121 +;
+#X obj 4 -38 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 174 -69 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 178 -42 r JERRY_attack;
+#X obj 268 -1 r JERRY_release;
+#X connect 0 0 18 0;
+#X connect 0 1 18 1;
+#X connect 1 0 4 1;
+#X connect 2 0 26 0;
+#X connect 2 0 25 0;
+#X connect 3 0 17 0;
+#X connect 4 0 24 0;
+#X connect 5 0 4 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 15 0;
+#X connect 8 0 30 0;
+#X connect 9 0 10 0;
+#X connect 10 0 16 0;
+#X connect 10 0 31 0;
+#X connect 11 0 18 0;
+#X connect 11 1 18 2;
+#X connect 12 0 13 0;
+#X connect 13 0 5 0;
+#X connect 13 0 22 0;
+#X connect 14 0 22 0;
+#X connect 15 0 14 0;
+#X connect 16 0 14 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;
+#X connect 20 0 1 0;
+#X connect 21 0 11 0;
+#X connect 23 0 3 0;
+#X connect 27 0 29 0;
+#X connect 28 0 29 0;
+#X connect 29 0 6 0;
+#X connect 29 0 9 0;
+#X connect 32 0 15 1;
+#X connect 32 0 18 0;
+#X connect 33 0 0 0;
+#X connect 33 0 16 1;
+#X restore 142 -181 pd init;
+#N canvas 20 177 476 248 bangs 0;
+#X obj 173 -112 r bang75-100;
+#X obj 316 -115 r bang75-400;
+#X obj 64 -54 delay 50;
+#X msg 64 -23 0;
+#X obj 26 -115 r bang75-50;
+#X msg 211 -17 0;
+#X msg 354 -27 0;
+#X msg 129 0 50;
+#X obj 280 -36 loadbang;
+#X obj 85 80 s EP-ADSR-BANG;
+#X msg 264 -3 500;
+#X msg 377 0 1000;
+#X obj 211 -51 delay 500;
+#X obj 354 -50 delay 1000;
+#N canvas 410 337 293 164 Trigger 0;
+#X obj 56 77 s JERRY_trig_Noise;
+#X obj 114 106 s JERRY_trig_OSC;
+#X obj 106 45 inlet;
+#X connect 2 0 0 0;
+#X connect 2 0 1 0;
+#X restore 26 118 pd Trigger;
+#N canvas 410 337 293 110 Trigger 0;
+#X obj 56 77 s JERRY_trig_Noise;
+#X obj 114 106 s JERRY_trig_OSC;
+#X obj 106 45 inlet;
+#X connect 2 0 0 0;
+#X connect 2 0 1 0;
+#X restore 171 119 pd Trigger;
+#N canvas 410 337 293 164 Trigger 0;
+#X obj 56 77 s JERRY_trig_Noise;
+#X obj 114 106 s JERRY_trig_OSC;
+#X obj 106 45 inlet;
+#X connect 2 0 0 0;
+#X connect 2 0 1 0;
+#X restore 316 122 pd Trigger;
+#X obj 221 77 s JERRY_EPAR_hold;
+#X msg 174 -59 1;
+#X msg 27 -37 1;
+#X msg 312 -59 1;
+#X connect 0 0 10 0;
+#X connect 0 0 9 0;
+#X connect 0 0 12 0;
+#X connect 0 0 18 0;
+#X connect 1 0 11 0;
+#X connect 1 0 9 0;
+#X connect 1 0 13 0;
+#X connect 1 0 20 0;
+#X connect 2 0 3 0;
+#X connect 3 0 14 0;
+#X connect 4 0 2 0;
+#X connect 4 0 7 0;
+#X connect 4 0 9 0;
+#X connect 4 0 19 0;
+#X connect 5 0 15 0;
+#X connect 6 0 16 0;
+#X connect 7 0 17 0;
+#X connect 8 0 7 0;
+#X connect 10 0 17 0;
+#X connect 11 0 17 0;
+#X connect 12 0 5 0;
+#X connect 13 0 6 0;
+#X connect 18 0 15 0;
+#X connect 19 0 14 0;
+#X connect 20 0 16 0;
+#X restore 193 -181 pd bangs;
+#X obj 12 -222 r EP_Jerry_env_onoff;
+#X obj 12 -133 s JERRY_attack_ctl;
+#X obj 33 -103 s JERRY_release_ctl;
+#X obj 12 -190 sel 1;
+#X msg 12 -161 200;
+#X obj 255 -137 r Jerry_EPEnvEX1;
+#X obj 229 -79 s JERRY_attack_ctl;
+#X obj 271 -38 s JERRY_release_ctl;
+#X msg 229 -107 1000;
+#X msg 271 -59 600;
+#X obj 380 -80 s JERRY_attack_ctl;
+#X obj 422 -39 s JERRY_release_ctl;
+#X obj 406 -138 r Jerry_EPEnvEX2;
+#X msg 380 -108 1;
+#X msg 422 -60 700;
+#X obj 102 -24 closebang;
+#X msg 102 3 0;
+#X obj 102 35 s EP_Jerry_env_onoff;
+#X obj 436 33 tgl 30 0 EP_Jerry_env_onoff EP_Jerry_env_onoff_ctl An/Aus
+-60 17 0 15 -99865 -1 -1 1 1;
+#X obj 315 24 loadbang;
+#X msg 315 48 1;
+#X obj 315 73 s EP_Jerry_env_onoff_ctl;
+#X msg 248 77 0;
+#X obj 248 104 s JERRY_deltime_ctl;
+#X obj 519 52 s jerry-key-7;
+#X obj 501 102 s Jerry_Seq_on_ctl;
+#X msg 501 82 0;
+#X connect 2 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 3 0;
+#X connect 6 0 4 0;
+#X connect 7 0 10 0;
+#X connect 7 0 11 0;
+#X connect 10 0 8 0;
+#X connect 11 0 9 0;
+#X connect 14 0 15 0;
+#X connect 14 0 16 0;
+#X connect 15 0 12 0;
+#X connect 16 0 13 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 21 0 22 0;
+#X connect 21 0 24 0;
+#X connect 21 0 26 0;
+#X connect 21 0 28 0;
+#X connect 22 0 23 0;
+#X connect 24 0 25 0;
+#X connect 28 0 27 0;
+#X restore 863 343 pd guts;
+#X obj -90 -219 cnv 15 1000 580 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -90 -212 cnv 15 1000 22 empty empty what? 20 11 0 14 -260097
+-33289 0;
+#X obj -24 -212 cnv 15 50 22 empty empty Lautstärkehüllkurve 0 11
+0 14 -260097 -33289 0;
+#X obj -71 159 cnv 15 335 80 empty empty Lautstärkehüllkurve 10 12
+0 13 -99865 -260097 0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array Jerry-Huellkurve 61734 float 2;
+#X coords 0 1 61734 0 600 160 1 0 0;
+#X restore 300 189 graph;
+#X obj 300 189 cnv 15 600 160 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -71 245 cnv 15 335 70 empty empty empty 6 10 0 11 -99865 -260097
+0;
+#X obj -1 253 bng 15 250 50 0 bang75-50 bang75-50_ctl Bang 20 7 0 10
+-99865 -260097 -260097;
+#X obj -1 273 bng 15 250 50 0 bang75-100 empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X obj -1 293 bng 15 250 50 0 bang75-400 empty Bang 20 7 0 10 -99865
+-260097 -260097;
+#X text -67 29 Attack [ms];
+#X text -66 79 Release [ms];
+#X text -61 41 (dt. Anstieg);
+#X text 417 171 *Die großen Markierungsstriche auf der X-Achse markieren
+;
+#X text 756 171 jeweils 100 ms;
+#X obj 307 -174 cnv 15 370 170 empty empty ToDo 10 12 0 12 -260097
+-1 0;
+#X text 58 252 50 ms Tastendruck;
+#X obj 12 205 nbx 5 14 -1e+037 1e+037 0 0 empty JERRY_attack empty
+0 -8 0 10 -66577 -260097 -260097 29.7661 256;
+#X obj 169 205 nbx 5 14 -1e+037 1e+037 0 0 empty JERRY_release empty
+0 -8 0 10 -66577 -260097 -260097 199.925 256;
+#X obj -44 189 hsl 120 16 1 2000 0 0 JERRY_attack JERRY_attack_ctl
+Attack 8 24 0 11 -66577 -260097 -261682 173 1;
+#X obj 106 189 hsl 120 16 1 2000 0 0 JERRY_release JERRY_release_ctl
+Release 8 24 0 11 -66577 -260097 -261682 1185 1;
+#X text 57 30 Zeit \, in der das Signal von Wert Null auf den Wert
+der Anschlagsstärke (0 - 1) linear anschwillt \, wenn eine Taste gedrückt
+wird.;
+#X text 58 292 1000 ms Tastendruck;
+#X text 58 272 500 ms Tastendruck;
+#X text -66 -74 In den meisten Klangerzeugern werden komplexere Hüllkurven
+verwendet \, die in der Regel mit 4 Werten funktionieren.;
+#X text -68 -51 (s. ADSR-Hüllkruve bei DRUMBO).;
+#X text -66 -112 LAUTSTÄRKEVERLÄUFE von Signalen werden mittels Hüllkurven
+geformt.;
+#X text 56 79 Zeit \, die sich das Signal nimmt \, um die Lautärke
+linear auf den Wert Null abschwellen zu lassen \, wenn die Taste losgelassen
+wird.;
+#X text -61 93 (dt. Ausklingen);
+#X text -67 -31 JERRY arbeitet dagegen mit einem sehr simplen Hüllkurvengenerator
+\, der nur zwei Werte benötigt: Den ATTACK-Wert und den RELEASE-Wert.
+;
+#X obj 835 35 bng 30 250 50 0 Jerry_EPEnvEX1 empty anwenden -7 40 0
+10 -99865 -260097 -1;
+#X obj 835 107 bng 30 250 50 0 Jerry_EPEnvEX2 empty anwenden -7 40
+0 10 -99865 -260097 -1;
+#X text 451 9 BEISPIELE;
+#X text 457 28 Der Lautstärkeverlauf hat einen maßgeblichen Einfluss
+auf den Charakter des Klanges. Zum Beispiel haben STREICHERÄHNLICHE
+Klänge häufig eine lange Attack-Zeit \, da es dauert bis durch das
+Streichen mit dem Bogen ein Ton entsteht.;
+#X text 456 104 PERKUSSIVE Klänge dagegen haben eine sehr kurze Attack-Zeit
+\, die dem schnellen Impuls beim Schlagen eines solchen Instrumentes
+entspricht.;
+#X text 318 -155 Aktiviere den Patch \, spiele mit dem Attack- und
+dem Release-Wert und erzeuge mit JERRY Klänge. Höre \, wie sich die
+Veränderung der Lautstärkehüllkurve auf den Klang auswirkt.;
+#X text 318 -103 Du kannst außerdem Hüllkurven zum besseren Verständnis
+visualisieren \, indem Du mit den bangs links unten im Fenster Klänge
+verschiedener Längen auslöst.;
+#X text 318 -55 Wähle einen Attack-Wert \, der größer ist als die
+Zeit \, die die Taste gehalten wird. Aktiviere dann unten einen entsprechenden
+Tastendruck. Was fällt Dir auf?;

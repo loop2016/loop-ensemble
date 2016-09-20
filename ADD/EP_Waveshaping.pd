@@ -1,0 +1,183 @@
+#N canvas 118 0 1102 707 10;
+#N canvas 421 244 336 360 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 604 148 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2821 -330 /~ 1024;
+#X obj -2821 -281 tabwrite~ Add-Shape-Spektrum;
+#X obj -2998 -380 r Add_waveshapeon;
+#X obj -2820 -309 clip~ 0 0.4;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 9 0;
+#X connect 3 0 2 0;
+#X connect 5 0 10 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 12 0;
+#X connect 11 0 5 0;
+#X connect 12 0 10 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -3020 -494 sel 1;
+#X obj -2963 -308 s Add_mainfreqmidi;
+#X obj -3020 -453 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -3020 -433 s Add_reset;
+#X obj -3020 -397 delay 20;
+#X obj -2998 -554 r Add_waveshapeon;
+#X obj -2912 -447 tabwrite~ Add-Shape-Zeitsignal;
+#X obj -2911 -532 r~ Add_shapesignal;
+#X obj -2911 -476 clip~ -1 1;
+#X obj -2906 -348 s Add_relvolon;
+#X obj -2906 -391 - 1;
+#X obj -2906 -372 abs;
+#X obj -2808 -290 s Add_notein1_dissctl;
+#X msg -2808 -310 0;
+#X obj -2808 -333 sel 0;
+#X obj -2999 -244 r Add_notein1_diss;
+#X obj -2999 -215 spigot;
+#X obj -2999 -189 s Add_notein1;
+#X obj -2823 -240 closebang;
+#X msg -2823 -219 0;
+#X obj -2823 -195 s Add_waveshapeon;
+#X msg -2965 -338 97;
+#X obj -2651 -571 tgl 35 0 Add_waveshapeon Add_waveshapeon_ctl An/Aus
+-70 20 0 17 -66577 -1 -1 1 1;
+#X obj -2757 -537 loadbang;
+#X msg -2757 -516 1;
+#X obj -2757 -495 s Add_waveshapeon_ctl;
+#X obj -2704 -615 bng 15 250 50 0 empty ADD_EPWaveshaping_reset empty
+17 7 0 10 -262144 -1 -1;
+#X obj -2704 -595 del 15;
+#X obj -2773 -216 s Add_reset;
+#X connect 0 0 8 0;
+#X connect 2 0 4 0;
+#X connect 2 0 15 0;
+#X connect 4 0 5 0;
+#X connect 4 0 6 0;
+#X connect 6 0 23 0;
+#X connect 7 0 0 0;
+#X connect 7 0 2 0;
+#X connect 7 0 12 0;
+#X connect 7 0 16 0;
+#X connect 7 0 18 1;
+#X connect 9 0 1 0;
+#X connect 9 0 10 0;
+#X connect 10 0 8 0;
+#X connect 12 0 13 0;
+#X connect 13 0 11 0;
+#X connect 15 0 14 0;
+#X connect 16 0 15 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 20 0 21 0;
+#X connect 20 0 30 0;
+#X connect 21 0 22 0;
+#X connect 23 0 3 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 28 0 29 0;
+#X connect 28 0 24 0;
+#X connect 29 0 24 0;
+#X restore 796 -1129 pd guts;
+#X obj -248 -1778 cnv 25 1100 680 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -248 -1800 cnv 15 1100 22 empty empty What?-Waveshaping 20 11
+0 14 -260097 -66577 0;
+#X text -185 -1140 1000 Hz;
+#X text -85 -1140 3000 Hz;
+#X text 12 -1140 5000 Hz;
+#X text 110 -1140 7000 Hz;
+#X text 208 -1140 9000 Hz;
+#X text 303 -1140 11000 Hz;
+#X text 401 -1140 13000 Hz;
+#X text 499 -1140 15000 Hz;
+#X obj -217 -1320 cnv 30 800 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Add-Shape-Spektrum 3000 float 2;
+#X coords 0 0.4 3000 0 800 180 1 0 0;
+#X restore -217 -1320 graph;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Add-Shape-Zeitsignal 300 float 4;
+#X coords 0 0.4 299 -0.4 265 180 1 0 0;
+#X restore -218 -1536 graph;
+#X text -237 -1454 0;
+#X obj -218 -1536 cnv 30 265 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -4 -1750 tgl 40 0 Add_notein1_diss Add_notein1_dissctl Ton 9
+-10 0 12 -66577 -260097 -260097 0 127;
+#X obj 443 -1452 cnv 15 380 80 empty empty ToDo 20 8 0 12 -260097 -1
+0;
+#X text -233 -1540 1;
+#X text -239 -1368 -1;
+#X floatatom 529 -1685 5 -20 20 0 - - -;
+#X floatatom 529 -1602 5 0 0 0 - - -;
+#X text 573 -1612 Clipping begrenzt eingehende Werte auf;
+#X text 572 -1600 festgelegte Grenzwerte;
+#X obj 529 -1732 knob 32 32 -1 1 0 0 empty empty empty 0 -10 0 9 -262144
+-260097 -261682 0 1;
+#X obj 529 -1645 clip -0.6 0.6;
+#X text 134 -1755 Beim WAVESHAPING werden Obertöne erzeugt \, indem
+das Audiosignal in seinem zeitlichen Amplitudenverlauf durch unterschiedliche
+Operationen verändert wird.;
+#X text 524 -1753 -1 bis 1;
+#X text -62 -1798 Signalverzerrung für zusätzliche Obertöne;
+#X text 133 -1561 Würde keine LAUTSTÄRKEANPASSUNG nach dem Clipping
+durchgeführt werden \, wäre das Ausgangssignal sehr leise \, da es
+schließlich auf kleine Amplitudenwerte begrenzt wird. Nach dem Clipping
+wird daher das Signal in seiner Lautstärke relativ zum begrenzenden
+Amplitudenwert angehoben.;
+#X text 64 -1441 Besteht das ursprüngliche Signal aus MEHREREN SINUSTÖNEN
+\, enthält es also viele Frequenzen \, so erzeugt das Clipping nicht
+nur harmonische Obertöne für alle Einzeltöne. Zusätzlich entstehen
+Obertöne bei den Summen und Differenzen der Eingangsfrequenzen. Resultat
+ist in der Regel ein sehr komplexes Obertonspektrum.;
+#X obj -223 -1773 cnv 15 180 180 empty empty empty 20 12 0 14 -99865
+-66577 0;
+#X obj -126 -1757 knob 40 40 0 127 0 0 Add_mainfreqmidi Add_mainfreqmidi
+Grundfrequenz 0 -8 0 9 -228856 -260097 -261682 2979 1;
+#X obj -132 -1712 nbx 5 14 -1e+037 1e+037 0 0 empty Add_basicfreq empty
+0 -8 0 10 -66577 -260097 -260097 493.883 256;
+#X obj -211 -1759 knob 40 40 0 127 0 0 Add_waveclipctl Add_waveclipctl
+Clip 0 -8 0 9 -228856 -260097 -261682 31 1;
+#X obj -215 -1712 nbx 5 14 -1e+037 1e+037 0 0 empty Add_waveclipshow
+empty 0 -8 0 10 -66577 -260097 -260097 0.00787402 256;
+#X obj -214 -1639 nbx 5 14 -1e+037 1e+037 0 0 empty Add_clipvalue empty
+0 -8 0 10 -66577 -260097 -1 1.97255 256;
+#X obj -236 -1681 cnv 2 2 2 empty empty ⇩ 20 12 0 60 -128992 -1 0
+;
+#X obj -43 -1693 cnv 15 120 100 empty empty empty 20 12 0 14 -99865
+-66577 0;
+#X text -188 -1680 Umwandlung in tatsächlichen Amplitudenwert;
+#X text -123 -1665 (Hier wird das Signal begrenzt);
+#X text 133 -1706 ADD wendet ein recht einfaches Verfahren der Signalformung
+an: Durch CLIPPING wird das Signal in seiner Amplitude (Lautstärke)
+begrenzt. Amplitudenwerte \, die kleiner bzw. größer als ein einstellbarer
+Wert sind \, werden auf diesen Wert zurückgesetzt. So werden sinusförmige
+\, 'rundliche' Signalbewegungen zusammengestutzt und zu rechteckigen
+Signalen geformt. Diese Formung geht einher mit der Erzeugung neuer
+Obertöne \, die ungeraden Vielfachen der Grundfrequenz entsprechen.
+Je stärker das Clipping ist \, desto kleiner ist der begrenzende Amplitudenwert.
+Umso kleiner dieser Amplitudenwert \, desto mehr wandelt sich das Signal
+zu einem Rechteck und mehr Obertöne entstehen.;
+#X obj 766 -1760 bng 25 250 50 0 ADD_EPWaveshaping_reset ADD_EPWaveshaping_reset_ctl
+zurücksetzen -26 34 0 11 -99865 -260097 -1;
+#X text 454 -1434 Erzeuge zuerst einen Sinuston. Verändere mit dem
+Knob den Clippingwert und versuche nachzuvollziehen \, wie das Waveshaping
+den Klang verändert. Übertrage dieses Prinzip dann auf komplexere
+Klänge.;
+#X connect 20 0 25 0;
+#X connect 24 0 20 0;
+#X connect 25 0 21 0;

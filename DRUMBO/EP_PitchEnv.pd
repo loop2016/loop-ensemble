@@ -1,0 +1,207 @@
+#N canvas 213 127 823 544 10;
+#N canvas 610 240 841 703 guts 0;
+#X obj 175 178 bng 18 250 50 0 trigger-pitch empty Trigger 24 9 0 8
+-191407 -260097 -1;
+#X obj 42 95 line~;
+#X obj 42 153 osc~;
+#X floatatom 42 -75 5 0 0 0 - - -;
+#X floatatom 89 -75 5 0 0 0 - - -;
+#X floatatom 136 -75 6 0 0 0 - - -;
+#X obj 136 -174 r fq21;
+#X obj 89 -174 r fq11;
+#X obj 42 -174 r tim1;
+#X obj 41 267 tabwrite~ osc;
+#X obj 77 287 tabwrite~ frequency;
+#X text 252 60 X-from Y-to X-to Y-from;
+#X msg 42 33 \$2 \, \$3 \$1;
+#X msg 432 31 \; frequency resize \$1 \; osc resize \$1;
+#X obj 240 -60 +;
+#X obj 42 10 pack f f f;
+#X text 47 48 von X \, auf Y in Z ms;
+#X msg 240 28 \; frequency bounds 0 \$1 \$2 0;
+#X obj 89 -150 int;
+#X obj 136 -150 int;
+#X obj 42 -150 int;
+#X obj 42 -124 s tim1int;
+#X obj 89 -104 s fq11int;
+#X obj 136 -124 s fq21int;
+#X obj 389 -51 * 44.1;
+#X obj 389 -73 r tim1int;
+#X obj 240 -135 r fq11int;
+#X obj 255 -115 r fq21int;
+#X obj 283 222 spigot;
+#X obj 283 187 bng 15 250 50 0 bangpitcho bangpitcho bang -25 7 0 9
+-191407 -260097 -1;
+#X obj 255 -93 t b f;
+#X obj 432 6 f;
+#X obj 240 7 pack f f;
+#X obj 240 -29 f;
+#X obj 362 -240 tgl 30 0 empty EP_pitch_onoff On/Off 0 -6 0 10 -4034
+-1 -1 1 1;
+#X obj 362 -106 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 316 176 tgl 30 0 empty EP_pitch_onoff On/Off 0 -6 0 10 -4034
+-1 -1 1 1;
+#X obj 362 -202 sel 1;
+#X msg 362 -171 1;
+#X msg 402 -171 0;
+#X obj 461 -209 del 1250;
+#X obj 508 -243 r tim1int;
+#X obj 362 -130 metro 500;
+#X text 470 -186 deaktiviere Metro \, wenn Bang abgefeuert für tim1int
+ms.;
+#X obj 441 130 r tim1int;
+#X text 459 206 Simpler ASR Envelope;
+#X msg 89 126 0.5;
+#X obj 420 302 vline~;
+#X obj 441 187 pack f f;
+#X obj 486 161 + 50;
+#X msg 420 275 1 50 \, 1 \$1 50 \, 0 100 \$2;
+#X obj 543 -211 + 150;
+#X obj 420 242 list;
+#X obj 441 162 pipe 1;
+#X obj 307 334 *~;
+#X obj 307 404 dac~;
+#X obj 307 374 *~ 0.7;
+#X obj 692 41 closebang;
+#X msg 692 64 0;
+#X obj 669 130 tgl 30 0 EP_pitch_onoff empty Patch_An/Aus -16 -6 0
+10 -3266 -1 -1 1 1;
+#X obj 585 30 loadbang;
+#X obj 585 59 del 40;
+#X msg 625 90 1;
+#X obj 723 63 s bang808;
+#X connect 0 0 9 0;
+#X connect 0 0 10 0;
+#X connect 0 0 31 0;
+#X connect 0 0 33 0;
+#X connect 0 0 15 0;
+#X connect 0 0 46 0;
+#X connect 1 0 2 0;
+#X connect 1 0 10 0;
+#X connect 2 0 9 0;
+#X connect 2 0 54 0;
+#X connect 3 0 15 0;
+#X connect 4 0 15 1;
+#X connect 5 0 15 2;
+#X connect 6 0 19 0;
+#X connect 7 0 18 0;
+#X connect 8 0 20 0;
+#X connect 12 0 1 0;
+#X connect 14 0 33 1;
+#X connect 15 0 12 0;
+#X connect 18 0 22 0;
+#X connect 18 0 4 0;
+#X connect 19 0 23 0;
+#X connect 19 0 5 0;
+#X connect 20 0 21 0;
+#X connect 20 0 3 0;
+#X connect 24 0 31 1;
+#X connect 24 0 32 1;
+#X connect 25 0 24 0;
+#X connect 26 0 14 0;
+#X connect 27 0 30 0;
+#X connect 28 0 0 0;
+#X connect 28 0 40 0;
+#X connect 28 0 39 0;
+#X connect 29 0 28 0;
+#X connect 29 0 52 0;
+#X connect 30 0 14 0;
+#X connect 30 1 14 1;
+#X connect 31 0 13 0;
+#X connect 32 0 17 0;
+#X connect 33 0 32 0;
+#X connect 34 0 37 0;
+#X connect 35 0 0 0;
+#X connect 36 0 28 1;
+#X connect 37 0 38 0;
+#X connect 37 1 39 0;
+#X connect 38 0 42 0;
+#X connect 39 0 42 0;
+#X connect 40 0 38 0;
+#X connect 41 0 42 1;
+#X connect 41 0 51 0;
+#X connect 42 0 35 0;
+#X connect 44 0 49 0;
+#X connect 44 0 53 0;
+#X connect 46 0 2 1;
+#X connect 47 0 54 1;
+#X connect 48 0 52 1;
+#X connect 49 0 48 1;
+#X connect 50 0 47 0;
+#X connect 51 0 40 1;
+#X connect 52 0 50 0;
+#X connect 53 0 48 0;
+#X connect 54 0 56 0;
+#X connect 56 0 55 0;
+#X connect 56 0 55 1;
+#X connect 57 0 58 0;
+#X connect 57 0 63 0;
+#X connect 58 0 59 0;
+#X connect 60 0 61 0;
+#X connect 61 0 62 0;
+#X connect 62 0 59 0;
+#X restore 684 301 pd guts;
+#X obj -90 -219 cnv 15 820 540 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -90 -212 cnv 15 820 22 empty empty what? 20 11 0 14 -260097
+-33289 0;
+#X obj -24 -212 cnv 15 50 22 empty empty Pitch-Envelope/Tonhöhen-Hüllkurve
+0 11 0 14 -260097 -33289 0;
+#X obj -73 -115 cnv 15 200 110 empty empty PitchEnv 10 12 0 13 -99865
+-260097 0;
+#X obj 9 -74 knob 35 35 10 500 0 1 knob_pitenv_time2_1_in knob_pitenv_time2_1_in
+empty 0 -8 0 11 -262144 -260097 -261682 1300 1;
+#X obj 67 -73 knob 35 35 0 127 0 1 knob_pitenv_freq2_1_in knob_pitenv_freq2_1_in
+empty 0 -8 0 11 -204786 -260097 -261682 1100 1;
+#X obj -51 -73 knob 35 35 12 6362 1 1 knob_pitenv_freq1_1_in knob_pitenv_freq1_1_in
+empty 0 -8 0 11 -262144 -260097 -261682 2000 1;
+#X text -47 49 - Time in ms;
+#X text -47 65 - Frequenz 1 in Hz;
+#X text -47 80 - Frequenz 2 in Hz;
+#X obj 651 -168 dspcon;
+#X obj 333 182 cnv 15 260 120 empty empty empty 0 0 0 14 -204786 -66577
+0;
+#X obj 333 42 cnv 15 260 120 empty empty empty 0 0 0 14 -204786 -66577
+0;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array osc 8687 float 0;
+#X coords 0 1 8686 -1 260 120 1 0 0;
+#X restore 333 42 graph;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array frequency 8687 float 0;
+#X coords 0 567 8687.7 0 260 120 1 0 0;
+#X restore 333 182 graph;
+#X obj 2 -32 nbx 5 14 -1e+037 1e+037 0 0 empty tim1int empty 0 -8 0
+10 -66577 -260097 -260097 197 256;
+#X obj -58 -32 nbx 5 14 -1e+037 1e+037 0 0 empty fq11int empty 0 -8
+0 10 -66577 -260097 -260097 480 256;
+#X obj 62 -32 nbx 5 14 -1e+037 1e+037 0 0 empty fq21int empty 0 -8
+0 10 -66577 -260097 -260097 87 256;
+#X obj 614 -120 bng 18 250 50 0 bangpitcho bangpitcho bang 25 10 0
+11 -99865 -260097 -1;
+#X text -56 21 Der Pitch Envelope hat drei einstellbare Parameter:
+;
+#X obj 334 -86 cnv 15 380 80 empty empty ToDo 10 10 0 11 -260097 -66577
+0;
+#X text 349 -70 Probiere verschiedene Sweeps aus und beobachte dabei
+wie sich die Wellenform in dem Fenster 'osc' verändert.;
+#X text -56 105 Frequenz 1 bestimmt die Anfangsfrequenz. Innerhalb
+von der eingestellten Zeit (Time) verändert sich der Ton linear zu
+Frequenz 2 So lassen sich ansteigende oder abfallende Tonbewegungen
+erzeugen (so genannte Sweeps).;
+#X text 350 -39 Versuche mit den drei Parametern eine Bass-Drum zu
+synthetisieren.;
+#X text -56 208 Bsp.: Eine große Trommel (Base-Drum) produziert in
+dem Moment \, in dem sie getreten wird einen hohen Ton bei ca. 200
+Hz (der Kick). Dieser fällt danach schnell (~20 ms) auf eine niedrigere
+Frequenz (< 100 Hz) ab \, da der Größe Klangkörper schwingt.;
+#X text -55 166 Mithilfe dieser Sweeps lässt sich nun unter anderem
+das komplexe Klangverhalten von echten Instrumenten nachbilden.;
+#X text 349 -116 Nutze diesen Bang \, um den Klang anzuhören:;
+#X obj -53 -89 cnv 10 10 10 empty empty Freq-1 0 7 0 11 -99865 -261682
+0;
+#X obj 67 -89 cnv 10 10 10 empty empty Freq-2 0 7 0 11 -99865 -261682
+0;
+#X obj 9 -89 cnv 10 10 10 empty empty Time 0 7 0 11 -99865 -261682
+0;

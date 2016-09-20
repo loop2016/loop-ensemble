@@ -1,0 +1,6 @@
+#N canvas 296 412 391 225 10;
+#X obj 19 0 cnv 16 41 18 empty empty empty 7 8 0 14 -1 -33289 0;
+#X obj 19 1 cnv 16 40 16 empty empty vis 7 8 0 14 -55022 -1 0;
+#X obj 0 0 bng 18 250 50 0 globvis_add_bang empty empty 17 7 0 10 -55022
+-260097 -262144;
+#X coords 0 0 1 1 60 18 1 0 0;

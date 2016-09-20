@@ -1,0 +1,201 @@
+#N canvas 107 0 1102 702 10;
+#N canvas 421 244 465 437 guts 0;
+#X obj -2998 -514 metro 100;
+#N canvas 604 148 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2821 -281 tabwrite~ Add-Virtuell-Spektrum;
+#X obj -2998 -380 r Add_virtualBase;
+#X obj -2821 -329 /~ 1024;
+#X obj -2712 -458 block~ 8192;
+#X obj -2820 -308 clip~ 0 0.1;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 10 0;
+#X connect 3 0 2 0;
+#X connect 5 0 8 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 5 0;
+#X connect 10 0 12 0;
+#X connect 12 0 8 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -3020 -494 sel 1;
+#X obj -2963 -308 s Add_mainfreqmidi;
+#X obj -3020 -270 s Add_ctlmode_verbfil_ctl;
+#X msg -3020 -302 1;
+#X obj -3020 -453 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -3020 -433 s Add_reset;
+#X obj -3020 -397 delay 20;
+#X obj -2906 -348 s Add_relvolon;
+#X obj -2906 -391 - 1;
+#X obj -2906 -372 abs;
+#X obj -2808 -290 s Add_notein1_dissctl;
+#X msg -2808 -310 0;
+#X obj -2808 -333 sel 0;
+#X obj -3030 -244 r Add_notein1_diss;
+#X obj -3030 -215 spigot;
+#X obj -3030 -189 s Add_notein1;
+#X obj -2912 -447 tabwrite~ Add-Virtuell-Zeitsignal;
+#X obj -2998 -554 r Add_virtualBase;
+#X obj -2877 -206 s Add_waveclipctl;
+#X msg -2877 -232 127;
+#X obj -2913 -532 r~ Add_Filtersignal;
+#X msg -2964 -346 74;
+#X obj -2911 -476 clip~ -0.5 0.5;
+#X obj -2644 -374 closebang;
+#X msg -2645 -343 0;
+#X obj -2648 -312 s Add_virtualBase;
+#X obj -2605 -603 tgl 30 0 Add_virtualBase Add_virtualBase_ctl An/Aus
+-60 15 0 15 -99865 -1 -1 1 1;
+#X obj -2714 -540 loadbang;
+#X msg -2714 -516 1;
+#X obj -2714 -489 s Add_virtualBase_ctl;
+#X obj -2719 -613 bng 15 250 50 0 empty ADD_EPvirtualbase_reset empty
+17 7 0 10 -262144 -1 -1;
+#X obj -2722 -585 del 10;
+#X connect 0 0 18 0;
+#X connect 2 0 6 0;
+#X connect 2 0 13 0;
+#X connect 5 0 4 0;
+#X connect 6 0 7 0;
+#X connect 6 0 8 0;
+#X connect 8 0 5 0;
+#X connect 8 0 23 0;
+#X connect 8 0 21 0;
+#X connect 10 0 11 0;
+#X connect 11 0 9 0;
+#X connect 13 0 12 0;
+#X connect 14 0 13 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 19 0 0 0;
+#X connect 19 0 2 0;
+#X connect 19 0 10 0;
+#X connect 19 0 14 0;
+#X connect 19 0 16 1;
+#X connect 21 0 20 0;
+#X connect 22 0 1 0;
+#X connect 22 0 24 0;
+#X connect 23 0 3 0;
+#X connect 24 0 18 0;
+#X connect 25 0 26 0;
+#X connect 26 0 27 0;
+#X connect 29 0 30 0;
+#X connect 30 0 31 0;
+#X connect 32 0 28 0;
+#X connect 32 0 33 0;
+#X connect 33 0 28 0;
+#X restore 788 -1184 pd guts;
+#X obj -258 -1818 cnv 15 1100 700 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -258 -1810 cnv 15 1100 22 empty empty What?-Virtueller 20 11
+0 14 -260097 -66577 0;
+#X obj -225 -1330 cnv 30 800 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Add-Virtuell-Spektrum 800 float 2;
+#X coords 0 0.1 800 0 800 180 1 0 0;
+#X restore -225 -1330 graph;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Add-Virtuell-Zeitsignal 300 float 4;
+#X coords 0 0.5 299 -0.5 265 180 1 0 0;
+#X restore -225 -1536 graph;
+#X text -244 -1454 0;
+#X obj -225 -1536 cnv 30 265 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X obj -24 -1618 tgl 30 0 Add_notein1_diss Add_notein1_dissctl Ton
+5 -7 0 12 -99865 -260097 -1 127 127;
+#X obj 456 -1517 cnv 15 380 170 empty empty ToDo 10 12 0 11 -260097
+-66577 0;
+#X text -240 -1540 1;
+#X text -246 -1368 -1;
+#X obj -224 -1777 cnv 15 170 110 empty empty Hochpassfilter 10 12 0
+13 -99865 -260097 0;
+#X obj -201 -1692 nbx 5 14 -1e+037 1e+037 0 0 empty Add_hp_freq empty
+0 -8 0 10 -66577 -260097 -1 16 256;
+#X text -218 -1148 100 Hz;
+#X text -144 -1148 500 Hz;
+#X text -55 -1148 1000 Hz;
+#X text 37 -1148 1500 Hz;
+#X text 128 -1148 2000 Hz;
+#X text 221 -1148 2500 Hz;
+#X text 316 -1148 3000 Hz;
+#X text 404 -1148 3500 Hz;
+#X text 497 -1148 4000 Hz;
+#X obj -224 -1661 cnv 15 110 110 empty empty Waveshaping 10 12 0 13
+-99865 -260097 0;
+#X obj -207 -1575 nbx 5 14 -1e+037 1e+037 0 0 empty Add_waveclipshow
+empty 0 -8 0 10 -66577 -260097 -260097 1 256;
+#X text 80 -1671 Doch auch wenn diese Frequenzanteile nicht mehr im
+Klang vorhanden sind und sich dadurch der generelle Klangcharakter
+stark verändert \, so hören wir doch immer noch die ursprüngliche
+Tonhöhe \, ganz so als wäre die Grundfrequenz noch vorhanden.;
+#X obj -32 -1692 nbx 5 14 -1e+037 1e+037 0 0 empty Add_basicfreq empty
+0 -8 0 10 -66577 -260097 -260097 220 256;
+#X obj -101 -1810 cnv 15 100 22 empty empty Grundton 0 11 0 14 -260097
+-66577 0;
+#X text -17 -1807 Tonhöhenwahrnemung mit Hilfe von Obertonspektren
+;
+#X text 469 -1417 Erzeuge mit ADD Klänge anderer Tonhöhe und/oder
+anderer Obertonstruktur \, z.B. einen Klang aus nur einer Sinusschwingung
+\, und versuche das Prinzip auch hier anzuwenden. Was fällt Dir auf
+und wie ließe sich das erklären?;
+#X text 79 -1778 Hier wird mittels Waveshaping ein Rechtecksignal mit
+einem ausgeprägtem Obertonspektrum aus ungeraden harmonischen generiert.
+;
+#X text 79 -1731 Wird nun ein Hochpassfilter eingesetzt \, um die unteren
+Frequenzbereiche in ihrer Lautstärke zu dämpfen \, so wird schnell
+die Grundfrequenz bis zur Unhörbarkeit gedämpft und auch die ersten
+Obertöne lassen sich herausfiltern.;
+#X text 80 -1600 Dieses Phänomen ist darauf zurückzuführen \, dass
+sich jeder komplexe Ton über sein individuelles Obertonspektrum definiert.
+Auch wenn die Grundfrequenz nicht vorhanden ist \, kann unser Hörsinn
+aus den Informationen \, die im Obertonspektrum enthalten sind \, die
+eigentlichen Ton in seiner Grundfrequenz rekonstruieren.;
+#X text 81 -1516 Wird nach und nach die Grenzfrequenz des Hochpassfilters
+erhöht \, so wird irgendwann eine Schwelle überschritten \, ab der
+der virtuelle Grundton nicht mehr zu erkennen ist. Hier wurde aus dem
+Obertonstpektrum so viel Information herausgefiltert \, dass das Gehör
+nicht mehr in der Lage ist \, den Grundton zu rekonstruieren.;
+#X text 82 -1432 Dieses Prinzip findet sich auch beim Telefonieren
+wieder: Das Telefon überträgt nur Frequenzen ab ca. 300 Hz. Der Grundton
+in der Stimme eines erwachsenen Menschen geht dabei in der Regel zwar
+verloren und überhaupt wird der Klang der Stimme stark beeinflusst
+\, trotzdem erkennt der Zuhörer am anderen Ende der Leitung die Tonlage
+des Sprechers und meistens sogar die Stimme.;
+#X obj -202 -1750 cnv 15 10 10 empty empty Frequenz 0 5 0 11 -99865
+-261682 0;
+#X obj -33 -1753 cnv 15 10 10 empty empty Grundfrequenz 0 5 0 11 -128992
+-261682 0;
+#X obj -205 -1634 cnv 15 10 10 empty empty Clip 0 5 0 11 -99865 -261682
+0;
+#X obj -205 -1621 knob 40 40 0 127 0 0 Add_waveclipctl Add_waveclipctl
+empty 0 -8 0 9 -228856 -260097 -261682 3900 1;
+#X obj -31 -1738 knob 40 40 0 127 0 0 Add_mainfreqmidi Add_mainfreqmidi
+empty 0 -8 0 9 -228856 -260097 -261682 2272 1;
+#X obj -121 -1692 nbx 5 14 -1e+037 1e+037 0 0 empty Add_hp_q empty
+0 -8 0 10 -66577 -260097 -1 6.53077 256;
+#X obj -119 -1751 cnv 15 10 10 empty empty Q 0 5 0 11 -99865 -261682
+0;
+#X obj -121 -1738 knob 40 40 0.1 21 0 0 Add_hp_q Add_hp_q_ctl empty
+0 -8 0 9 -262144 -260097 -261682 1200 1;
+#X obj -201 -1738 knob 40 40 16 5000 0 0 Add_hp_freq Add_hp_freq_ctl
+empty 0 -8 0 9 -262144 -260097 -261682 0 1;
+#X obj 773 -1772 bng 25 250 50 0 ADD_EPvirtualbase_reset ADD_EPvirtualbase_reset_ctl
+zurücksetzen -26 34 0 11 -99865 -260097 -1;
+#X text 469 -1499 Aktiviere die Wiedergabe des Tons. Setze dann mit
+Hilfe der Knobs (Knob und Fader 7 auf dem NanoKontrol) den Hochpassfilter
+ein. Im Frequenzspektrum kannst Du sehen \, wie die tiefen Töne gedämpft
+werden und Du hörst \, wie sich der Klangcharakter verändert. Gleichzeitig
+fällt auf \, dass die Tonhöhe gleich bleibt.;

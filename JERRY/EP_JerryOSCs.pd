@@ -1,0 +1,207 @@
+#N canvas 111 42 1113 675 10;
+#N canvas 308 106 692 462 guts 0;
+#N canvas 616 128 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -326 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2822 -310 log~ 10;
+#X obj -2823 -261 clip~ -200 0;
+#X obj -2823 -287 *~ 20;
+#X obj -2821 -332 /~ 4096;
+#X obj -2822 -233 tabwrite~ Jerry-OSCs-Spektrum;
+#X obj -2998 -380 r Jerry_EPOSCs_on;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 12 0;
+#X connect 3 0 2 0;
+#X connect 5 0 13 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 11 0;
+#X connect 10 0 13 0;
+#X connect 11 0 10 0;
+#X connect 12 0 9 0;
+#X connect 14 0 5 0;
+#X restore -2840 -493 pd spektrum;
+#X obj -2911 -532 r~ Jerry_mainOut;
+#X obj -3070 -432 loadbang;
+#X obj -3068 -357 s jerry-key-1;
+#X obj -2994 -432 sel 1;
+#X obj -3071 -389 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -2964 -291 s JERRY_delfeedback_ctl;
+#X obj -2910 -317 s JERRY_deltime_ctl;
+#X msg -2910 -348 250;
+#X msg -2964 -348 0.1;
+#X obj -3004 -378 del 10;
+#X obj -2846 -385 closebang;
+#X floatatom -2789 -222 5 0 0 0 - - -;
+#X floatatom -2625 -219 5 0 0 0 - - -;
+#X obj -3075 -530 r Jerry_EPOSCs_on;
+#X obj -2793 -136 s Jerry_EPMouseX;
+#X obj -2615 -117 s Jerry_EPMouseY;
+#X obj -2789 -193 abs;
+#X obj -2618 -171 abs;
+#X obj -2594 -171 r skalmausy;
+#X obj -2763 -193 r skalmausx;
+#X obj -2616 -146 *;
+#X obj -2790 -163 *;
+#X obj -2744 -307 mousestate;
+#X obj -3001 -191 s Jerry_EP_Oscs_freqosc1;
+#X obj -3037 -157 s Jerry_EP_Oscs_freqosc2;
+#X obj -3003 -479 metro 100;
+#X obj -3021 -251 r JERRY_freq_scale;
+#X obj -3037 -191 / 2;
+#X obj -3021 -221 int;
+#X obj -2637 -471 tgl 35 0 Jerry_EPOSCs_on Jerry_EPOSCs_on_ctl An/Aus
+-60 18 0 15 -99865 -1 -1 1 1;
+#X obj -2700 -543 loadbang;
+#X msg -2699 -521 1;
+#X obj -2701 -495 s Jerry_EPOSCs_on_ctl;
+#X obj -2728 -371 s Jerry_Seq_on_ctl;
+#X msg -2728 -391 0;
+#X connect 1 0 0 0;
+#X connect 2 0 5 0;
+#X connect 2 0 35 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 5 0 10 0;
+#X connect 8 0 7 0;
+#X connect 9 0 6 0;
+#X connect 10 0 9 0;
+#X connect 10 0 8 0;
+#X connect 11 0 3 0;
+#X connect 12 0 17 0;
+#X connect 13 0 18 0;
+#X connect 14 0 4 0;
+#X connect 14 0 26 0;
+#X connect 17 0 22 0;
+#X connect 18 0 21 0;
+#X connect 19 0 21 1;
+#X connect 20 0 22 1;
+#X connect 21 0 16 0;
+#X connect 22 0 15 0;
+#X connect 23 3 12 0;
+#X connect 23 4 13 0;
+#X connect 26 0 23 0;
+#X connect 27 0 29 0;
+#X connect 28 0 25 0;
+#X connect 29 0 24 0;
+#X connect 29 0 28 0;
+#X connect 31 0 32 0;
+#X connect 32 0 33 0;
+#X connect 35 0 34 0;
+#X restore 806 -1165 pd guts;
+#X obj -258 -1818 cnv 15 1110 670 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -258 -1810 cnv 16 1110 22 empty empty what?-Mausgeschwindigkeit:
+20 11 0 14 -260097 -1 0;
+#X text -88 -1177 1000 Hz;
+#X text 12 -1177 3000 Hz;
+#X text 109 -1177 5000 Hz;
+#X text 207 -1177 7000 Hz;
+#X text 305 -1177 9000 Hz;
+#X text 400 -1177 11000 Hz;
+#X text 498 -1177 13000 Hz;
+#X text 596 -1177 15000 Hz;
+#X obj -120 -1309 cnv 30 800 130 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Jerry-OSCs-Spektrum 3000 float 2;
+#X coords 0 0 3000 -200 800 130 1 0 0;
+#X restore -120 -1309 graph;
+#X obj 314 -1775 cnv 15 390 120 empty empty ToDo 10 12 0 11 -260097
+-66577 0;
+#X obj -244 -1778 cnv 20 145 110 empty empty empty 10 12 0 13 -33289
+-260097 0;
+#X obj -239 -1773 cnv 20 135 100 empty empty empty 10 12 0 13 -66577
+-260097 0;
+#X obj -159 -1767 knob 42 42 0 0.15 0 1 JERRY_volosc2 JERRY_volosc2_ctl
+empty -14 -10 0 8 -262144 -260097 -260097 1367 1;
+#X obj -223 -1767 knob 42 42 0 0.1 0 1 JERRY_volosc1 JERRY_volosc1_ctl
+empty 0 -10 0 11 -262144 -260097 -260097 1025 1;
+#X obj -224 -1720 cnv 15 41 41 empty empty empty 10 12 0 13 -33289
+-261682 0;
+#X obj -159 -1720 cnv 15 41 41 empty empty empty 10 12 0 13 -33289
+-261682 0;
+#X obj -203 -1699 image sub1.gif;
+#X obj -138 -1699 image sub2.gif;
+#X text -75 -1697 Die beiden Oszillatoren erklingen ohne das bandpassgefilterte
+Rauschen beim Drücken der B-TASTE.;
+#X text 333 -1754 Erzeuge mit JERRY Klänge mittels der B-Taste. Bewege
+dann die Maus abwechselnd in die vier Bewegungsrichtungen und versuche
+die Klänge nachzuvollziehen \, die durch die Bewegung entstehen.;
+#X text 333 -1703 Unterschiedliche PRESETS führen übrigens zu unterschiedlichen
+Werten bei der Beschleunigung \, so dass sich auch der Klang verändert.
+;
+#X text -75 -1753 Neben dem bandpassgefilterten Rauschen erzeugt JERRY
+seine Sounds über Oszillatoren (Sinusgeneratoren) \, die an die BEWEGUNGSGESCHWINDIGKEIT
+DER MAUS in der Horizontalen bzw. der Vertikalen angeschlossen sind.
+;
+#X obj -189 -1649 cnv 15 470 320 empty empty empty 20 12 0 14 -99865
+-66577 0;
+#X obj 314 -1649 cnv 15 470 320 empty empty empty 20 12 0 14 -99865
+-66577 0;
+#X obj 569 -1424 nbx 5 15 -1e+037 1e+037 0 0 empty Jerry_EPMouseX Geschwindigkeit---Horizontale
+0 25 0 11 -66577 -260097 -1 0 256;
+#X obj 69 -1424 nbx 5 15 -1e+037 1e+037 0 0 empty Jerry_EPMouseY Geschwindigkeit---Vertikale
+0 25 0 11 -54094 -260097 -1 0 256;
+#X obj 34 -1359 osc~;
+#X text 71 -1458 Hz;
+#X obj 34 -1409 *;
+#X obj 533 -1359 osc~;
+#X text 569 -1458 Hz;
+#X obj 533 -1409 +;
+#X text 351 -1568 Wenn die Maus bewegt wird \, wird die Geschwindigkeit
+des Bewegung zu dieser Grundfrequenz ADDIERT.;
+#X text 351 -1534 Das Resultat sind leichte Schankungen in der Tonhöhe
+bei langsamer Bewegung und sehr starke \, sprunghafte bei schnellen
+Bewegungen. Die schnellen Bewegungen führen dabei zu sehr ungewöhnlichen
+\, GERÄUSCHHAFTEN KLÄNGEN.;
+#X text 356 -1410 Addition der Geschwindigkeit;
+#X text 404 -1360 Schwingungsgenerator;
+#X text -95 -1360 Schwingungsgenerator;
+#X text -96 -1458 Eingangsfrequenz -->;
+#X text 402 -1459 Eingangsfrequenz -->;
+#X floatatom 34 -1383 5 0 0 0 - - -;
+#X floatatom 533 -1383 5 0 0 0 - - -;
+#X floatatom 34 -1459 5 0 0 0 - Jerry_EP_Oscs_freqosc1 -;
+#X floatatom 533 -1458 5 0 0 0 - Jerry_EP_Oscs_freqosc2 -;
+#X text -153 -1590 Ist die Geschwindigkeit also 0 \, so ist die Frequenz
+des Schwingungsgenerators also 0 und er gibt keiner Schwingung aus.
+;
+#X text -153 -1549 Wenn die Maus bewegt wird \, werden sehr plötzlich
+sich ständig veränderte Frequenzwerte an den Schwingungsgenerator
+gegeben.;
+#X text -24 -1383 Frequenz;
+#X text 476 -1383 Frequenz;
+#X text -152 -1643 Die Bewegungsgeschwindigkeit der Maus auf der Vertikalen
+ist an den ersten Oszillator angeschlossen. Die Eingangsfrequenz wird
+hier mit der Beschleunigung MULTIPLIZIERT.;
+#X text -153 -1500 Das Resultat sind chaotische \, GERÄUSCHAFTE KLÄNGE.
+;
+#X text -113 -1410 mit der Geschwindigkeit;
+#X text -113 -1420 Multiplikation;
+#X text -24 -1808 Klänge durch Bewegung und Unterton;
+#X text 351 -1644 Die Bewegungsgeschwindigkeit der Maus auf der Horizontalen
+ist an den zweiten Oszillator angeschlossen. Hier wird OHNE BEWEGUNG
+ein Sinuston erzeugt \, der eine Oktave tiefer (Halbierung der Frequenz)
+ist als der tiefste Ton aus dem bandpassgefilterten Rauschen. Dieser
+Ton wird als die zweite SUBHARMONISCHE bezeichnet.;
+#X connect 28 0 35 1;
+#X connect 29 0 32 1;
+#X connect 32 0 43 0;
+#X connect 35 0 44 0;
+#X connect 43 0 30 0;
+#X connect 44 0 33 0;
+#X connect 45 0 32 0;
+#X connect 46 0 35 0;

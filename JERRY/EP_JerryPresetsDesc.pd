@@ -1,0 +1,83 @@
+#N canvas 158 64 883 592 10;
+#X obj -80 -209 cnv 15 880 590 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj -80 -202 cnv 15 880 22 empty empty what?-Presets 20 11 0 14
+-260097 -33289 0;
+#X obj -56 -151 bng 33 250 50 0 jerry-key-1 jerry-key-1 1 12 17 0 17
+-162280 -260097 -1;
+#X obj -15 -151 bng 33 250 50 0 jerry-key-2 jerry-key-2 2 12 17 0 17
+-162280 -260097 -1;
+#X obj 27 -151 bng 33 250 50 0 jerry-key-3 jerry-key-3 3 12 17 0 17
+-162280 -260097 -1;
+#X obj 69 -151 bng 33 250 50 0 jerry-key-4 jerry-key-4 4 12 17 0 17
+-162280 -260097 -1;
+#X obj 110 -151 bng 33 250 50 0 jerry-key-5 jerry-key-5 5 12 17 0 17
+-162280 -260097 -1;
+#X obj 151 -151 bng 33 250 50 0 jerry-key-6 jerry-key-6 6 12 17 0 17
+-162280 -260097 -1;
+#X obj 235 -151 bng 33 250 50 0 jerry-key-8 jerry-key-8 8 12 17 0 17
+-162280 -260097 -1;
+#X obj 276 -151 bng 33 250 50 0 jerry-key-9 jerry-key-9 9 12 17 0 17
+-162280 -260097 -1;
+#X obj 193 -151 bng 33 250 50 0 jerry-key-7 jerry-key-7 7 12 17 0 17
+-162280 -260097 -1;
+#X obj -60 -168 cnv 9 60 10 empty empty Melodie 7 5 0 10 -162280 -1
+0;
+#X obj 189 -168 cnv 9 60 10 empty empty Harmonie 7 5 0 10 -162280 -1
+0;
+#X obj 336 -144 cnv 20 90 20 empty empty Preset 10 12 0 12 -66577 -260097
+0;
+#X obj 427 -144 nbx 1 20 0.1 10 0 0 empty JERRY-aktives-preset empty
+0 20 0 13 -66577 -260097 -260097 1 10;
+#X text -57 -15 2: Durch die Bandpassfilterung entsteht ein komplexer
+Ton mit Grundton und vier geraden Harmonischen. Der erste Osczillator
+gibt die 1 Subharmonische aus. Der zweite recht hohe \, scharfe Sounds.
+Die Attack-Zeit ist mit 15 ms kurz \, die Release-Zeit mit 300 ms mittellang.
+;
+#X text -56 -82 1: Durch die Bandpassfilterung entsteht ein einzelner
+Sinuston. Der erste Osczillator gibt die Oktave unter diesem Ton aus
+(1. Subharmonische). Der zweite dezente Sounds. Die Attack-Zeit ist
+mit 30 ms relativ kurz \, die Release-Zeit mit 500 ms recht lang.;
+#X text -59 57 3: Durch die Bandpassfilterung entsteht ein komplexer
+Ton mit Grundton und vier ungeraden Harmonischen. Der erste Osczillator
+gibt die 1 Subharmonische aus. Der zweite tiefere \, voluminösere
+Sounds. Der Attack-Zeit ist mit 1 ms sehr plötzlich \, die Release-Zeit
+mit 200 ms kürzer.;
+#X text -57 291 6: Durch die Bandpassfilterung entsteht ein sehr spezieller
+Klang aus dicht beieinander liegenden Sinustönen. Der erste Osczillator
+gibt die 1 Subharmonische \, die hier als Grundton dient \, aus. Der
+zweite dezente \, voluminöse Sounds. Der Attack-Zeit ist mit 1000
+ms lang \, der Release passiert in 500 ms dagegen schneller.;
+#X text 368 -82 7: Durch die Bandpassfilterung entsteht hier ein Durakkord.
+Der erste Osczillator gibt die Oktave unter dem Grundton aus. Der zweite
+sehr leise \, aber scharfe Sounds. Die Attack-Zeit ist mit 30 ms relativ
+kurz \, die Release-Zeit mit 200 ms ebenso.;
+#X text 368 -15 8: Durch die Bandpassfilterung entsteht hier ein Mollakkord.
+Der erste Osczillator gibt die Oktave unter dem Grundton aus. Der zweite
+voluminöse Sounds. Die Attack-Zeit ist mit 30 ms relativ kurz \, die
+Release-Zeit mit 500 ms recht lang.;
+#X text 369 57 9: Durch die Bandpassfilterung entsteht hier ein vierstimmiger
+Akkord \, in der Regel mit passender Septime. Der erste Osczillator
+gibt die Oktave unter dem Grundton aus. Der zweite leise \, hohe Sounds.
+Die Attack-Zeit ist mit 600 ms mittellang \, die Release-Zeit mit 300
+ms ebenso.;
+#X text -61 -103 MELODIE;
+#X text 359 -103 HARMONIE;
+#X obj 378 159 cnv 15 380 100 empty empty ToDo 10 12 0 11 -260097 -1
+0;
+#X text -58 129 4: Durch die Bandpassfilterung entsteht ein komplexer
+Ton mit Grundton und den ersten vier Harmonischen. Der erste Oszillator
+gibt die erste Subharmonische aus. Der zweite aggressive \, hohe und
+schnelle Sounds. Der Attack-Zeit ist mit 800 ms lang \, die Release-Zeit
+mit 1000 ms änhlich lang.;
+#X text -57 201 5: Durch die Bandpassfilterung entsteht ein sehr spezieller
+Klang mit Grundton und den sehr hohen \, dichtliegenden und nicht auschließlich
+harmonischen Obertönen. Der erste Osczillator gibt die 1 Subharmonische
+aus. Der zweite aggressive \, hohe Sounds. Der Attack-Zeit ist mit
+1500 ms sehr lang \, der Release passiert in 500 ms dagegen schneller.
+;
+#X text 397 177 Zum besseren Verständnis der Beschreibungen der Presets
+kannst Du Dir bei ADD die Erläuterungen zur 'Additiven Synthese' anschauen.
+;
+#X text 397 219 Außerdem kannst Du Dir Erklärungen zu Attack- und
+Release-Zeit unter 'Lautstärkehüllkürve' holen.;

@@ -1,0 +1,7 @@
+#N canvas 0 0 450 300 10;
+#X obj 100 66 inlet;
+#X obj 218 177 s knob_pulse_VCO_\$1_in;
+#X obj 100 137 s waveform_VCO_\$1_in;
+#X obj 218 66 inlet;
+#X connect 0 0 2 0;
+#X connect 3 0 1 0;

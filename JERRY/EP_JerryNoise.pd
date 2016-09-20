@@ -1,0 +1,158 @@
+#N canvas 82 20 1153 709 10;
+#N canvas 740 210 514 371 guts 0;
+#N canvas 672 151 450 310 spektrum 0;
+#X obj -2822 -414 *~;
+#X obj -2795 -414 *~;
+#X obj -2822 -351 biquad~ 0 0 0 0 1;
+#X obj -2822 -373 q8_sqrt~;
+#X text -2637 -458 Blockgröße;
+#X obj -2998 -225 metro 100;
+#X obj -2821 -495 inlet~;
+#X obj -2822 -442 fft~;
+#X obj -2712 -458 block~ 8192;
+#X obj -2822 -305 log~ 10;
+#X obj -2998 -380 r Jerry_EPNoise_on;
+#X obj -2821 -228 tabwrite~ Jerry-Noise-Spektrum;
+#X obj -2822 -328 /~ 4096;
+#X obj -2822 -282 *~ 20;
+#X obj -2822 -256 clip~ -200 -50;
+#X connect 0 0 3 0;
+#X connect 1 0 3 0;
+#X connect 2 0 12 0;
+#X connect 3 0 2 0;
+#X connect 5 0 11 0;
+#X connect 6 0 7 0;
+#X connect 7 0 0 0;
+#X connect 7 0 0 1;
+#X connect 7 1 1 0;
+#X connect 7 1 1 1;
+#X connect 9 0 13 0;
+#X connect 10 0 5 0;
+#X connect 12 0 9 0;
+#X connect 13 0 14 0;
+#X connect 14 0 11 0;
+#X restore -2899 -503 pd spektrum;
+#X obj -2911 -476 clip~ -0.2 0.2;
+#X obj -3075 -530 r Jerry_EPNoise_on;
+#X obj -2911 -532 r~ Jerry_mainOut;
+#X obj -2911 -447 tabwrite~ Jerry-Noise-Zeitsignal;
+#X obj -3075 -491 metro 100;
+#X obj -3071 -432 loadbang;
+#X obj -3071 -307 s jerry-key-1;
+#X obj -2994 -432 sel 1;
+#X obj -3071 -389 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -2964 -291 s JERRY_delfeedback_ctl;
+#X obj -2910 -317 s JERRY_deltime_ctl;
+#X msg -2910 -348 250;
+#X msg -2964 -348 0.1;
+#X obj -3004 -378 del 10;
+#X obj -3043 -402 closebang;
+#X obj -2945 -612 tgl 35 0 Jerry_EPNoise_on Jerry_EPNoise_on_ctl An/Aus
+-65 18 0 17 -99865 -1 -1 1 1;
+#X obj -3075 -614 loadbang;
+#X msg -3075 -591 1;
+#X obj -3075 -566 s Jerry_EPNoise_on_ctl;
+#X obj -2843 -374 s Jerry_Seq_on_ctl;
+#X msg -2843 -394 0;
+#X connect 1 0 4 0;
+#X connect 2 0 5 0;
+#X connect 2 0 8 0;
+#X connect 3 0 0 0;
+#X connect 3 0 1 0;
+#X connect 5 0 4 0;
+#X connect 6 0 9 0;
+#X connect 6 0 21 0;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 9 0 14 0;
+#X connect 12 0 11 0;
+#X connect 13 0 10 0;
+#X connect 14 0 13 0;
+#X connect 14 0 12 0;
+#X connect 15 0 7 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 21 0 20 0;
+#X restore 842 -1163 pd guts;
+#X obj -258 -1818 cnv 15 1150 690 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -258 -1810 cnv 16 1150 22 empty empty what?-Rauschen 20 11 0
+14 -260097 -66577 0;
+#X text -195 -1150 1000 Hz;
+#X text -95 -1150 3000 Hz;
+#X text 2 -1150 5000 Hz;
+#X text 100 -1150 7000 Hz;
+#X text 198 -1150 9000 Hz;
+#X text 293 -1150 11000 Hz;
+#X text 391 -1150 13000 Hz;
+#X text 489 -1150 15000 Hz;
+#X obj -227 -1330 cnv 30 800 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array Jerry-Noise-Spektrum 3000 float 2;
+#X coords 0 -50 3000 -200 800 180 1 0 0;
+#X restore -227 -1330 graph;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array Jerry-Noise-Zeitsignal 300 float 4;
+#X coords 0 0.2 299 -0.2 265 180 1 0 0;
+#X restore -228 -1546 graph;
+#X text -247 -1464 0;
+#X obj -228 -1546 cnv 30 265 180 empty empty empty 10 12 0 10 -204786
+-260097 0;
+#X text -252 -1550 0.2;
+#X text -258 -1378 -0.2;
+#X obj 505 -1586 cnv 15 380 160 empty empty ToDo 20 8 0 10 -260097
+-66577 0;
+#X obj -119 -1810 cnv 15 100 16 empty empty durch 0 11 0 14 -260097
+-66577 0;
+#X obj -71 -1810 cnv 15 100 16 empty empty Bandpassfilter 0 11 0 14
+-260097 -66577 0;
+#X obj -232 -1781 cnv 20 100 120 empty empty Lautstärke 10 14 0 11
+-66577 -261682 0;
+#X obj -212 -1757 knob 42 42 0 1 0 1 JERRY_volnoisebp JERRY_volnoisebp_ctl
+empty 0 -25 0 11 -262144 -260097 -260097 4100 1;
+#X obj -213 -1710 cnv 15 41 41 empty empty empty 10 12 0 13 -33289
+-261682 0;
+#X obj -192 -1689 image sub3.gif;
+#X obj -115 -1763 nbx 5 15 -1e+037 1e+037 0 0 empty JERRY_Freq Frequenz(Hz)
+0 -8 0 11 -54094 -260097 -1 1148.07 256;
+#X obj -116 -1722 nbx 5 15 -1e+037 1e+037 0 0 empty JERRY_Q Filtergüte-Q
+0 -8 0 11 -54094 -260097 -1 40.5057 256;
+#X text -52 -1764 X-Achse;
+#X text -51 -1723 Y-Achse;
+#X text 10 -1729 Filtergüte des Bandpassfilters;
+#X text 80 -1676 JERRYs Klangerzeugung passiert unter anderem durch
+Bandpassfilterung von weißem Rauschen.;
+#X text 80 -1605 BANDPASSFILTER lassen einen voreingestellten Frequenzbereich
+passieren und blockieren die Frequenzen über- und unterhalb dieses
+Bereiches.;
+#X text 82 -1557 Die FILTERGÜTE (Q) bestimmt dabei vor allem die Breite
+des Frequenzbereichs \, der durchgelassen wird.;
+#X text 81 -1525 Eine niedrige Filtergüte führt zu einem breiten
+Durchlassbereich. Eine hohe Filtergüte zu einem schmalen Durchlassbereich.
+;
+#X text 80 -1477 Die Filtergüte wird in JERRY durch die VERTIKALE
+POSITION des Mauszeigers bestimmt. Die Frequenz \, an der er Bandpassfilter
+ansetzt \, wird durch die HORIZONTALE POSITION der Maus bestimmt.;
+#X text 10 -1769 zentrale Frequenz des Filters;
+#X text 80 -1641 WEIßES RAUSCHEN enthält theoretisch also ALLE hörbaren
+Frequenzen.;
+#X text 519 -1563 Bewege die Maus zum oberen Bildrand und erzeuge einen
+Klang mit der Taste N. Aufgrund der niedrigen Filtergüte können viele
+Frequenzen des Rauschens passieren.;
+#X obj 425 -1632 bng 15 250 50 0 Jerry_what-morenoise xxxaretr empty
+19 7 0 10 -2097 -260097 -1;
+#X text 445 -1634 <-- mehr zu weißem Rauschen;
+#X text 81 -1408 JERRY verfügt dabei über unterschiedliche voreingestellte
+Presets zur Filterung des Rauschens. Jedes führt zu einem anderen
+Klang.;
+#X text 519 -1519 Bewege nun die Maus langsam zum unteren Bildrand.
+Die Filtergüte erhöht sich und so wird der Durchlassbereich des Bandpassfilters
+immer schmaler. Das Rauschen wandelt sich langsam zu einem sinusähnlichen
+Ton.;
+#X text 519 -1463 Versuche nachzuvollziehen \, wie sich das Zeitsignal
+und das Spektrum von dem eines Rauschens zu dem eines Sinus ändert.
+;
+#X obj 440 -1399 bng 15 250 50 0 Jerry_what-presets xxxaretr what?
+19 7 0 10 -2097 -260097 -1;

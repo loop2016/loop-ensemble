@@ -1,0 +1,163 @@
+#N canvas 0 0 1104 682 10;
+#N canvas 504 0 450 147 guts 0;
+#X obj 50 34 r Add_BPMEP;
+#X obj 50 62 int;
+#X obj 199 38 loadbang;
+#X msg 199 62 120;
+#X obj 199 88 s Add_BPMEP_ctl;
+#X obj 50 92 s Add_BPMEP_Int;
+#X obj 318 39 closebang;
+#X obj 318 89 s Add_SequencerEPon;
+#X msg 318 63 0;
+#X obj 284 -49 tgl 35 0 Add_SequencerEPon xxx An/Aus -66 17 0 17 -66577
+-1 -1 0 1;
+#X obj 107 -44 loadbang;
+#X msg 107 -21 1;
+#X obj 109 6 s Add_SequencerEPon;
+#X msg 41 -25 0;
+#X obj 30 4 s Add_trigseq;
+#X connect 0 0 1 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 6 0 8 0;
+#X connect 8 0 7 0;
+#X connect 10 0 11 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 13 0 14 0;
+#X restore 787 -1150 pd guts;
+#X obj -263 -1808 cnv 15 1100 680 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -263 -1801 cnv 15 1100 22 empty empty what?-Sequenzer 20 11
+0 14 -260097 -33289 0;
+#X obj 248 -1489 pianoroll pianoroll2 448 189 36 62 27 16 48 0 1 42
+1 54 0.384615 42 1 52 0.653846 42 1 55 0 42 0.615385 55 1 42 0.653846
+53 0.5 42 0.692308 58 0.769231 42 0.846154 53 0.730769 42 1 54 0.153846
+;
+#X obj 248 -1285 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -262144 -1 -1 58 256;
+#X obj 689 -1285 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -262144 -1 -1 0.769231 256;
+#X obj 248 -1661 nbx 5 14 0 180 0 1 empty Add_BPMEP_Int empty 0 -8
+0 10 -262144 -1 -1 120 256;
+#X obj 248 -1565 nbx 5 14 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -262144 -1 -1 11 256;
+#N canvas 294 213 572 377 counter 0;
+#X obj -250 -1820 cnv 15 570 350 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -98 -1810 inlet;
+#X obj -125 -1604 counter;
+#X obj -125 -1662 metro;
+#X obj -125 -1557 % 16;
+#X msg -98 -1738 60000;
+#X obj -98 -1717 /;
+#X floatatom -98 -1695 5 0 0 0 - - -;
+#X obj -98 -1759 t b f;
+#X obj -245 -1716 r Add_SequencerEPon;
+#X floatatom -98 -1782 5 0 0 0 - - -;
+#X obj -125 -1642 bng 25 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text -54 -1757 Der eingehende BeatsPerMinute(BPM)-Wert wird in die
+Dauer einer Virtelnote in Millisekunden umgerechnet. Dafür wird die
+Gesamtzahl der Millisekunden in einer Minute (60000) mit der Anzahl
+der Viertelschläge pro Minute (BPM) dividiert.;
+#X floatatom -125 -1535 5 0 0 0 - - -;
+#X obj -125 -1498 outlet;
+#X text -75 -1604 Das Counter-Objekt zählt die erhaltenen Bangs.;
+#X floatatom -125 -1583 5 0 0 0 - - -;
+#X text -87 -1559 Das Modulo-Objekt sorgt dafür \, dass immer wieder
+16-Schläge gezählt werden \, indem es den erhaltenen Wert durch 16
+teilt und den Rest dieser Division ausgibt.;
+#X obj -250 -1843 cnv 15 570 22 empty empty what?-Sequenzer 20 11 0
+14 -260097 -33289 0;
+#X text -209 -1734 An/Aus;
+#X text -59 -1810 Einlass;
+#X text -81 -1498 Ausgabe;
+#X text -86 -1668 Das Metro-Objekt erhält den BPM-Wert in Millisekunden
+und gibt im Abstand dieses Zeitfensters immer wieder ein Signal (Bang)
+aus.;
+#X connect 1 0 10 0;
+#X connect 2 0 16 0;
+#X connect 3 0 11 0;
+#X connect 4 0 13 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 1;
+#X connect 8 0 5 0;
+#X connect 8 1 6 1;
+#X connect 9 0 3 0;
+#X connect 10 0 8 0;
+#X connect 11 0 2 0;
+#X connect 13 0 14 0;
+#X connect 16 0 4 0;
+#X restore 248 -1587 pd counter;
+#X obj 227 -1272 cnv 15 20 20 empty empty Tonhöhe 20 12 0 14 -128992
+-257985 0;
+#X obj 657 -1273 cnv 15 20 20 empty empty Lautstärke 20 12 0 14 -128992
+-258113 0;
+#X obj 251 -1679 hsl 128 15 60 160 0 0 Add_BPMEP Add_BPMEP_ctl empty
+-2 -8 0 10 -191407 -1 -1 7620 1;
+#X text 305 -1566 Der Counter zählt in der eingestellten Geschwindigkeit
+;
+#X text 636 -1567 durch die Stufen.;
+#X text 251 -1256 in Midi;
+#X text 644 -1257 1 ist volle Lautstärke;
+#X obj -217 -1761 cnv 15 380 80 empty empty ToDo 20 8 0 10 -260097
+-66577 0;
+#X text -196 -1521 Sehr häufig sind Sequenzer als sogenannte STEP-SEQUENZER
+angelegt. Die Bezeichnung rührt daher \, dass eine SEQUENZ in einzelne
+Klangereignisse aufgeteilt wird und dann jeder einzelne Klang (z.B.
+jede Note) SCHRITT FÜR SCHRITT in seinen Parametern bearbeitet und
+ausgegeben werden kann.;
+#X text 320 -1297 Der STEP-SEQUENZER gibt für jede Stufe eine voreingestellte
+Tonhöhe und Lautstärke aus \, mit denen dann ein Klangerzeuger gesteuert
+werden kann.;
+#X text 604 -1509 eingestellt werden.;
+#X obj 416 -1512 cnv 15 20 20 empty empty (gelb) 20 12 0 11 -128992
+-257985 0;
+#X text 256 -1509 In jeder Stufe können Tonhöhe;
+#X obj 547 -1512 cnv 15 20 20 empty empty (rot) 20 12 0 11 -128992
+-258113 0;
+#X text 478 -1509 und Lautstärke;
+#X obj -241 -1356 cnv 15 450 190 empty empty ADDs-Step-Sequenzer 20
+12 0 14 -99865 -260097 0;
+#X text -195 -1449 Der Step-Sequenzer erzeugt in der Regel (gerade
+auch der Übersichtlichkeit in der Bedienbarkeit wegen) eher kurze
+LOOPS. LOOPS sind relativ kurze Sequenzen \, die sich immer wiederholen
+und während dieses wiederholten Abspielens verändert werden können.
+LOOPS werden sehr häufig in elektronischer Musik eingesetzt.;
+#X text -238 -1289 - NOTENWERTE:;
+#X text -155 -1289 Dieser Parameter bestimmt \, ob die Schritte des
+Sequenzers als ganze \, Halbe- \, Viertel- \, Achtel- oder Sechzehntelnoten
+ausgelesen werden.;
+#X text -238 -1244 - NOTENLÄNGE:;
+#X text -155 -1244 Hier kann eingestellt werden \, wie lange jede Note
+erklingt bzw. wie groß die Pausen zwischen den Noten sind.;
+#X text -194 -1335 ADDs 16-stufiger Step-Sequenzer kann neben der Tonhöhe
+und der Laustärke der einzelnen Noten folgende Eigenschaften für
+alle Töne gemeinsam steuern:;
+#X text 315 -1587 <---- Klicken zum Öffnen des Counters.;
+#X text 385 -1678 Hier BPM-Wert (Beats-Per-Minute: Die Anzahl der Viertelschläge
+pro Minute) einstellen.;
+#X text -195 -1204 Außerdem können automatisch Sequenzen erzeugt
+und bis zu vier Sequenzen können gespeichert und geladen werden.;
+#X text -194 -1659 Ein SEQUENZER ist ein Gerät oder eine Software
+zur Aufnahme \, Bearbeitung und Wiedergabe von Daten zur Erstellung
+von Musik.;
+#X text -195 -1613 Ein Sequenzer speichert und übermittelt eine Partitur
+an einen Klangzeuger. Dabei können alle möglichen Eigenschaften der
+Klänge voreingestellt und somit automatisiert werden \, z.B. die Tonhöhe
+\, die Lautstärke \, die Tondauer \, usw.. Der Sequenzer gibt dann
+in einer vorher festgelegten zeitlichen Reihenfolge und Geschwindigkeit
+die Daten an den Klangerzeuger weiter.;
+#X text -207 -1746 Stelle einen BPM-Wert ein. Verändere die Tonhöhen
+und Lautstärken der Sequenz \, indem du die die gelben und roten Balken
+im Fenster verschiebst \, und beobachte die Veränderungen im Output.
+Öffne den Counter-Patch und versuche die Umwandlung der Werte nachzuvollziehen.
+;
+#X connect 3 0 4 0;
+#X connect 3 1 5 0;
+#X connect 6 0 8 0;
+#X connect 7 0 3 0;
+#X connect 8 0 7 0;

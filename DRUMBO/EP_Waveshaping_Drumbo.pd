@@ -1,0 +1,244 @@
+#N canvas 159 43 1025 707 10;
+#N canvas 916 345 463 549 guts 0;
+#X obj -2748 -670 closebang;
+#X msg -2748 -647 0;
+#N canvas 887 178 659 684 darstellung_und_presets 0;
+#X obj 96 54 clip~ -0.6 0.6;
+#X msg 124 181 stop;
+#X obj 151 213 metro 100;
+#X obj 124 131 sel 0;
+#X obj 324 172 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 344 208 s bangtonal_sine;
+#X obj 525 284 s freq2_globe;
+#X obj 3 85 spigot~;
+#X text 476 258 500 Hz;
+#X msg 525 259 70.43;
+#X obj 95 253 tabwrite~ zeitsignal_waveshape;
+#N canvas 737 356 842 358 spektrum_ws 0;
+#X obj 11 32 rfft~;
+#X obj 11 59 *~;
+#X obj 38 59 *~;
+#X obj 11 123 biquad~ 0 0 0 0 1;
+#X obj 11 101 q8_sqrt~;
+#X obj 112 225 loadbang;
+#X text 173 239 Beschriftung X-Achse Spektrum;
+#X text 320 18 Blockgröße;
+#X obj 11 146 clip~ 0 256;
+#X obj -91 1 inlet~;
+#X obj 149 21 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 149 81 stop;
+#X obj 149 121 metro 100;
+#X obj 149 47 sel 0;
+#X obj 239 18 block~ 4096;
+#X msg 112 302 \; spektrum_waveshape yticks -1 20 20;
+#X obj -92 192 tabwrite~ spektrum_waveshape;
+#X obj 149 -5 r EP_Waveshape_onoff;
+#X msg 100 262 \; spektrum_waveshape xticks 0 9.4 5;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 1 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 15 0;
+#X connect 5 0 18 0;
+#X connect 8 0 16 0;
+#X connect 9 0 0 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 16 0;
+#X connect 13 0 11 0;
+#X connect 13 1 12 0;
+#X connect 17 0 10 0;
+#X restore 41 286 pd spektrum_ws;
+#X obj 124 9 r EP_Waveshape_onoff;
+#X obj 97 -58 r~ darstellung_EP;
+#X msg 305 241 1500;
+#X obj 305 265 s knob_levenv_release_1_in;
+#X obj 305 219 del 1;
+#X obj 305 285 s knob_levenv_decay_1_in;
+#X obj 305 305 s knob_levenv_release_2_in;
+#X obj 305 325 s knob_levenv_decay_2_in;
+#X obj 305 365 s knob_levenv_decay_3_in;
+#X obj 305 345 s knob_levenv_release_3_in;
+#X obj 305 385 s knob_levenv_release_4_in;
+#X obj 305 405 s knob_levenv_decay_4_in;
+#X obj 305 425 s knob_levenv_release_5_in;
+#X obj 305 445 s knob_levenv_decay_5_in;
+#X obj 305 465 s knob_levenv_release_6_in;
+#X obj 305 485 s knob_levenv_decay_6_in;
+#X obj 305 505 s knob_levenv_release_7_in;
+#X obj 305 525 s knob_levenv_decay_7_in;
+#X obj 305 545 s knob_levenv_release_8_in;
+#X obj 305 565 s knob_levenv_decay_8_in;
+#X obj 455 208 del 88;
+#X connect 0 0 10 0;
+#X connect 1 0 2 0;
+#X connect 2 0 10 0;
+#X connect 3 0 1 0;
+#X connect 3 1 2 0;
+#X connect 3 1 4 0;
+#X connect 4 0 5 0;
+#X connect 4 0 16 0;
+#X connect 4 0 32 0;
+#X connect 7 1 11 0;
+#X connect 9 0 6 0;
+#X connect 12 0 7 1;
+#X connect 12 0 3 0;
+#X connect 13 0 0 0;
+#X connect 13 0 7 0;
+#X connect 14 0 15 0;
+#X connect 14 0 17 0;
+#X connect 14 0 18 0;
+#X connect 14 0 19 0;
+#X connect 14 0 21 0;
+#X connect 14 0 20 0;
+#X connect 14 0 22 0;
+#X connect 14 0 23 0;
+#X connect 14 0 24 0;
+#X connect 14 0 25 0;
+#X connect 14 0 28 0;
+#X connect 14 0 29 0;
+#X connect 14 0 31 0;
+#X connect 14 0 30 0;
+#X connect 14 0 27 0;
+#X connect 14 0 26 0;
+#X connect 16 0 14 0;
+#X connect 32 0 9 0;
+#X restore -2968 -560 pd darstellung_und_presets;
+#X obj -2949 -468 r Drumbo_waveclipctl;
+#X obj -2949 -425 / 127;
+#X floatatom -2949 -388 5 0 0 0 - - -;
+#X obj -2949 -347 s Drumbo_waveclipctl_show;
+#X obj -2616 -624 s bang808;
+#X obj -2748 -597 tgl 30 0 EP_Waveshape_onoff empty An/Aus 36 16 0
+11 -3137 -1 -1 1 1;
+#X obj -2811 -670 loadbang;
+#X msg -2811 -647 1;
+#X connect 0 0 1 0;
+#X connect 0 0 7 0;
+#X connect 1 0 8 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 9 0 10 0;
+#X connect 10 0 8 0;
+#X restore 722 -1116 pd guts;
+#X obj -248 -1778 cnv 25 1020 680 empty empty empty 20 12 0 14 -128992
+-66577 0;
+#X obj -248 -1800 cnv 15 1020 22 empty empty What?-Waveshaping 20 11
+0 14 -260097 -66577 0;
+#X obj 215 -1450 cnv 15 380 80 empty empty ToDo 10 12 0 12 -260097
+-1 0;
+#X floatatom 469 -1629 5 -20 20 0 - - -;
+#X floatatom 469 -1559 5 0 0 0 - - -;
+#X text 465 -1524 Clipping begrenzt eingehende Werte auf;
+#X obj 469 -1692 knob 38 38 -1 1 0 0 empty empty empty 0 -10 0 9 -262144
+-260097 -261682 0 1;
+#X obj 469 -1595 clip -0.6 0.6;
+#X text 74 -1665 Beim WAVESHAPING werden Obertöne erzeugt \, indem
+das Audiosignal in seinem zeitlichen Amplitudenverlauf durch unterschiedliche
+Operationen verändert wird.;
+#X text 464 -1713 -1 bis 1;
+#X text -62 -1798 Signalverzerrung für zusätzliche Obertöne;
+#X obj -218 -1661 cnv 15 110 120 empty empty Waveshaping 10 12 0 13
+-99865 -260097 0;
+#X obj -194 -1619 knob 35 35 0 127 0 0 Drumbo_waveclipctl Drumbo_waveclipctl
+empty 0 -8 0 9 -228856 -260097 -261682 0 1;
+#X obj -198 -1577 nbx 5 14 -1e+037 1e+037 0 0 empty Drumbo_waveclipctl_show
+empty 0 -8 0 10 -66577 -260097 -260097 0 256;
+#X obj -198 -1635 cnv 15 20 10 empty empty Clip 2 8 0 11 -99865 -261682
+0;
+#X text 153 -1133 2 KHz;
+#X text -35 -1133 1 KHz;
+#X text -127 -1133 500 Hz;
+#X text -220 -1391 0;
+#X text -226 -1328 -1;
+#X text -220 -1453 1;
+#X text -213 -1133 0 Hz;
+#X obj -207 -1453 cnv 15 400 140 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array zeitsignal_waveshape 200 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 0.6 199 -0.6 400 140 1 0 0;
+#X restore -207 -1453 graph;
+#X obj -207 -1287 cnv 15 800 150 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array spektrum_waveshape 400 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 256 400 0 800 150 1 0 0;
+#X restore -207 -1287 graph;
+#X text 343 -1133 3 kHz;
+#X text 533 -1133 4 KHz;
+#X obj -102 -1660 cnv 15 110 120 empty empty Träger 10 12 0 13 -99865
+-260097 0;
+#X obj -75 -1620 knob 35 35 0 127 0 0 freq2_globe freq2_globe empty
+0 -8 0 11 -262144 -260097 -261682 1886 1;
+#X obj -73 -1579 hsl 39 10 0 127 0 0 freq2_globe freq2_globe empty
+-2 -8 0 10 -99865 -4032 -1 2107 1;
+#X obj -76 -1563 nbx 6 14 -1e+037 1e+037 0 0 vvvvvvvv freq2_anzeige_1
+empty 0 -8 0 11 -66577 -260097 -260097 500.004 256;
+#X obj -76 -1635 cnv 10 10 10 empty empty Frequenz 0 7 0 11 -99865
+-261682 0;
+#X obj -209 -1712 bng 30 250 50 0 1-GUI-bang 1-GUI-bang_r Drumpad-1
+36 25 0 11 -99865 -260097 -1;
+#X text 250 -1133 2 \, 5 kHz;
+#X text 435 -1133 3 \, 5 KHz;
+#X text 53 -1133 1 \, 5 KHz;
+#X text 73 -1616 DRUMBO wendet ein recht einfaches Verfahren der Signalformung
+an: Durch CLIPPING wird das Signal in seiner Amplitude (Lautstärke)
+begrenzt. Amplitudenwerte \, die kleiner bzw. größer als ein einstellbarer
+Wert sind \, werden auf diesen Wert zurückgesetzt. So werden sinusförmige
+\, 'rundliche' Signalbewegungen zusammengestutzt und zu rechteckigen
+Signalen geformt. Diese Formung geht einher mit der Erzeugung neuer
+Obertöne \, die ungeraden Vielfachen der Grundfrequenz entsprechen.
+Grundfrequenz x3 \, x5 \, x7... Je stärker das Clipping ist \, desto
+kleiner ist der begrenzende Amplitudenwert. Umso kleiner dieser Amplitudenwert
+\, desto mehr wandelt sich das Signal zu einem Rechteck und mehr Obertöne
+entstehen.;
+#X text 464 -1512 festgelegte Grenzwerte. Alle Werte über;
+#X text 465 -1499 0 \, 6 bzw. kleiner -0 \, 6 werden abgeschnitten.
+;
+#X obj -89 -1712 bng 30 250 50 0 2-GUI-bang 2-GUI-bang_r Drumpad-2
+36 25 0 11 -99865 -260097 -1;
+#X obj 31 -1712 bng 30 250 50 0 3-GUI-bang 3-GUI-bang_r Drumpad-3 36
+25 0 11 -99865 -260097 -1;
+#X obj 151 -1712 bng 30 250 50 0 4-GUI-bang 4-GUI-bang_r Drumpad-4
+36 25 0 11 -99865 -260097 -1;
+#X text 226 -1432 Aktiviere den Patch und erzeuge zuerst einen Sinuston.
+Verändere mit dem ersten Drehregler den Clippingwert und versuche
+nachzuvollziehen \, wie das Waveshaping den Klang verändert. Alle
+Pads funktionieren!;
+#X obj -209 -1752 bng 30 250 50 0 5-GUI-bang 5-GUI-bang_r Drumpad-5
+36 25 0 11 -99865 -260097 -1;
+#X obj -89 -1752 bng 30 250 50 0 6-GUI-bang 6-GUI-bang_r Drumpad-6
+36 25 0 11 -99865 -260097 -1;
+#X obj 31 -1752 bng 30 250 50 0 7-GUI-bang 7-GUI-bang_r Drumpad-7 36
+25 0 11 -99865 -260097 -1;
+#X obj 151 -1752 bng 30 250 50 0 8-GUI-bang 8-GUI-bang_r Drumpad-8
+36 25 0 11 -99865 -260097 -1;
+#X connect 4 0 8 0;
+#X connect 7 0 4 0;
+#X connect 8 0 5 0;

@@ -1,0 +1,13 @@
+#N canvas 632 367 450 300 10;
+#X obj 100 66 inlet;
+#X obj 160 66 inlet;
+#X obj 218 66 inlet;
+#X obj 278 66 inlet;
+#X obj 218 177 s knob_noise_lp_\$1_in;
+#X obj 160 157 s knob_noise_level_\$1_in;
+#X obj 100 137 s knob_wave_level_\$1_in;
+#X obj 278 197 s knob_noise_hp_\$1_in;
+#X connect 0 0 6 0;
+#X connect 1 0 5 0;
+#X connect 2 0 4 0;
+#X connect 3 0 7 0;

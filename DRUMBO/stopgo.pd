@@ -1,0 +1,43 @@
+#N canvas 592 203 756 356 10;
+#X obj 3 126 select 0 1;
+#X obj 21 68 loadbang;
+#X msg 21 91 0;
+#X obj 334 325 s startstop_canvas;
+#X msg 226 212 label ►;
+#X msg 455 192 label ■;
+#X msg 226 237 label_font 2 14;
+#X msg 226 262 label_pos 7 8;
+#X msg 455 217 label_font 0 13;
+#X msg 455 242 label_pos 8 7;
+#X obj 0 0 cnv 15 51 24 empty startstop_canvas_bg empty 20 12 0 14
+-258699 -262144 0;
+#X obj 3 319 s startstop_canvas_bg;
+#X obj 3 3 tgl 18 0 stopgo stopgo empty -2 -7 0 9 -54094 -260097 -33289
+0 1;
+#X msg 31 246 color -43073;
+#X msg 3 217 color 13;
+#X obj 22 3 cnv 16 26 18 startstop_canvas startstop_canvas ► 7 8
+2 14 -1 -1 0;
+#X obj 22 4 cnv 16 25 16 startstop_canvas startstop_canvas ► 7 8
+2 14 -99865 -260097 0;
+#X text 561 314 Button Overkill Deep Stuff;
+#X connect 0 0 14 0;
+#X connect 0 0 4 0;
+#X connect 0 0 6 0;
+#X connect 0 0 7 0;
+#X connect 0 1 13 0;
+#X connect 0 1 5 0;
+#X connect 0 1 8 0;
+#X connect 0 1 9 0;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
+#X connect 4 0 3 0;
+#X connect 5 0 3 0;
+#X connect 6 0 3 0;
+#X connect 7 0 3 0;
+#X connect 8 0 3 0;
+#X connect 9 0 3 0;
+#X connect 12 0 0 0;
+#X connect 13 0 11 0;
+#X connect 14 0 11 0;
+#X coords 0 0 1 1 51 24 1 0 0;

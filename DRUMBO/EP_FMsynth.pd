@@ -1,0 +1,460 @@
+#N canvas 40 31 1105 715 10;
+#N canvas 208 596 806 214 guts 0;
+#N canvas 780 540 841 230 globalisierung 0;
+#X obj 38 25 r waveform_VCO;
+#X obj 261 25 r waveform_LFO;
+#X obj 707 28 r knob_pulse_LFO;
+#X obj 484 27 r knob_pulse_VCO;
+#X obj 38 182 EP_FMsynth_globalisierung 1;
+#X obj 208 182 EP_FMsynth_globalisierung 2;
+#X obj 378 182 EP_FMsynth_globalisierung 3;
+#X obj 548 182 EP_FMsynth_globalisierung 4;
+#X obj 38 152 EP_FMsynth_globalisierung 5;
+#X obj 208 152 EP_FMsynth_globalisierung 6;
+#X obj 378 152 EP_FMsynth_globalisierung 7;
+#X obj 548 152 EP_FMsynth_globalisierung 8;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 0 0 6 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X connect 0 0 9 0;
+#X connect 0 0 10 0;
+#X connect 0 0 11 0;
+#X connect 1 0 4 1;
+#X connect 1 0 5 1;
+#X connect 1 0 6 1;
+#X connect 1 0 7 1;
+#X connect 1 0 8 1;
+#X connect 1 0 9 1;
+#X connect 1 0 10 1;
+#X connect 1 0 11 1;
+#X connect 2 0 4 3;
+#X connect 2 0 5 3;
+#X connect 2 0 6 3;
+#X connect 2 0 7 3;
+#X connect 2 0 8 3;
+#X connect 2 0 9 3;
+#X connect 2 0 10 3;
+#X connect 2 0 11 3;
+#X connect 3 0 4 2;
+#X connect 3 0 5 2;
+#X connect 3 0 6 2;
+#X connect 3 0 7 2;
+#X connect 3 0 8 2;
+#X connect 3 0 9 2;
+#X connect 3 0 10 2;
+#X connect 3 0 11 2;
+#X restore 39 25 pd globalisierung;
+#N canvas 293 283 659 767 darstellung_und_presets 0;
+#X obj 124 105 tgl 15 0 empty EP_FMsynth_onoff empty 17 7 0 10 -262144
+-1 -1 1 1;
+#X obj 96 54 clip~ -0.6 0.6;
+#X msg 124 181 stop;
+#X obj 151 213 metro 100;
+#X obj 124 131 sel 0;
+#X obj 324 172 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 443 289 s knob_pulse_VCO;
+#X obj 553 289 s knob_pulse_LFO;
+#X msg 443 267 0;
+#X msg 553 267 0;
+#X msg 443 311 0;
+#X msg 553 311 0;
+#X obj 443 333 s waveform_VCO;
+#X obj 553 333 s waveform_LFO;
+#X obj 324 288 s bangtonal_sine;
+#X msg 275 311 1500;
+#X obj 155 415 s freq2_globe;
+#X msg 155 391 18.2655;
+#X obj 275 335 s knob_levenv_release_1_in;
+#X obj 275 355 s knob_levenv_decay_1_in;
+#X obj 107 -29 r~ darstellung_EP_FMsynth_mini;
+#X msg 301 70 250;
+#X obj 301 118 s autark_carrier;
+#X msg 521 70 150;
+#X msg 411 70 1;
+#X obj 411 118 s autark_mod;
+#X obj 521 118 s autark_int;
+#X obj 97 -59 r~ darstellung_EP;
+#X msg 153 321 0;
+#X obj 153 355 s EP_AMsynth_onoff;
+#N canvas 188 203 842 358 spektrum_FM 0;
+#X obj 11 32 rfft~;
+#X obj 11 59 *~;
+#X obj 38 59 *~;
+#X obj 11 123 biquad~ 0 0 0 0 1;
+#X obj 11 101 q8_sqrt~;
+#X obj 112 225 loadbang;
+#X text 173 239 Beschriftung X-Achse Spektrum;
+#X text 320 18 Blockgröße;
+#X obj 11 146 clip~ 0 256;
+#X obj -91 1 inlet~;
+#X obj 149 21 tgl 15 0 empty EP_FMsynth_onoff empty 17 7 0 10 -262144
+-1 -1 1 1;
+#X msg 149 81 stop;
+#X obj 149 121 metro 100;
+#X obj 149 47 sel 0;
+#X text 371 195 Array graphs can be given "ticks" on both the x and
+y axis to help you visually measure your data. The tick messages require
+3 values: (the index or value of the FIRST large tick \, then the interval
+between ticks \, then finally the number of ticks overall per large
+tick).;
+#X text 370 281 Arrays can be given labels to describe the x and y
+axis. Give a y value and a bunch of x values or vice versa:;
+#X obj 239 18 block~ 4096;
+#X obj -92 192 tabwrite~ spektrum_FM;
+#X msg 174 264 \; spektrum_FM xticks 0 9.5 5;
+#X msg 175 302 \; spektrum_FM yticks -1 20 20;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 1 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 18 0;
+#X connect 5 0 19 0;
+#X connect 8 0 17 0;
+#X connect 9 0 0 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 17 0;
+#X connect 13 0 11 0;
+#X connect 13 1 12 0;
+#X restore 2 253 pd spektrum_FM;
+#X obj 95 253 tabwrite~ zeitsignal_FM;
+#X obj 3 85 spigot~;
+#X obj 275 375 s knob_levenv_release_2_in;
+#X obj 275 395 s knob_levenv_decay_2_in;
+#X obj 275 435 s knob_levenv_decay_3_in;
+#X obj 275 415 s knob_levenv_release_3_in;
+#X obj 275 455 s knob_levenv_release_4_in;
+#X obj 275 475 s knob_levenv_decay_4_in;
+#X obj 275 495 s knob_levenv_release_5_in;
+#X obj 275 515 s knob_levenv_decay_5_in;
+#X obj 275 535 s knob_levenv_release_6_in;
+#X obj 275 555 s knob_levenv_decay_6_in;
+#X obj 275 575 s knob_levenv_release_7_in;
+#X obj 275 595 s knob_levenv_decay_7_in;
+#X obj 275 615 s knob_levenv_release_8_in;
+#X obj 275 635 s knob_levenv_decay_8_in;
+#X obj 275 289 del 50;
+#X connect 0 0 4 0;
+#X connect 0 0 32 1;
+#X connect 1 0 31 0;
+#X connect 2 0 3 0;
+#X connect 3 0 31 0;
+#X connect 4 0 2 0;
+#X connect 4 1 3 0;
+#X connect 4 1 5 0;
+#X connect 5 0 8 0;
+#X connect 5 0 9 0;
+#X connect 5 0 10 0;
+#X connect 5 0 11 0;
+#X connect 5 0 14 0;
+#X connect 5 0 17 0;
+#X connect 5 0 21 0;
+#X connect 5 0 24 0;
+#X connect 5 0 23 0;
+#X connect 5 0 28 0;
+#X connect 5 0 47 0;
+#X connect 8 0 6 0;
+#X connect 9 0 7 0;
+#X connect 10 0 12 0;
+#X connect 11 0 13 0;
+#X connect 15 0 18 0;
+#X connect 15 0 19 0;
+#X connect 15 0 33 0;
+#X connect 15 0 34 0;
+#X connect 15 0 36 0;
+#X connect 15 0 35 0;
+#X connect 15 0 37 0;
+#X connect 15 0 38 0;
+#X connect 15 0 39 0;
+#X connect 15 0 40 0;
+#X connect 15 0 43 0;
+#X connect 15 0 44 0;
+#X connect 15 0 46 0;
+#X connect 15 0 45 0;
+#X connect 15 0 42 0;
+#X connect 15 0 41 0;
+#X connect 17 0 16 0;
+#X connect 20 0 1 0;
+#X connect 20 0 32 0;
+#X connect 21 0 22 0;
+#X connect 23 0 26 0;
+#X connect 24 0 25 0;
+#X connect 27 0 1 0;
+#X connect 27 0 32 0;
+#X connect 28 0 29 0;
+#X connect 32 1 30 0;
+#X connect 47 0 15 0;
+#X restore 39 0 pd darstellung_und_presets;
+#X obj 249 1 r open_autark;
+#N canvas 447 808 1302 529 erklär-presets 0;
+#X obj 18 31 bng 15 250 50 0 empty fmsynth-preset1 fmsynth-preset1
+17 7 0 10 -262144 -1 -1;
+#X obj 231 212 s freq2_globe;
+#X obj 128 212 s lfo_int_globe;
+#X obj 18 212 s lfo_freq_globe;
+#X text 244 160 1 kHz;
+#X text 138 160 500 Hz;
+#X obj 438 31 bng 15 250 50 0 empty fmsynth-preset2 fmsynth-preset2
+17 7 0 10 -262144 -1 -1;
+#X text 664 160 1 kHz;
+#X msg 548 139 31.584;
+#X text 558 160 500 Hz;
+#X obj 651 212 s freq2_globe;
+#X obj 548 212 s lfo_int_globe;
+#X obj 438 212 s lfo_freq_globe;
+#X obj 868 31 bng 15 250 50 0 empty fmsynth-preset3 fmsynth-preset3
+17 7 0 10 -262144 -1 -1;
+#X msg 978 139 31.584;
+#X text 988 160 500 Hz;
+#X obj 1081 212 s freq2_globe;
+#X obj 978 212 s lfo_int_globe;
+#X obj 868 212 s lfo_freq_globe;
+#X text 1095 160 500 Hz;
+#X text 874 160 600 Hz;
+#X obj 325 212 s waveform_VCO;
+#X obj 335 232 s waveform_LFO;
+#X msg 325 139 0;
+#X obj 745 212 s waveform_VCO;
+#X obj 755 232 s waveform_LFO;
+#X msg 745 139 0;
+#X text 344 160 Sinus;
+#X text 764 160 Sinus;
+#X obj 1175 212 s waveform_VCO;
+#X obj 1185 232 s waveform_LFO;
+#X msg 1175 139 0;
+#X text 1194 160 Sinus;
+#X text 24 160 1 Hz;
+#X obj 18 271 bng 15 250 50 0 empty fmsynth-preset1.5 fmsynth-preset1.5
+17 7 0 10 -262144 -1 -1;
+#X obj 155 472 s waveform_LFO;
+#X floatatom 155 442 5 0 0 0 - - -;
+#X obj 155 408 counter;
+#X msg 194 360 5;
+#X text 454 120 400 Hz;
+#X msg 448 99 51.725;
+#X text 444 160 500 Hz;
+#X msg 18 139 3.748;
+#X msg 128 139 31.584;
+#X msg 231 140 94.432;
+#X msg 438 139 56.38;
+#X msg 651 139 94.432;
+#X msg 868 139 60.688;
+#X msg 1081 139 70.43;
+#X connect 0 0 44 0;
+#X connect 0 0 42 0;
+#X connect 0 0 43 0;
+#X connect 0 0 23 0;
+#X connect 6 0 46 0;
+#X connect 6 0 45 0;
+#X connect 6 0 8 0;
+#X connect 6 0 26 0;
+#X connect 8 0 11 0;
+#X connect 13 0 48 0;
+#X connect 13 0 47 0;
+#X connect 13 0 14 0;
+#X connect 13 0 31 0;
+#X connect 14 0 17 0;
+#X connect 23 0 21 0;
+#X connect 23 0 22 0;
+#X connect 26 0 24 0;
+#X connect 26 0 25 0;
+#X connect 31 0 29 0;
+#X connect 31 0 30 0;
+#X connect 34 0 37 0;
+#X connect 34 0 38 0;
+#X connect 36 0 35 0;
+#X connect 37 0 36 0;
+#X connect 38 0 37 4;
+#X connect 42 0 3 0;
+#X connect 43 0 2 0;
+#X connect 44 0 1 0;
+#X connect 45 0 12 0;
+#X connect 46 0 10 0;
+#X connect 47 0 18 0;
+#X connect 48 0 16 0;
+#X restore 39 50 pd erklär-presets;
+#X obj 404 2 r closebang-autark;
+#X msg 404 29 0;
+#X obj 404 55 s autark-onoff;
+#X obj 249 51 getdir;
+#X obj 249 26 bng 15 250 50 0 empty what-ADSR empty 17 7 0 10 -262144
+-1 -1;
+#X msg 249 78 \; pd open FM_autark.pd \$1;
+#X obj 639 24 closebang;
+#X msg 639 47 0;
+#X obj 604 95 tgl 30 0 EP_FMsynth_onoff empty Patch-An/Aus -17 -8 0
+10 -3394 -1 -1 1 1;
+#X obj 579 24 loadbang;
+#X msg 579 47 1;
+#X obj 673 46 s bang808;
+#X connect 2 0 8 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 7 0 9 0;
+#X connect 8 0 7 0;
+#X connect 10 0 11 0;
+#X connect 10 0 15 0;
+#X connect 11 0 12 0;
+#X connect 13 0 14 0;
+#X connect 14 0 12 0;
+#X restore 1040 627 pd guts;
+#X obj -12 -66 cnv 15 1100 710 empty empty empty 20 15 0 14 -128992
+-33289 0;
+#X obj 9 173 cnv 15 150 125 empty empty FM-Modulator 10 12 0 13 -99865
+-260097 0;
+#X obj 9 304 cnv 15 150 280 empty empty Waveform 10 12 0 13 -99865
+-260097 0;
+#X obj 90 544 knob 28 28 0 0.975 0 0 knob_pulse_LFO knob_pulse_LFO
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 29 544 knob 28 28 0 0.975 0 0 knob_pulse_VCO knob_pulse_VCO
+empty 0 -8 0 11 -228856 -260097 -261682 0 1;
+#X obj 39 344 vradio 17 1 0 6 waveform_VCO waveform_VCO Träger -5
+-8 0 9 -66577 -260097 -260097 0;
+#X obj 104 344 vradio 17 1 0 6 waveform_LFO waveform_LFO Modulator
+-11 -8 0 9 -66577 -260097 -260097 0;
+#X text 68 343 sin;
+#X text 68 360 rec;
+#X text 68 377 saw;
+#X text 68 394 isw;
+#X text 68 412 tri;
+#X text 69 428 pls;
+#X obj 18 274 nbx 5 14 -1e+037 1e+037 0 0 empty 1-LFO-freq empty 0
+-8 0 11 -66577 -260097 -260097 0.0328311 256;
+#X obj 9 47 cnv 15 150 120 empty empty FM-Träger 10 12 0 13 -99865
+-260097 0;
+#X obj 24 217 knob 35 35 0 127 0 0 lfo_freq_globe lfo_freq_globe empty
+0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 86 217 knob 35 35 0 127 0 0 lfo_int_globe lfo_int_globe empty
+0 -8 0 11 -262144 -260097 -261682 0 1;
+#X obj 61 89 knob 35 35 0 127 0 0 freq2_globe freq2_globe empty 0 -8
+0 11 -262144 -260097 -261682 489 1;
+#X obj 57 130 hsl 39 10 0 127 0 0 freq2_globe freq2_globe empty -2
+-8 0 10 -99865 -4032 -1 547 1;
+#X obj 82 258 hsl 39 10 0 127 0 0 lfo_int_globe lfo_int_globe empty
+-2 -8 0 10 -99865 -4032 -1 0 1;
+#X obj 20 258 hsl 39 10 0 127 0 0 lfo_freq_globe lfo_freq_globe empty
+-2 -8 0 10 -99865 -4032 -1 0 1;
+#X obj 46 146 nbx 6 14 -1e+037 1e+037 0 0 vvvvvvvv freq2_anzeige_1
+empty 0 -8 0 11 -66577 -260097 -260097 65.4064 256;
+#X obj 81 274 nbx 5 14 -1e+037 1e+037 0 0 empty 1-LFO-int empty 0 -8
+0 11 -66577 -260097 -260097 0 256;
+#X obj 9 471 cnv 15 130 20 empty empty Pulsbreite* 6 10 0 11 -99865
+-260097 0;
+#X obj 270 -19 bng 18 250 50 0 1-GUI-bang 1-GUI-bang_r Drumpad-1 25
+10 0 11 -99865 -260097 -260097;
+#X text 584 618 2 KHz;
+#X text 396 618 1 KHz;
+#X text 304 618 500 Hz;
+#X text 486 618 1.5 KHz;
+#X text 211 365 0;
+#X text 205 428 -1;
+#X text 211 303 1;
+#X text 218 618 0 Hz;
+#X obj 224 303 cnv 15 400 140 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 0 50 919 418 (subpatch) 0;
+#X array zeitsignal_FM 200 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 0.6 199 -0.6 400 140 1 0 0;
+#X restore 224 303 graph;
+#X obj 224 464 cnv 15 400 150 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#N canvas 511 450 1153 478 (subpatch) 0;
+#X array spektrum_FM 200 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 256 200 0 400 150 1 0 0;
+#X restore 224 464 graph;
+#X text 228 216 Bei geringer Modulationsfrequenz (bis 10 Hz) schwankt
+der Ton hörbar in seiner Höhe (Vibrato). Ab einer Modulation des
+Trägers mit einer Frequenz im hörbaren Bereich (> 20 Hz) ist kein
+Vibrato mehr wahrnehmbar. Stattdessen kommen zum Grundton des Trägers
+weitere Obertöne hinzu.;
+#X obj -12 -60 cnv 15 1100 22 empty empty what?-Frequenzmodulations-Synthese
+20 11 0 14 -260097 -33289 0;
+#X obj 638 121 cnv 15 430 490 empty empty ToDo 10 12 0 12 -260097 -1
+0;
+#X obj 1011 276 bng 15 250 50 0 fmsynth-preset2 empty click 19 8 0
+8 -99865 -260097 -1;
+#X obj 1011 151 bng 15 250 50 0 fmsynth-preset1 empty click 19 8 0
+8 -99865 -260097 -1;
+#X obj 1011 463 bng 15 250 50 0 fmsynth-preset3 empty click 19 8 0
+8 -99865 -260097 -1;
+#X text 649 220 Experimentiere mit den anderen Modulatorsignalen wie
+Rechteck und Sägezahn und beobachte \, wie die Form des Modulatorsignals
+im Spektrum erkennbar wird.;
+#X obj 1011 227 bng 15 250 50 0 fmsynth-preset1.5 empty click 19 8
+0 8 -99865 -260097 -1;
+#X text 650 458 Besonders interessant wird der Effekt \, wenn Seitenbänder
+auch im negativen Frequenzbereich entstehen. Diese werden am Nullpunkt
+in den positiven Frequenzbereich zurückgespiegelt. Dies sorgt für
+nicht-lineare Verzerrungen. Die neu generierten Teiltöne sind allgemeinhin
+nicht harmonisch. Sichtbar wird dies beispielsweise bei einer Trägerfrequenz
+von 500 Hz und einer Modulationsfrequenz von 600 Hz. Das erste Seitenband
+unterhalb der Trägerfrequenz ist bei -100 Hz \, respektive 100 Hz
+zu finden. Das zweite Seitenband bei -700 Hz (also auch bei +700 Hz).
+;
+#X text 648 145 Stelle den Träger auf eine Frequenz von 1 kHz \, den
+Modulator auf einen Wert von 1 Hz und eine Intensität von 500 ein.
+Im Frequenzspektrum siehst Du nun \, dass die Frequenz zwischen 500
+Hz und 1.5 kHz um den Wert 1 kHz schwankt.;
+#X obj 765 46 cnv 15 155 30 empty empty empty 6 14 0 11 -99865 -260097
+0;
+#X obj 777 54 bng 15 500 10 0 open_autark empty FM-Beispiel-öffnen
+20 8 0 10 -260097 -66577 -260097;
+#X obj 1004 -16 dspcon;
+#X text 228 119 Der erste Oszillator ist der TRÄGER der zweite der
+MODULATOR. Das Signal des Modulators wird genutzt \, um die Frequenz
+des Trägers periodisch zu verändern. Mit steigender Intensität des
+Modulatorsignals steigt die Bandbreite des Modulationseffekts um die
+Trägerfrequenz herum. Bei einer Intensität von 0 ist die FM-Synthese
+deaktiviert.;
+#X text 649 270 Erhöhst Du die Modulationsfrequenz von 1 Hz nun beispielsweise
+auf 500 Hz \, enstehen die typischen Seitenfrequenzen/Seitenbänder
+der FM-Synthese. Diese entstehen in beide Richtungen um die zentrale
+Frequenz im periodischen Abstand von 500 Hz. Die ersten Seitenbänder
+sind in diesem Beispiel also bei 500 Hz und 1.5 kHz \, die zweiten
+bei 0 Hz und 2 kHz \, usw. Die Modulationsfrequenz von 500 Hz wird
+zur Grundfrequenz. Das Spektrum besteht aus ganzzahligen Vielfachen
+der Modulationsfrequenz \, d.h. in diesem speziellen Fall ist das Spektrum
+noch harmonisch. Mit steigender Intensität wächst wie zuvor die Gesamtbandbreite
+des Signals. Je nach Signalform des Trägers und des Modulators resulieren
+andere komplexe Klänge.;
+#X text 228 9 Mit Frequenzmodulation lassen sich KOMPLEXE FREQUENZSPEKTREN
+erzeugen \, die nicht-linear und nicht-harmonisch sein können. Derartige
+Spektren sind mit anderen Syntheseverfahren \, beispielsweise der additiver
+Synthese (siehe ADD) \, nur sehr aufwendig mit einer Vielzahl von Oszillatoren
+umzusetzen. Die einfache FM-Synthese schafft dies bereits schon mit
+zwei Oszillatoren. So lassen sich einfach sehr komplexe Klänge erzeugen.
+;
+#X text 29 489 *beeinflusst nur;
+#X text 646 7 Hier ist ein simpler Patch hinterlegt \, welcher die
+grundsätzliche Funktionsweise der Frenquenzmodulation verdeutlicht.
+;
+#X text 35 504 Pulssignale (pls);
+#X obj 58 73 cnv 10 10 10 empty empty Frequenz 0 7 0 11 -99865 -261682
+0;
+#X obj 23 202 cnv 10 10 10 empty empty Frequenz 0 7 0 11 -99865 -261682
+0;
+#X obj 83 202 cnv 10 10 10 empty empty Intensität 0 7 0 11 -99865
+-261682 0;
+#X obj 26 528 cnv 10 10 10 empty empty Träger 0 7 0 11 -99865 -261682
+0;
+#X obj 86 528 cnv 10 10 10 empty empty Modulator 0 7 0 11 -99865 -261682
+0;
