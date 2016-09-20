@@ -8,6 +8,9 @@ DRUMBO uses a 16-Step-Sequencer and is meant to be a typical Drum Machine. DRUMB
 JERRY is basically a pad- or a lead synthesizer. JERRYs sound production is more experimental and allows to create various sounds: 
 Monophonic tones, complex sounds for tonal play but also noisy experimental sounds. The sounds are primarily effected by the moving speed and position of the mouse on the screen. Numerous presets help to quickly experience JERRYs potential. A simple 16-Step-Sequencer help JERRY to coexist with the other instruments and even create rythmic sounds. JERRY is completely controlled by mouse and keyboard. All three instruments can be connected via the network function. This enables them to share some of their parameters with each other. JERRY controls the tonality (continuous, chromatic, major or minor).
 
+Before you get started, please install Pure Data extended. It is available at https://puredata.info/downloads/pd-extended/releases/0.43.4
+The instruments can be launched with the patches ADD.pd, DRUMBO.pd or JERRY.pd within the specific folders.
+
 For more information, please contact: christofmschultz@gmail.com or drahtsalat@joyscouts.de
 
 Christof & Marten - loop2016
